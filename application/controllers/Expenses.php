@@ -1,0 +1,171 @@
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+
+require APPPATH . '/libraries/BaseController.php';
+
+class Expenses extends BaseController
+{
+    /**
+     * This is default constructor of the class
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('expenses_model');
+        $this->load->model('bank_model');
+        $this->load->model('cash_account_model');
+        $this->isLoggedIn();   
+    }
+    
+    /**
+     * This function used to load the first screen of the devotee
+     */
+    
+    /**
+     * This function is used to load the  devotee list
+     */
+    function expenseListing()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        } else {      
+            // $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));  
+            $account_type = $this->security->xss_clean($this->input->post('account_type'));
+            $expense_type = $this->security->xss_clean($this->input->post('expense_type'));
+            // $data['devotee_id'] = $devotee_id;
+            $data['account_type'] = $account_type;
+            $data['expense_type'] = $expense_type;
+            // $filter['devotee_id'] = $devotee_id;
+            $filter['account_type'] = $account_type;
+            $filter['expense_type'] = $expense_type;
+           
+            $searchText = $this->security->xss_clean($this->input->post('searchText'));
+            $data['searchText'] = $searchText;
+            $this->load->library('pagination');
+            $count = $this->expenses_model->expensesListingCount($searchText,$filter,$this->company_id);
+            $data['count'] =  $count;
+			$returns = $this->paginationCompress ( "expenseListing/", $count, 100 );
+            $data['partyInfo'] =$this->expenses_model->getPartyInfo($this->company_id);
+            $data['bank'] = $this->bank_model->getAllBank($this->company_id);
+            $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
+            $data['expensesRecords'] = $this->expenses_model->expensesListing($searchText,$filter,$this->company_id, $returns["page"], $returns["segment"]);
+            $this->global['pageTitle'] = $this->company_name.' :expense Details ';
+            $this->loadViews("expenses/expenses", $this->global, $data, NULL);
+        }
+    }
+
+
+    /**
+     * This function is used to add new  devotee to the system
+     */
+    function addExpenses()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else {
+                // $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));
+                $account_type = $this->security->xss_clean($this->input->post('account_type'));
+                $expense_amount = $this->input->post('expense_amount');
+                $invoice_no = $this->input->post('invoice_no');
+                $expense_type = $this->input->post('expense_type');
+                $comments = $this->input->post('comments');
+                $party_id = $this->input->post('party');
+                $bank_row_id = $this->input->post('bank_row_id');
+                $cash_row_id = $this->input->post('cash_row_id');
+
+                    $expensesInfo = array('account_type'=>$account_type,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+                    'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
+                         
+                $result = $this->expenses_model->addExpenses($expensesInfo);
+                if($result > 0){
+                    $this->session->set_flashdata('success', 'New Expenses created successfully');
+                } else {
+                    $this->session->set_flashdata('error', 'Expenses creation failed');
+                }
+                redirect('expenseListing');
+            
+        }
+    }
+
+    /**
+     * This function is used load devotee edit form
+     */
+    function editExpensePageView($row_id = NULL)
+    {
+        if($this->isAdmin() == TRUE) {
+            $this->loadThis();
+        } else {
+            if($row_id == null){
+                redirect('expenseListing');
+            }
+            $data['expenseInfo'] = $this->expenses_model->getExpenseInfoById($row_id);
+            $data['partyInfo'] =$this->expenses_model->getPartyInfo($this->company_id);
+            $data['bank'] = $this->bank_model->getAllBank($this->company_id);
+            $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
+            $this->global['pageTitle'] = $this->company_name.' : Edit expenses ';
+            $this->loadViews("expenses/editExpenses", $this->global, $data, NULL);
+        }
+    }
+
+    /**
+     * This function is used to edit the devotee information
+     */
+    function updateExpense()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        } else {
+            // $devotee_id = $this->input->post('devotee_id');
+            $row_id = $this->input->post('row_id');
+            $account_type = $this->security->xss_clean($this->input->post('account_type'));
+            $expense_amount = $this->input->post('expense_amount');
+            log_message('debug','amount='.$expense_amount);
+            $invoice_no = $this->input->post('invoice_no');
+            $expense_type = $this->input->post('expense_type');
+            $party_id = $this->input->post('party');
+            $comments = $this->input->post('comments');
+            $bank_row_id = $this->input->post('bank_row_id');
+            $cash_row_id = $this->input->post('cash_row_id');
+                $expensesInfo = array('account_type'=>$account_type,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+                'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
+                    
+                $result = $this->expenses_model->updateExpense($expensesInfo,$row_id);
+                if($result > 0){
+                    $this->session->set_flashdata('success', 'New Expense updated successfully');
+                } else {
+                    $this->session->set_flashdata('error', 'expense update failed');
+                }
+                redirect('editExpensePageView/'.$row_id);
+            
+        }
+    }
+
+
+    
+   
+  
+  /**
+     * This function is used to delete the devotee using devotee_id
+     * @return boolean $result : TRUE / FALSE
+     */
+    public function deleteExpense()
+    {
+        if ($this->isAdmin() == true) {
+            echo (json_encode(array('status' => 'access')));
+        } else {
+            $expense_id = $this->input->post('expense_id');
+            $expensesInfo = array('is_deleted' => 1, 'updated_by' => $this->employee_id, 'updated_date_time' => date('Y-m-d H:i:s'));
+            $result = $this->expenses_model->deleteExpense($expense_id,$expensesInfo);
+            if ($result > 0) {echo (json_encode(array('status' => true)));} else {echo (json_encode(array('status' => false)));}
+        }
+    }
+
+    
+    
+}
+
+
+?>
