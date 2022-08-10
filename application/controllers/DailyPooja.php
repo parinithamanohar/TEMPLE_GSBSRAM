@@ -1,6 +1,8 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseController.php';
+require_once 'vendor/autoload.php';
+
 
 class DailyPooja extends BaseController
 {
@@ -53,6 +55,7 @@ class DailyPooja extends BaseController
              if($this->role == ROLE_ADMIN ) {
              $editButton = '<a class="btn  btn-sm btn-info" href="'.site_url('editDailyPooja/'.$r->row_id).'"title="Edit"><i class="fas fa-edit"></i></i></a>';
              $deleteButton = '<a class="btn btn-sm btn-danger deleteDailyPooja" data-row_id='.$r->row_id.' href="#" title="Delete"><i class="fas fa-trash"></i></a>';
+             $recieptButton = '<a href="'.site_url('puFeePaymentReceiptPrint/'.$r->row_id).'" target="_blank">Receipt</a>';
             }else{
                 $editButton='';
                 $deleteButton='' ;
@@ -62,7 +65,7 @@ class DailyPooja extends BaseController
                 $r->devotee_id,
                  $r->devotee_name,
                  $r->event_type,
-                 $viewButton.' '.$editButton.' '.$deleteButton
+                 $viewButton.' '.$editButton.' '.$deleteButton.' '.$recieptButton
             );
        }
    
@@ -98,6 +101,7 @@ class DailyPooja extends BaseController
                 $gothradp = $this->security->xss_clean($this->input->post('gothra_id'));
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
                 $paksha_id = $this->security->xss_clean($this->input->post('paksha_id'));
+                $amount = $this->security->xss_clean($this->input->post('amount'));
                 // if($event_type=='Date'){
                 //     $eventdp='0'; $tithidp='0'; $nakshathradp='0'; $masadp='0'; $rashidp='0'; $gothradp='0'; }
                 // if($event_type=='Event'){
@@ -125,6 +129,7 @@ class DailyPooja extends BaseController
                 'masa_id'=>$masadp,
                 'rashi_id'=>$rashidp,
                 'gothra_id'=>$gothradp,
+                'amount'  =>$amount,
                 'company_id'=>$this->company_id);
 
                 $result = $this->DailyPooja_model->addPooja($eventInfo);
@@ -184,6 +189,8 @@ class DailyPooja extends BaseController
                 $gothradp = $this->security->xss_clean($this->input->post('gothra_id'));
                 $paksha_id = $this->security->xss_clean($this->input->post('paksha_id'));
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
+                $amount = $this->security->xss_clean($this->input->post('amount'));
+
                 // if($event_type=='Date'){
                 //     $eventdp='0'; $tithidp='0'; $nakshathradp='0'; $masadp='0'; $rashidp='0'; $gothradp='0'; }
                 // if($event_type=='Event'){
@@ -205,6 +212,7 @@ class DailyPooja extends BaseController
                 'event_id'=>$eventdp,
                 'tithi_id'=>$tithidp,
                 'nakshathra_id'=>$nakshathradp,
+                'amount'  =>$amount,
                 'masa_id'=>$masadp,
                 'rashi_id'=>$rashidp,
                 'gothra_id'=>$gothradp,
@@ -252,6 +260,31 @@ class DailyPooja extends BaseController
             $this->loadViews("dailyDetails/viewDailyDetails", $this->global, $data, null);
         }
     } 
+
+
+
+    
+    public function feePaymentReceiptPrint($row_id = NULL){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            error_reporting(0); 
+            $data['dpInfo'] = $this->DailyPooja_model->getDPDetails($row_id);
+           $data['companyLogo'] = $this->company_logo;
+                      
+            $this->global['pageTitle'] = ''.TAB_TITLE.' : Fee Receipt';
+            // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
+            $mpdf->SetTitle('Fee Receipt');
+        
+            $data['receipt_title_mgmt'] = EXCEL_TITLE;
+            $html = $this->load->view('DailyPooja/dailyPoojaReciept',$data,true);
+            $mpdf->WriteHTML($html);            
+           
+            $mpdf->Output('Fee_Receipt.pdf', 'I'); 
+        } 
+    }
 
 }
 

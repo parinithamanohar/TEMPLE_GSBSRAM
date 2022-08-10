@@ -256,15 +256,19 @@ function alphaOnly(event) {
     return ((key >= 65 && key <= 90) || key == 8 || key == 32);
 };
 
+
+
 jQuery(document).ready(function() {
     $('#member-list thead tr').clone(true).appendTo('#member-list thead');
     $('#member-list thead tr:eq(1) th').each(function(i) {
 
         var title = $(this).text();
         if (title != 'Actions') {
+          
             $(this).html(
                 '<div class="form-group position-relative mb-0 mt-0 search-padding "><input type="text" class="form-control input-sm" placeholder="Search" ' +
                 title + '" /> </div>');
+            
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
                     table
@@ -278,6 +282,8 @@ jQuery(document).ready(function() {
         }
     });
     var table = $('#member-list').DataTable({
+
+        "oSearch": {"sSearch": "2022"},
 
         processing: true,
         orderCellsTop: true,

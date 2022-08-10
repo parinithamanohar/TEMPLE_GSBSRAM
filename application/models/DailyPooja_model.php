@@ -52,7 +52,7 @@ class DailyPooja_model extends CI_Model
 
     function getDPDetails($row_id)
     {
-        $this->db->select('dailypooja.row_id,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
+        $this->db->select('dailypooja.row_id,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
         $this->db->from('tbl_dailypooja_management_info as dailypooja');
         $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
         $this->db->join('tbl_events as events','events.row_id=dailypooja.event_id','left');

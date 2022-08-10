@@ -226,6 +226,16 @@ if ($error) {
                                 </div>
                             </div>
 
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <label for="amount">Amount*</label>
+                                    <input type="text" class="form-control " id="amount" value = "<?php echo $dpInfo->amount ?>"
+                                     name="amount" placeholder="Enter Amount"
+                                     onkeypress="return isNumberKey(event)" autocomplete="off"
+                                     required>
+                                   </div>
+                                </div>
+
                         </div>
                                     
 

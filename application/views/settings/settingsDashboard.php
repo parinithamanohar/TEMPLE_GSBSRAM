@@ -298,7 +298,7 @@ if ($warning) {
                 <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#subscription">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
-                    <h6 class="m-0 text-dark">Subscription Amount</h6>
+                    <h6 class="m-0 text-dark">Amount</h6>
                 </div>
 
                 <div id="subscription" class="collapse">
@@ -311,7 +311,7 @@ if ($warning) {
                                     <div class="col-8">
                                         <div class="form-group mb-0">
                                             <input type="text" class="form-control" id="subscription"
-                                                name="subscription" placeholder="Enter Subscription Amount"
+                                                name="subscription" placeholder="Enter Amount"
                                                 autocomplete="off" required>
                                         </div>
                                     </div>
@@ -327,7 +327,7 @@ if ($warning) {
                                     <table class="table table-bordered text-dark mb-0">
                                         <thead class="text-center">
                                             <tr class="table_row_background">
-                                                <th>Subscription Amount</th>
+                                                <th>Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                             <?php if (!empty($subscriptionInfo)) {
@@ -342,7 +342,7 @@ if ($warning) {
                                             </tr>
                                             <?php }
                       } else { ?>
-                                            <td colspan="2" style="background-color: #83c8ea7d;">Subscription Not Found
+                                            <td colspan="2" style="background-color: #83c8ea7d;">Amount Not Found
                                             </td>
                                             <?php } ?>
                                         </thead>

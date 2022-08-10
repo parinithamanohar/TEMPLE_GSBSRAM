@@ -156,7 +156,7 @@ jQuery(document).ready(function(){
 			hitURL = baseURL + "deleteSubscriptionInfo",
 			currentRow = $(this);
 		
-		var confirmation = confirm("Are you sure to delete this Subscription?");
+		var confirmation = confirm("Are you sure to delete this Amount?");
 		
 		if(confirmation)
 		{
@@ -168,8 +168,8 @@ jQuery(document).ready(function(){
 			}).done(function(data){
 					
 				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("Subscription successfully deleted"); }
-				else if(data.status = false) { alert("Subscription deletion failed"); }
+				if(data.status = true) { alert("Amount successfully deleted"); }
+				else if(data.status = false) { alert("Amount deletion failed"); }
 				else { alert("Access denied..!"); }
 			});
 		}

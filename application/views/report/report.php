@@ -306,10 +306,24 @@
                     </div>
             </div>
             <!-- Modal footer -->
+
+
             <div class="modal-footer">
+                <div class="col-4">
+                    <select class="form-control text-dark" id="reportFormat" name="reportFormat" required>
+                        <option value="VIEW">VIEW</option>     
+                        <option value="DOWNLOAD">DOWNLOAD</option>
+                    </select>
+                </div>
+                <button id="downloadstaffReportExcel" type="submit" class="btn btn-md btn-primary float-right"><i
+                        class="fa fa-download"></i> Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+            <!-- <div class="modal-footer">
                 <button type="submit" id="devoteeReport" class="btn btn-success">Download</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
             </form>
         </div>
     </div>

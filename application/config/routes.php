@@ -459,3 +459,5 @@ $route['Employeeindex'] = 'employee/index';
 
 
 $route['viewDailyPooja/(:num)'] = "DailyPooja/viewDailyPooja/$1";
+
+$route['puFeePaymentReceiptPrint/(:any)'] = "DailyPooja/feePaymentReceiptPrint/$1";

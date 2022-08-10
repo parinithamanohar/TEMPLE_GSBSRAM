@@ -1,6 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseController.php';
+require_once 'vendor/autoload.php';
 
 class Report extends BaseController
 {
@@ -149,11 +150,41 @@ public function downloadDevotee(){
         $this->loadThis();
     } else {
         $filter = array();
+        error_reporting(0);
         $purchase_fromDate = $this->security->xss_clean($this->input->post('purchase_fromDate'));
         $purchase_toDate = $this->security->xss_clean($this->input->post('purchase_toDate'));
         $post_status = $this->security->xss_clean($this->input->post('post_status'));
+        $reportFormat = $this->security->xss_clean($this->input->post('reportFormat'));
 
         $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+
+        $filter['post_status']= $post_status;
+        // $filter['stream_name']= $stream[$sheet];
+        if(!empty($purchase_fromDate)) {
+        $filter['purchase_fromDate']= date('Y-m-d',strtotime($purchase_fromDate));
+        }
+        else{
+            $filter['purchase_fromDate'] = ''; 
+        }
+        if(!empty($purchase_toDate)) {
+        $filter['purchase_toDate']=  date('Y-m-d',strtotime($purchase_toDate));
+        }
+        else{
+            $filter['purchase_toDate']= '';
+        }
+
+        if($reportFormat == 'VIEW'){
+            $data['dt_filter'] = $filter;
+            $data['company_id'] = $this->company_id;
+            $data['devotee_model'] = $this->Devotee_model;
+            $this->global['pageTitle'] = ''.EXCEL_TITLE.' : DEVOTEE REPORT';
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman']);
+            $mpdf->AddPage('P','','','','',10,10,10,10,8,8);
+            $mpdf->SetTitle('DEVOTEE REPORT');
+            $html = $this->load->view('report/devoteeView',$data,true);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output('Devotee_Report.pdf', 'I');
+        }else{
         $sheet = 0;
             $this->excel->setActiveSheetIndex($sheet);
             $this->excel->getActiveSheet()->setTitle($sheet);
@@ -188,24 +219,7 @@ public function downloadDevotee(){
             $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Contact number');
             $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Devotee address');
             
-            
-            
-            $filter['post_status']= $post_status;
-            // $filter['stream_name']= $stream[$sheet];
-            if(!empty($purchase_fromDate)) {
-            $filter['purchase_fromDate']= date('Y-m-d',strtotime($purchase_fromDate));
-            }
-            else{
-                $filter['purchase_fromDate'] = ''; 
-            }
-            if(!empty($purchase_toDate)) {
-            $filter['purchase_toDate']=  date('Y-m-d',strtotime($purchase_toDate));
-            }
-            else{
-                $filter['purchase_toDate']= '';
-            }
-            log_message('debug','bfrom'.$filter['purchase_fromDate']);
-
+        
 
             $sl = 1;
             $excel_row = 4;
@@ -227,7 +241,7 @@ public function downloadDevotee(){
                 $this->excel->createSheet(); 
             // }
             
-        }
+        
         
         $filename ='Devotee_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -237,7 +251,8 @@ public function downloadDevotee(){
         ob_start();
         setcookie('isDownLoaded',1);  
         $objWriter->save("php://output");
-        
+            }
+    } 
     }
 
     public function downloadBank(){
