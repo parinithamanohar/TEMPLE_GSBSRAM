@@ -275,9 +275,11 @@ class DailyPooja extends BaseController
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Fee Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
             $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
-            $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
+            $mpdf->autoScriptToLang = true;
+            $mpdf->autoLangToFont = true;
+                        $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
             $mpdf->SetTitle('Fee Receipt');
-        
+
             $data['receipt_title_mgmt'] = EXCEL_TITLE;
             $html = $this->load->view('DailyPooja/dailyPoojaReciept',$data,true);
             $mpdf->WriteHTML($html);            

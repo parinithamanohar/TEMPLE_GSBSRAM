@@ -51,7 +51,8 @@ table{
                         <img  class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
                     </td>
                     <td width="700" style="text-align:center;">
-                        <b style="font-size: 25px;margin-bottom: 2px;"><?php echo $receipt_title_mgmt; ?></b><br/>
+                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
+                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br/>
                         <!-- <b style="font-size: 13px;margin-bottom: 2px;">Unit of KJES </b><br/> -->
                         <span style="font-size: 13px;margin-bottom: 2px;">
                         </span><br/>
@@ -62,22 +63,22 @@ table{
             </table>
             <hr class="border_bottom hr_line">
 
-            <table class="table" style="font-size: 13px;">
+            <table class="table" style="font-size: 15px;">
                 
                 <tr>
-                    <td colspan="2">Receipt No.: <span style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
+                    <td colspan="2">ರಶೀದಿ ಸಂಖ್ಯೆ.: <span style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
                 </tr>
                 <tr>
-                    <td colspan="2">Name of the Devotee : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
+                    <td colspan="2">ಹೆಸರು : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
                 </tr>
               
-                <tr>
+                <!-- <tr>
                     <td width="220">Event Type  : <?php echo strtoupper($dpInfo->event_type); ?></td>
                   
-                </tr>
+                </tr> -->
               
                 <tr>
-                    <td colspan="2">Date : <?php echo date('d-m-Y',strtotime($dpInfo->date)); ?></td>
+                    <td colspan="2">ದಿನಾಂಕ : <?php echo date('d-m-Y',strtotime($dpInfo->date)); ?></td>
                 </tr>
                 
 
@@ -85,21 +86,21 @@ table{
                
               
             </table>
-            <table class="table table_bordered" style="font-size: 13px;">
+            <table class="table table_bordered" style="font-size: 15px;">
                 <tr>
-                    <th>Particulars</th>
-                    <th width="120">Amount</th>
+                    <th>ವಿವರಗಳು</th>
+                    <th width="120">ಮೊತ್ತ</th>
                 </tr> 
                 <tr>
                     <td style="text-align: center;">DAILY POOJA FEE</td>
                     <td style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></td>
                 </tr>
                 <tr>
-                    <th>Grand Total</th>
+                    <th>ಒಟ್ಟು  ಮೊತ್ತ</th>
                     <th style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></th>
                 </tr>
                 <tr>
-                    <td colspan="2" style="font-size: 13px;"><br><b>Amount in words: <span style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b></td>
+                    <td colspan="2" style="font-size: 13px;"><br><b>: <span style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b></td>
                 </tr>
             </table>
 
