@@ -35,6 +35,7 @@ class DailyPooja extends BaseController
             $data['gothraInfo'] =$this->DailyPooja_model->getGothraInfo($this->company_id); 
             $data['occationInfo'] = $this->setting_model->getAllOccationInfo($this->company_id);
             $data['pakshaInfo'] = $this->setting_model->getAllPakshaInfo($this->company_id);
+            $data['subscriptionInfo'] = $this->setting_model->getAllSubscriptionInfo($this->company_id);
 
             // $data['committeeTypeInfo'] =$this->Event_model->getCommitteeTypeInfo($this->company_id);  
             $this->global['pageTitle'] = $this->company_name.' :DailyPooja Details ';
@@ -130,6 +131,8 @@ class DailyPooja extends BaseController
                 'rashi_id'=>$rashidp,
                 'gothra_id'=>$gothradp,
                 'amount'  =>$amount,
+                'created_by'=>$this->company_id,
+                'created_date_time' =>date('Y-m-d H:i:s'),
                 'company_id'=>$this->company_id);
 
                 $result = $this->DailyPooja_model->addPooja($eventInfo);
@@ -161,6 +164,7 @@ class DailyPooja extends BaseController
             $data['gothraInfo'] =$this->DailyPooja_model->getGothraInfo($this->company_id); 
             $data['occationInfo'] = $this->setting_model->getAllOccationInfo($this->company_id);
             $data['pakshaInfo'] = $this->setting_model->getAllPakshaInfo($this->company_id);
+            $data['subscriptionInfo'] = $this->setting_model->getAllSubscriptionInfo($this->company_id);
             $this->global['pageTitle'] = $this->company_name.' : Edit DailyPooja ';
             $this->loadViews("DailyPooja/editDailyPooja", $this->global, $data, NULL);
         }
@@ -218,6 +222,8 @@ class DailyPooja extends BaseController
                 'gothra_id'=>$gothradp,
                 'occation_id' =>$occation_id,
                 'paksha_id' =>$paksha_id,
+                'updated_date_time' =>date('Y-m-d H:i:s'),
+                'updated_by' =>$this->company_id,
                 'company_id'=>$this->company_id);
                
                 $result = $this->DailyPooja_model->updateDailyPooja($eventInfo,$row_id);

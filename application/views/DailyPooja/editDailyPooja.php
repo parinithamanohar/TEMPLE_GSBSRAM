@@ -226,7 +226,24 @@ if ($error) {
                                 </div>
                             </div>
 
+
                             <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="amount">Amount*</label>
+                                <select class="form-control " id="amount" name="amount" required>
+                                    <!-- <option value=""> Select Devotee </option> -->
+                                    <option value="<?php echo $dpInfo->amount?>">
+                                                            Selected :<?php echo $dpInfo->amount?>
+                                    <?php if(!empty($subscriptionInfo)) {
+                                        foreach($subscriptionInfo as $sub ){?>
+                                        <option value="<?php echo $sub->amount;?>">
+                                        <?php echo $sub->amount;?></option>
+                                        <?php }}?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="amount">Amount*</label>
                                     <input type="text" class="form-control " id="amount" value = "<?php echo $dpInfo->amount ?>"
@@ -234,7 +251,7 @@ if ($error) {
                                      onkeypress="return isNumberKey(event)" autocomplete="off"
                                      required>
                                    </div>
-                                </div>
+                                </div> -->
 
                         </div>
                                     

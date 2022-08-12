@@ -78,7 +78,7 @@ table{
                 </tr> -->
               
                 <tr>
-                    <td colspan="2">ದಿನಾಂಕ : <?php echo date('d-m-Y',strtotime($dpInfo->date)); ?></td>
+                    <td colspan="2">ದಿನಾಂಕ : <?php echo date('d-m-Y',strtotime($dpInfo->created_date_time)); ?></td>
                 </tr>
                 
 
