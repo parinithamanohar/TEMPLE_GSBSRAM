@@ -44,9 +44,14 @@ class Devotee_model extends CI_Model
         if(!empty($filter['contact_number'])){
             $this->db->where('BaseTbl.contact_number', $filter['contact_number']);
         }
-        if(!empty($filter['devotee_address'])){
-            $this->db->where('BaseTbl.devotee_address', $filter['devotee_address']);
+        // if(!empty($filter['devotee_address'])){
+        //     $this->db->where('BaseTbl.devotee_address', $filter['devotee_address']);
+        // }
+         if(!empty($filter['devotee_address'])){
+            $likeCriteria = "(BaseTbl.devotee_address  LIKE '%".$filter['devotee_address']."%')";
+            $this->db->where($likeCriteria);
         }
+
         $this->db->where('BaseTbl.company_id',$company_id);
         $this->db->where('BaseTbl.is_deleted', 0);
         $query = $this->db->get();
@@ -76,8 +81,12 @@ class Devotee_model extends CI_Model
         if(!empty($filter['contact_number'])){
             $this->db->where('BaseTbl.contact_number', $filter['contact_number']);
         }
-        if(!empty($filter['devotee_address'])){
-            $this->db->where('BaseTbl.devotee_address', $filter['devotee_address']);
+        // if(!empty($filter['devotee_address'])){
+        //     $this->db->where('BaseTbl.devotee_address', $filter['devotee_address']);
+        // }
+          if(!empty($filter['devotee_address'])){
+            $likeCriteria = "(BaseTbl.devotee_address  LIKE '%".$filter['devotee_address']."%')";
+            $this->db->where($likeCriteria);
         }
 
         $this->db->where('BaseTbl.company_id',$company_id);

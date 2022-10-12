@@ -79,7 +79,7 @@ class Event extends BaseController
 
                 $event_id = $this->security->xss_clean($this->input->post('events'));
                 $event_date = $this->security->xss_clean($this->input->post('event_date'));
-                $events_date = date('y-m-d',strtotime($event_date));
+                $events_date = date('Y-m-d',strtotime($event_date));
                 $eventInfo = array('event_id'=>$event_id,'event_date'=>$events_date,'company_id'=>$this->company_id);
 
                 $result = $this->Event_model->addEvents($eventInfo);
@@ -119,7 +119,7 @@ class Event extends BaseController
 
             $event_id = $this->security->xss_clean($this->input->post('events'));
             $event_date = $this->security->xss_clean($this->input->post('event_date'));
-            $events_date = date('y-m-d',strtotime($event_date));
+            $events_date = date('Y-m-d',strtotime($event_date));
 
                
                 $eventInfo = array('event_id'=>$event_id,'event_date'=>$events_date,'company_id'=>$this->company_id);

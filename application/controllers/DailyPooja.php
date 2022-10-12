@@ -93,7 +93,7 @@ class DailyPooja extends BaseController
                 $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));
                 $event_type = $this->security->xss_clean($this->input->post('event_type'));
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $dateinfo = date('y-m-d',strtotime($datedp));
+                $dateinfo = date('Y-m-d',strtotime($datedp));
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
                 $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));
@@ -184,7 +184,7 @@ class DailyPooja extends BaseController
                 $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));
                 $event_type = $this->security->xss_clean($this->input->post('event_type'));
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $dateinfo = date('y-m-d',strtotime($datedp));
+                $dateinfo = date('Y-m-d',strtotime($datedp));
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
                 $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));

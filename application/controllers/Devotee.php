@@ -81,7 +81,7 @@ class Devotee extends BaseController
             $this->load->library('form_validation');
             // $this->form_validation->set_rules('devotee_id','devotee ID','required');
             $this->form_validation->set_rules('devotee_name','Full Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('dob','Dob','required');
+            // $this->form_validation->set_rules('dob','Dob','required');
             $this->form_validation->set_rules('gender','Gender','required');
             $this->form_validation->set_rules('contact_number','Contact Number','required|min_length[10]');
             $this->form_validation->set_rules('devotee_address','Address','required');
@@ -111,15 +111,16 @@ class Devotee extends BaseController
                 // 'languages_known' => $this->input->post('hidden_languages_known'),
                 $devotee_address = $this->security->xss_clean($this->input->post('devotee_address'));
                 if(!empty($profile_image)){
-                    $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
+                    $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('Y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
                     'contact_number'=>$contact_number,'alternative_contact_number'=>$alternative_contact_number,'profile_image'=>$profile_image,
                     'email'=>$email,'post_status'=>$post_status,'devotee_address'=>$devotee_address, 'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'));
                     } else {
-                        $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
+                        $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('Y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
                         'contact_number'=>$contact_number,'alternative_contact_number'=>$alternative_contact_number,
                         'email'=>$email,'post_status'=>$post_status,'devotee_address'=>$devotee_address, 'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'));
                     }
                 $return = $this->devotee_model->addDevotee($devoteeInfo);
+                log_message('debug','dateofbirth'.print_r($devoteeInfo,true));
                 $devotee_id = 'SRM'.sprintf('%05d',$return);
                 $devoteeId = array('devotee_id'=>$devotee_id);
                 $result = $this->devotee_model->updateDevotee($devoteeId,$return);
@@ -207,11 +208,11 @@ class Devotee extends BaseController
                 $devotee_address = $this->security->xss_clean($this->input->post('devotee_address'));
                 $devoteeInfo = array();
                  if(!empty($profile_image)){
-                    $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
+                    $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('Y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
                     'contact_number'=>$contact_number,'alternative_contact_number'=>$alternative_contact_number,'profile_image'=>$profile_image,
                     'email'=>$email,'post_status'=>$post_status,'devotee_address'=>$devotee_address, 'company_id'=>$this->company_id,'updated_by'=>$this->employee_id, 'updated_date_time'=>date('Y-m-d H:i:s'));
                     }else {
-                        $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
+                        $devoteeInfo = array('devotee_name'=>$devotee_name,'dob'=>date('Y-m-d',strtotime($dob)),'gender'=>$gender,'email'=>$email,
                         'contact_number'=>$contact_number,'alternative_contact_number'=>$alternative_contact_number,
                         'email'=>$email,'post_status'=>$post_status,'devotee_address'=>$devotee_address, 'company_id'=>$this->company_id,'updated_by'=>$this->employee_id, 'updated_date_time'=>date('Y-m-d H:i:s'));
                     }

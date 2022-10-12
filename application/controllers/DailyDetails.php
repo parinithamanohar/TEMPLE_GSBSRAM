@@ -88,7 +88,7 @@ class DailyDetails extends BaseController
         }  else {
 
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $panchangadate = date('y-m-d',strtotime($datedp));
+                $panchangadate = date('Y-m-d',strtotime($datedp));
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
                 $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));
@@ -126,7 +126,7 @@ class DailyDetails extends BaseController
         }  else {
 
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $panchangadate = date('y-m-d',strtotime($datedp));
+                $panchangadate = date('Y-m-d',strtotime($datedp));
 
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
@@ -190,7 +190,7 @@ class DailyDetails extends BaseController
             $row_id = $this->input->post('row_id');
            
             $datedp = $this->security->xss_clean($this->input->post('date'));
-            $panchangadate = date('y-m-d',strtotime($datedp));
+            $panchangadate = date('Y-m-d',strtotime($datedp));
             $eventdp = $this->security->xss_clean($this->input->post('event_id'));
             $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
             $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));

@@ -217,14 +217,14 @@ if ($error) {
                                     </div> -->
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
-                                            <label for="return_date">Date Of Birth*</label>
+                                            <label for="return_date">Date Of Birth</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
                                                     <span
                                                         class="input-group-text material-icons date-icon">date_range</span>
                                                     <input id="dob" type="text" name="dob"
                                                         class="form-control datepicker date-col-3"
-                                                        placeholder="Date of Birth" autocomplete="off"  required>
+                                                        placeholder="Date of Birth" autocomplete="off" >
                                                 </div>
                                             </div>
 
