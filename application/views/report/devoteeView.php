@@ -71,7 +71,7 @@ u {
                             <tr>
                             <th style="border: 1px solid black;text-align: center;width: 100px;"><?php echo $j++; ?></th>
                             <th style="border: 1px solid black;text-align: center;width: 130px;"><?php echo $devotee->devotee_id; ?></th>
-                            <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $devotee->devotee_name.', '.$devotee->contact_number.', '.$devotee->devotee_address; ?></th>
+                            <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $devotee->devotee_name.', '.$devotee->devotee_address.' , PH: '.$devotee->contact_number; ?></th>
                             </tr>        
                             <?php        
                         }

@@ -231,7 +231,7 @@ public function downloadDevotee(){
                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $asset->email);
                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $asset->gender);
                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $asset->contact_number);
-                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $asset->devotee_name.', '.$asset->contact_number.', '.$asset->devotee_address);
+                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $asset->devotee_name.', '.$asset->devotee_address.' , PH: '.$asset->contact_number);
 
                     //$this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $this->asset_model->getDepreciationAmountByAsset($asset->row_id));
                     $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
