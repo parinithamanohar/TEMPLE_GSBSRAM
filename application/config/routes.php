@@ -411,7 +411,7 @@ $route['downloadAssetReport'] = "report/downloadAsset";
 $route['downloadCommitteeReport'] = "report/downloadCommitteeReport";
 $route['downloadDevoteeReport'] = 'report/downloadDevotee';
 $route['downloadBankTReport'] = 'report/downloadBank';
-
+$route['downloadDailyPoojaReport'] = "report/downloadDailyPoojaReport";
 
 //income
 $route['getIncomeInfo'] = "income/getIncomeInfo";

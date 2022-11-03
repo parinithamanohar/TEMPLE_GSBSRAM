@@ -46,7 +46,7 @@ u {
 
 
 </style>
-    <div class="container-fluid border_full" style="padding-right:0px; padding-left:0px;">
+    <div class="container-fluid " style="padding-right:0px; padding-left:0px;">
         <div class="row" >
             <table style="width: 100%;border-collapse: collapse;">
                 <tr>
@@ -56,6 +56,8 @@ u {
                     <th style="border: 1px solid black;text-align: center;width: 100px;">SL. NO.</th>
                     <th style="border: 1px solid black;text-align: center;width: 130px;">DEVOTEE ID</th>
                     <th style="border: 1px solid black;text-align: center;width: 200px;">ADDRESS</th>
+                    <th style="text-align: center;width: 200px;"></th>
+
                 </tr>
                 <?php 
                 $filter = array();
@@ -72,6 +74,7 @@ u {
                             <th style="border: 1px solid black;text-align: center;width: 100px;"><?php echo $j++; ?></th>
                             <th style="border: 1px solid black;text-align: center;width: 130px;"><?php echo $devotee->devotee_id; ?></th>
                             <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $devotee->devotee_name.', '.$devotee->devotee_address.' , PH: '.$devotee->contact_number; ?></th>
+                            <th style="text-align: center;width: 130px;"></th>
                             </tr>        
                             <?php        
                         }

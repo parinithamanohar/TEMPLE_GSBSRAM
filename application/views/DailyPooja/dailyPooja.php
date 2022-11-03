@@ -78,7 +78,7 @@ if ($success) {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Devotee Name</th>
+                                    <th>Seva By</th>
                                     <th>Event Type</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -92,199 +92,208 @@ if ($success) {
         </div>
         <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <div id="Modal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg ">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header modal-call-report p-2">
-                    <div class=" col-md-10 col-10">
-                        <span class="text-white mobile-title" style="font-size : 20px">Add Daily Pooja
-                            Details</span>
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header modal-call-report p-2">
+                        <div class=" col-md-10 col-10">
+                            <span class="text-white mobile-title" style="font-size : 20px">Add Daily Pooja
+                                Details</span>
+                        </div>
+                        <div class=" col-md-2 col-2">
+                            <button type="button" class="text-white close" data-dismiss="modal">&times;</button>
+                        </div>
                     </div>
-                    <div class=" col-md-2 col-2">
-                        <button type="button" class="text-white close" data-dismiss="modal">&times;</button>
-                    </div>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body m-0">
-                    <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addSubscription" action="<?php echo base_url() ?>addDailyPooja"
-                        method="post" role="form">
-                        <input type="hidden" name="row_id" id="row_id" />
-                        <div class="row">
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="devotee_id">Devotee name*</label>
-                                <select class="form-control " id="devotee_id" name="devotee_id" required>
-                                    <option value=""> Select Devotee </option>
-                                    <?php if(!empty($poojaInfo)) {
+                    <!-- Modal body -->
+                    <div class="modal-body m-0">
+                        <?php $this->load->helper("form"); ?>
+                        <form role="form" id="addSubscription" action="<?php echo base_url() ?>addDailyPooja"
+                            method="post" role="form">
+                            <input type="hidden" name="row_id" id="row_id" />
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="devotee_id">Seva By*</label>
+                                        <select class="form-control " id="devotee_id" name="devotee_id" required>
+                                            <option value=""> Select Seva By </option>
+                                            <?php if(!empty($poojaInfo)) {
                                         foreach($poojaInfo as $role ){?>
-                                        <option value="<?php echo $role->row_id;?>">
-                                        <?php echo $role->devotee_name;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $role->row_id;?>">
+                                                <?php echo $role->devotee_name;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <div class="form-group">
-                                    <label for="event_type">Event Type*</label>
-                                    <select class="form-control " id="event_type" name="event_type" required>
-                                    <option value="">Select Event Type</option>
-                                                <option value="Date">Date</option>
-                                                 <!-- <option value="Event">Event</option>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="event_type">Event Type*</label>
+                                        <select class="form-control " id="event_type" name="event_type" required>
+                                            <option value="">Select Event Type</option>
+                                            <option value="Date">Date</option>
+                                            <!-- <option value="Event">Event</option>
                                                 <option value="Tithi">Tithi</option>
                                                 <option value="Nakshathra">Nakshathra</option>
                                                 <option value="Masa">Masa</option>
                                                 <option value="Rashi">Rashi</option>  -->
-                                                <option value="Panchanga">Panchanga</option>
+                                            <option value="Panchanga">Panchanga</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="event_date col-lg-6 col-12">
-                                <div class="form-group">
-                                    <label for="date">Date*</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text material-icons date-icon">date_range</span>
-                                            <input id="date" type="text" name="date" required
-                                                class="form-control datepicker date-col-3 required "
-                                                placeholder="Select Date" autocomplete="off"  />
+                                <div class="event_date_only col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="date">Date*</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <span
+                                                    class="input-group-text material-icons date-icon">date_range</span>
+                                                <input id="date" type="text" name="date"
+                                                    class="form-control datepicker date-col-3 required "
+                                                    placeholder="Select Date" autocomplete="off" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                                
 
-                            <div class="col-lg-6 col-12 event_panchanga">
-                            <div class="form-group">
-                                <label for="tithi_id">Tithi*</label>
-                                <select class="form-control " id="tithi_id" name="tithi_id">
-                                    <option value=""> Select Tithi </option>
-                                    <?php if(!empty($tithiInfo)) {
+
+                                <div class="col-lg-6 col-12 event_panchanga">
+                                    <div class="form-group">
+                                        <label for="tithi_id">Tithi*</label>
+                                        <select class="form-control " id="tithi_id" name="tithi_id">
+                                            <option value=""> Select Tithi </option>
+                                            <?php if(!empty($tithiInfo)) {
                                         foreach($tithiInfo as $tithi ){?>
-                                        <option value="<?php echo $tithi->row_id;?>">
-                                        <?php echo $tithi->tithi;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $tithi->row_id;?>">
+                                                <?php echo $tithi->tithi;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12 event_date" id="dpnakshathra" >
-                            <div class="form-group">
-                                <label for="nakshathra_id">Nakshathra*</label>
-                                <select class="form-control " id="nakshathra_id" name="nakshathra_id" required>
-                                    <option value=""> Select Nakshathra </option>
-                                    <?php if(!empty($nakshathraInfo)) {
+                                <div class="col-lg-6 col-12 event_date" id="dpnakshathra">
+                                    <div class="form-group">
+                                        <label for="nakshathra_id">Nakshathra*</label>
+                                        <select class="form-control " id="nakshathra_id" name="nakshathra_id" required>
+                                            <option value=""> Select Nakshathra </option>
+                                            <?php if(!empty($nakshathraInfo)) {
                                         foreach($nakshathraInfo as $nakshathra ){?>
-                                        <option value="<?php echo $nakshathra->row_id;?>">
-                                        <?php echo $nakshathra->nakshathra;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $nakshathra->row_id;?>">
+                                                <?php echo $nakshathra->nakshathra;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12 event_panchanga" >
-                            <div class="form-group">
-                                <label for="masa_id">Masa*</label>
-                                <select class="form-control " id="masa_id" name="masa_id" >
-                                    <option value=""> Select Masa </option>
-                                    <?php if(!empty($masaInfo)) {
+                                <div class="col-lg-6 col-12 event_panchanga">
+                                    <div class="form-group">
+                                        <label for="masa_id">Masa*</label>
+                                        <select class="form-control " id="masa_id" name="masa_id">
+                                            <option value=""> Select Masa </option>
+                                            <?php if(!empty($masaInfo)) {
                                         foreach($masaInfo as $masa ){?>
-                                        <option value="<?php echo $masa->row_id;?>">
-                                        <?php echo $masa->masa;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $masa->row_id;?>">
+                                                <?php echo $masa->masa;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12 event_date" id="dprashi">
-                            <div class="form-group">
-                                <label for="rashi_id">Rashi*</label>
-                                <select class="form-control " id="rashi_id" name="rashi_id" required>
-                                    <option value=""> Select Rashi </option>
-                                    <?php if(!empty($rashiInfo)) {
+                                <div class="col-lg-6 col-12 event_date" id="dprashi">
+                                    <div class="form-group">
+                                        <label for="rashi_id">Rashi*</label>
+                                        <select class="form-control " id="rashi_id" name="rashi_id" required>
+                                            <option value=""> Select Rashi </option>
+                                            <?php if(!empty($rashiInfo)) {
                                         foreach($rashiInfo as $rashi){?>
-                                        <option value="<?php echo $rashi->row_id;?>">
-                                        <?php echo $rashi->rashi;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $rashi->row_id;?>">
+                                                <?php echo $rashi->rashi;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12 event_date" id="dpgothra" >
-                            <div class="form-group">
-                                <label for="gothra_id">Gothra*</label>
-                                <select class="form-control " id="gothra_id" name="gothra_id" required>
-                                    <option value=""> Select Gothra </option>
-                                    <?php if(!empty($gothraInfo)) {
+                                <div class="col-lg-6 col-12 event_date" id="dpgothra">
+                                    <div class="form-group">
+                                        <label for="gothra_id">Gothra*</label>
+                                        <select class="form-control " id="gothra_id" name="gothra_id" required>
+                                            <option value=""> Select Gothra </option>
+                                            <?php if(!empty($gothraInfo)) {
                                         foreach($gothraInfo as $gothra ){?>
-                                        <option value="<?php echo $gothra->row_id;?>">
-                                        <?php echo $gothra->gothra;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $gothra->row_id;?>">
+                                                <?php echo $gothra->gothra;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12 event_date">
-                            <div class="form-group">
-                                <label for="occation_id">Occation*</label>
-                                <select class="form-control " id="occation_id" name="occation_id" required>
-                                    <option value=""> Select Occation </option>
-                                    <?php if(!empty($occationInfo)) {
+                                <div class="col-lg-6 col-12 event_date">
+                                    <div class="form-group">
+                                        <label for="occation_id">Occasion*</label>
+                                        <select class="form-control " id="occation_id" name="occation_id" required>
+                                            <option value=""> Select Occasion </option>
+                                            <?php if(!empty($occationInfo)) {
                                         foreach($occationInfo as $occation ){?>
-                                        <option value="<?php echo $occation->row_id;?>">
-                                        <?php echo $occation->occation;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $occation->row_id;?>">
+                                                <?php echo $occation->occation;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="col-lg-6 col-12 event_panchanga" >
-                            <div class="form-group">
-                                <label for="paksha_id">Paksha*</label>
-                                <select class="form-control " id="paksha_id" name="paksha_id">
-                                    <option value=""> Select Paksha </option>
-                                    <?php if(!empty($pakshaInfo)) {
+                                <div class="col-lg-6 col-12 event_panchanga">
+                                    <div class="form-group">
+                                        <label for="paksha_id">Paksha*</label>
+                                        <select class="form-control " id="paksha_id" name="paksha_id">
+                                            <option value=""> Select Paksha </option>
+                                            <?php if(!empty($pakshaInfo)) {
                                         foreach($pakshaInfo as $paksha ){?>
-                                        <option value="<?php echo $paksha->row_id;?>">
-                                        <?php echo $paksha->paksha;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $paksha->row_id;?>">
+                                                <?php echo $paksha->paksha;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="amount">Amount*</label>
-                                <select class="form-control " id="amount" name="amount" required>
-                                    <option value=""> Select Amount </option>
-                                    <?php if(!empty($subscriptionInfo)) {
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="amount">Amount*</label>
+                                        <select class="form-control " id="amount" name="amount" required>
+                                            <option value=""> Select Amount </option>
+                                            <?php if(!empty($subscriptionInfo)) {
                                         foreach($subscriptionInfo as $sub ){?>
-                                        <option value="<?php echo $sub->amount;?>">
-                                        <?php echo $sub->amount;?></option>
-                                        <?php }}?>
-                                    </select>
+                                            <option value="<?php echo $sub->amount;?>">
+                                                <?php echo $sub->amount;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                                
-                        </div>
 
-                            
-                       
-                        <div class="form-group">
-                            <input style="float:right;" type="submit" class="btn btn-primary" value="Add" />
-                        </div>
-                    </form>
+                                <div class="col-lg-12 col-12">
+                                    <div class="form-group">
+                                        <label for="role">Remarks</label>
+                                        <textarea class="form-control required" value="" name="remarks" id="remarks"
+                                            rows="4" placeholder="Remarks" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <input style="float:right;" type="submit" class="btn btn-primary" value="Add" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
     </div>
-
-
-
-
-
-</div>
 </div>
 <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/committee/committee.js" charset="utf-8"> -->
 </script>
@@ -305,7 +314,7 @@ function alphaOnly(event) {
 // function changeStatus(){
 //     //document.getElementById("booktype").style.visibility="hidden";
 //     var status = document.getElementById("event_type");
-    
+
 //     if(status.value=="Date"){
 //         document.getElementById("dpdate").style.visibility="visible";
 
@@ -443,7 +452,7 @@ jQuery(document).ready(function() {
             });
         }
     });
-    
+
 });
 
 
@@ -462,27 +471,31 @@ $("#vImg").change(function() {
     readURL(this);
 });
 
-$(document).ready(function () {
+$(document).ready(function() {
     $('.event_date').hide();
     $('.event_panchanga').hide();
+    $('.event_date_only').hide();
 
-    $("#event_type").change(function () {
+    $("#event_type").change(function() {
         event_type = $('#event_type').val();
-        if(event_type == 'Date'){
-        $('.event_date').show();
-        $('.event_panchanga').hide();
-        $("#paksha_id").prop('required',false);
-        $("#masa_id").prop('required',false);
-        $("#tithi_id").prop('required',false);
-    }else{
-        $('.event_date').show();
-        $('.event_panchanga').show();
-        $("#paksha_id").prop('required',true);
-        $("#masa_id").prop('required',true);
-        $("#tithi_id").prop('required',true);
-    }
+        if (event_type == 'Date') {
+            $('.event_date').show();
+            $('.event_date_only').show();
+            $('.event_panchanga').hide();
+            $("#date").prop('required', true);
+            $("#paksha_id").prop('required', false);
+            $("#masa_id").prop('required', false);
+            $("#tithi_id").prop('required', false);
+        } else {
+            $('.event_date').show();
+            $('.event_date_only').hide();
+            $('.event_panchanga').show();
+            $("#date").prop('required', false);
+            $("#paksha_id").prop('required', true);
+            $("#masa_id").prop('required', true);
+            $("#tithi_id").prop('required', true);
+        }
     });
 
 });
-
 </script>

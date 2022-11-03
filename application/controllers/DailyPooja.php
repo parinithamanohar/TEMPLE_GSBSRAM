@@ -103,6 +103,7 @@ class DailyPooja extends BaseController
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
                 $paksha_id = $this->security->xss_clean($this->input->post('paksha_id'));
                 $amount = $this->security->xss_clean($this->input->post('amount'));
+                $remarks = $this->security->xss_clean($this->input->post('remarks'));
                 // if($event_type=='Date'){
                 //     $eventdp='0'; $tithidp='0'; $nakshathradp='0'; $masadp='0'; $rashidp='0'; $gothradp='0'; }
                 // if($event_type=='Event'){
@@ -131,6 +132,7 @@ class DailyPooja extends BaseController
                 'rashi_id'=>$rashidp,
                 'gothra_id'=>$gothradp,
                 'amount'  =>$amount,
+                'remarks' =>$remarks,
                 'created_by'=>$this->company_id,
                 'created_date_time' =>date('Y-m-d H:i:s'),
                 'company_id'=>$this->company_id);
@@ -194,7 +196,7 @@ class DailyPooja extends BaseController
                 $paksha_id = $this->security->xss_clean($this->input->post('paksha_id'));
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
                 $amount = $this->security->xss_clean($this->input->post('amount'));
-
+                $remarks = $this->security->xss_clean($this->input->post('remarks'));
                 // if($event_type=='Date'){
                 //     $eventdp='0'; $tithidp='0'; $nakshathradp='0'; $masadp='0'; $rashidp='0'; $gothradp='0'; }
                 // if($event_type=='Event'){
@@ -222,6 +224,7 @@ class DailyPooja extends BaseController
                 'gothra_id'=>$gothradp,
                 'occation_id' =>$occation_id,
                 'paksha_id' =>$paksha_id,
+                 'remarks'  =>$remarks,
                 'updated_date_time' =>date('Y-m-d H:i:s'),
                 'updated_by' =>$this->company_id,
                 'company_id'=>$this->company_id);

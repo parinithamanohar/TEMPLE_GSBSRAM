@@ -67,6 +67,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-6 column_padding_card">
+                <div class="card card-small dash-card " style="background: #4a76ce">
+                    <div class="card-body ">
+                        <span class="stats-small__label text-uppercase text-center text-white">Daily Pooja
+                            Report</span>
+                        <h6 class="stats-small__value count text-white"></h6>
+                        <div class="icon float-right">
+                            <i class="fa fa-users dash-icons"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center dash-footer p-2">
+                        <a class="more-info" href="<?php echo base_url(); ?>downloadDailyPoojaReport"><span>Click Here <i
+                                    class="fa fa-arrow-circle-right"></i></span></a>
+                    </div>
+                </div>
+            </div>
             <!-- <div class="col-lg-3 col-6 column_padding_card">
                 <div class="card card-small dash-card " style="background: #119a74">
                     <div class="card-body ">
