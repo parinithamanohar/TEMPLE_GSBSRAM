@@ -56,7 +56,6 @@ class Report extends BaseController
             $filter = array();
             $purchase_fromDate = $this->security->xss_clean($this->input->post('purchase_fromDate'));
             $purchase_toDate = $this->security->xss_clean($this->input->post('purchase_toDate'));
-            log_message('debug','bfrom'.$purchase_fromDate);
             $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
             $sheet = 0;
                 $this->excel->setActiveSheetIndex($sheet);
@@ -103,7 +102,6 @@ class Report extends BaseController
                 else{
                     $filter['purchase_toDate']= '';
                 }
-                log_message('debug','bfrom'.$filter['purchase_fromDate']);
 
 
                 $sl = 1;
@@ -264,7 +262,6 @@ public function downloadDevotee(){
             $filter = array();
             $purchase_fromDate = $this->security->xss_clean($this->input->post('purchase_fromDate'));
             $purchase_toDate = $this->security->xss_clean($this->input->post('purchase_toDate'));
-            log_message('debug','bfrom'.$purchase_fromDate);
             $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
             $sheet = 0;
             $this->excel->setActiveSheetIndex($sheet);
@@ -313,7 +310,6 @@ public function downloadDevotee(){
             else{
                 $filter['purchase_toDate']= '';
             }
-            log_message('debug','bfrom'.$filter['purchase_fromDate']);
 
 
             $sl = 1;
@@ -444,8 +440,18 @@ public function downloadDevotee(){
                     $this->loadThis();
                 } else {
                     $filter = array();
-                    $purchase_fromDate = $this->security->xss_clean($this->input->post('purchase_fromDate'));
-                    $purchase_toDate = $this->security->xss_clean($this->input->post('purchase_toDate'));
+                    $pooja_fromDate = $this->security->xss_clean($this->input->post('pooja_fromDate'));
+                    $pooja_toDate = $this->security->xss_clean($this->input->post('pooja_toDate'));
+                    if(!empty($pooja_fromDate)) {
+                        $filter['pooja_fromDate']= date('Y-m-d',strtotime($pooja_fromDate));
+                        }
+                        else{
+                            $filter['pooja_fromDate'] = ''; 
+                        }
+                        if(!empty($pooja_toDate)) {
+                        $filter['pooja_toDate']=  date('Y-m-d',strtotime($pooja_toDate));
+                        }
+
                     $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                     $sheet = 0;
                         $this->excel->setActiveSheetIndex($sheet);
@@ -455,12 +461,12 @@ public function downloadDevotee(){
                         $this->excel->getActiveSheet()->setCellValue('A2',"Daily Pooja Report");
                         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
                         $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
-                        $this->excel->getActiveSheet()->mergeCells('A1:M1');
-                        $this->excel->getActiveSheet()->mergeCells('A2:M2');
-                        $this->excel->getActiveSheet()->getStyle('A1:M1')->getFont()->setBold(true);
-                        $this->excel->getActiveSheet()->getStyle('A2:M2')->getFont()->setBold(true);
-                        $this->excel->getActiveSheet()->getStyle('A1:M1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                        $this->excel->getActiveSheet()->getStyle('A1:M2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                        $this->excel->getActiveSheet()->mergeCells('A1:N1');
+                        $this->excel->getActiveSheet()->mergeCells('A2:N2');
+                        $this->excel->getActiveSheet()->getStyle('A1:N1')->getFont()->setBold(true);
+                        $this->excel->getActiveSheet()->getStyle('A2:N2')->getFont()->setBold(true);
+                        $this->excel->getActiveSheet()->getStyle('A1:N1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                        $this->excel->getActiveSheet()->getStyle('A1:N2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                         
                         $excel_row = 3;
                         $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
@@ -477,9 +483,10 @@ public function downloadDevotee(){
                         $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(25);
                         $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(25);
                         $this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(25);
+                        $this->excel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
 
-                        $this->excel->getActiveSheet()->getStyle('A3:M3')->getFont()->setBold(true);
-                        $this->excel->getActiveSheet()->getStyle('A3:M3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                        $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
+                        $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Seva By');
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Event Type');
@@ -493,6 +500,7 @@ public function downloadDevotee(){
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Paksha');
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Amount');
                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, 'Remarks');
+                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('N'.$excel_row, 'Created Date');
     
                         // $filter['report_type']= "Asset";
                         // $filter['stream_name']= $stream[$sheet];
@@ -500,12 +508,12 @@ public function downloadDevotee(){
         
                         $sl = 1;
                         $excel_row = 4;
-                        $dpInfo = $this->DailyPooja_model->getDPDetailsForReport();
+                        $dpInfo = $this->DailyPooja_model->getDPDetailsForReport($filter);
                         foreach($dpInfo as $dp){
-                            if(date('d-m-Y',strtotime($dp->date)) == '01-01-1970'){
+                            if(empty($dp->date) || $dp->date == '1970-01-01'){
                               $event_date = '';
                             }else{
-                                $event_date = date('d-m-Y',strtotime($dp->date));       
+                                $event_date = $dp->date.'-'.date('Y');       
                             }
                             
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
@@ -521,8 +529,10 @@ public function downloadDevotee(){
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, $dp->paksha);
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, $dp->amount);
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, $dp->remarks);
+                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('N'.$excel_row, date('d-m-Y',strtotime($dp->created_date_time)));
                                 $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                 $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':L'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                $this->excel->getActiveSheet()->getStyle('N'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                 // $this->excel->getActiveSheet()->getStyle('H'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                 $excel_row++;
                             }
@@ -541,6 +551,125 @@ public function downloadDevotee(){
                     $objWriter->save("php://output");
                     
                 }
+
+
+
+
+
+
+                public function downloadDailyPoojaMonthWiseReport(){
+                    if ($this->isAdmin() == true ) {
+                        setcookie('isDownLoaded',1);  
+                        $this->loadThis();
+                    } else {
+                        $filter = array();
+                        $pooja_month = $this->security->xss_clean($this->input->post('pooja_month'));
+
+                        // if($pooja_month == 'NOVEMBER'){
+                        //     $pooja_date = '01-11';
+                        // }else{
+                        //     $pooja_date = '';  
+                        // }
+                           
+                        $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                        $sheet = 0;
+                            $this->excel->setActiveSheetIndex($sheet);
+                            $this->excel->getActiveSheet()->setTitle($sheet);
+                            $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
+                            $this->excel->getActiveSheet()->setCellValue('A1', EXCEL_TITLE);
+                            $this->excel->getActiveSheet()->setCellValue('A2',"Daily Pooja Month Wise Report");
+                            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
+                            $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
+                            $this->excel->getActiveSheet()->mergeCells('A1:N1');
+                            $this->excel->getActiveSheet()->mergeCells('A2:N2');
+                            $this->excel->getActiveSheet()->getStyle('A1:N1')->getFont()->setBold(true);
+                            $this->excel->getActiveSheet()->getStyle('A2:N2')->getFont()->setBold(true);
+                            $this->excel->getActiveSheet()->getStyle('A1:N1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                            $this->excel->getActiveSheet()->getStyle('A1:N2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                            
+                            $excel_row = 3;
+                            $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+                            $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(35);
+                            $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+                            
+                            $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(25);
+                            $this->excel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+    
+                            $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
+                            $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Seva By');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Event Type');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Date');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Tithi');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Nakshatra');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Masa');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Rashi');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Gothra');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Ocassion');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Paksha');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Amount');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, 'Remarks');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('N'.$excel_row, 'Created Date');
+        
+                            // $filter['report_type']= "Asset";
+                            // $filter['stream_name']= $stream[$sheet];
+                           
+            
+                            $sl = 1;
+                            $excel_row = 4;
+                            $dpInfo = $this->DailyPooja_model->getDPDetailsMonthForReport($pooja_month);
+                            foreach($dpInfo as $dp){
+                                if(empty($dp->date) || $dp->date == '1970-01-01'){
+                                  $event_date = '';
+                                }else{
+                                    $event_date = $dp->date.'-'.date('Y');       
+                                }
+                                
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $dp->devotee_name);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, $dp->event_type);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $event_date);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $dp->tithi);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $dp->nakshathra);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $dp->masa);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, $dp->rashi);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, $dp->gothra);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, $dp->occation);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, $dp->paksha);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, $dp->amount);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, $dp->remarks);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('N'.$excel_row, date('d-m-Y',strtotime($dp->created_date_time)));
+                                    $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':L'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('N'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    // $this->excel->getActiveSheet()->getStyle('H'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $excel_row++;
+                                }
+                                $this->excel->createSheet(); 
+                            // }
+                            
+                        }
+                        
+                        $filename ='Daily_Pooja_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
+                        header('Content-Type: application/vnd.ms-excel'); //mime type
+                        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+                        header('Cache-Control: max-age=0'); //no cache
+                        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+                        ob_start();
+                        setcookie('isDownLoaded',1);  
+                        $objWriter->save("php://output");
+                        
+                    }
 
    
 }

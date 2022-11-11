@@ -412,6 +412,7 @@ $route['downloadCommitteeReport'] = "report/downloadCommitteeReport";
 $route['downloadDevoteeReport'] = 'report/downloadDevotee';
 $route['downloadBankTReport'] = 'report/downloadBank';
 $route['downloadDailyPoojaReport'] = "report/downloadDailyPoojaReport";
+$route['downloadDailyPoojaMonthWiseReport'] = "report/downloadDailyPoojaMonthWiseReport";
 
 //income
 $route['getIncomeInfo'] = "income/getIncomeInfo";

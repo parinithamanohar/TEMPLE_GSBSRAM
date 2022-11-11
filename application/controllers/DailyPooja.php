@@ -93,7 +93,36 @@ class DailyPooja extends BaseController
                 $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));
                 $event_type = $this->security->xss_clean($this->input->post('event_type'));
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $dateinfo = date('Y-m-d',strtotime($datedp));
+                if(!empty( $datedp)){
+                $dateinfo = date('d-m',strtotime($datedp));
+                }else{
+                    $dateinfo = '';  
+                }
+                if(date('m',strtotime($datedp)) == 1){
+                    $month = 'JANUARY';
+                }else if(date('m',strtotime($datedp)) == 2){
+                    $month = 'FEBRUARY'; 
+                }else if(date('m',strtotime($datedp)) == 3){
+                    $month = 'MARCH'; 
+                }else if(date('m',strtotime($datedp)) == 4){
+                    $month = 'APRIL'; 
+                }else if(date('m',strtotime($datedp)) == 5){
+                    $month = 'MAY'; 
+                }else if(date('m',strtotime($datedp)) == 6){
+                    $month = 'JUNE'; 
+                }else if(date('m',strtotime($datedp)) == 7){
+                    $month = 'JULY'; 
+                }else if(date('m',strtotime($datedp)) == 8){
+                    $month = 'AUGUST'; 
+                }else if(date('m',strtotime($datedp)) == 9){
+                    $month = 'SEPTEMBER'; 
+                }else if(date('m',strtotime($datedp)) == 10){
+                    $month = 'OCTOBER'; 
+                }else if(date('m',strtotime($datedp)) == 11){
+                    $month = 'NOVEMBER'; 
+                }else if(date('m',strtotime($datedp)) == 12){
+                    $month = 'DECEMBER'; 
+                }
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
                 $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));
@@ -133,6 +162,7 @@ class DailyPooja extends BaseController
                 'gothra_id'=>$gothradp,
                 'amount'  =>$amount,
                 'remarks' =>$remarks,
+                'month' =>$month,
                 'created_by'=>$this->company_id,
                 'created_date_time' =>date('Y-m-d H:i:s'),
                 'company_id'=>$this->company_id);

@@ -79,7 +79,7 @@ if ($success) {
                                 <tr>
                                     <th>ID</th>
                                     <th>Seva By</th>
-                                    <th>Event Type</th>
+                                    <th>Pooja Type</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -126,9 +126,9 @@ if ($success) {
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
-                                        <label for="event_type">Event Type*</label>
+                                        <label for="event_type">Pooja Type*</label>
                                         <select class="form-control " id="event_type" name="event_type" required>
-                                            <option value="">Select Event Type</option>
+                                            <option value="">Select Pooja Type</option>
                                             <option value="Date">Date</option>
                                             <!-- <option value="Event">Event</option>
                                                 <option value="Tithi">Tithi</option>

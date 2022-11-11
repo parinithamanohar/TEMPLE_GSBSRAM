@@ -61,6 +61,10 @@ class Employee extends BaseController
          $data['notificationMessage'] = $this->employee_model->notifications($this->company_id,$data['notificationMsg']->rashi_id,$data['notificationMsg']->date,$data['notificationMsg']->event_id,$data['notificationMsg']->tithi_id,$data['notificationMsg']->nakshathra_id,$data['notificationMsg']->masa_id,$data['notificationMsg']->gothra_id);
 
         }
+        $today_date = date('d-m');
+
+        $data['yearlyPoojaInfo'] = $this->employee_model->getYearlyPoojaInfo($this->company_id,$today_date);
+
         
         
         // if(!empty($data['notificationMsg'])){
@@ -355,7 +359,6 @@ class Employee extends BaseController
     
      */
     function changePassword($active = "changepass"){
-        log_message('debug','testing');
         $this->load->library('form_validation');
         
         $this->form_validation->set_rules('oldPassword','Old password','required|max_length[20]');

@@ -261,7 +261,7 @@ class Employee_model extends CI_Model
           
          $this->db->join('tbl_devotee as devotee', 'devotee.row_id = dp.devotee_id');
         //   $this->db->where_in('dp.rashi_id',$rashi);
-          $this->db->or_where_in('dp.date',$date);
+        //   $this->db->or_where_in('dp.date',$date);
           $this->db->or_where_in('dp.event_id',$event);
           $this->db->or_where_in('dp.tithi_id',$tithi);
           $this->db->or_where_in('dp.nakshathra_id',$nakshathra);
@@ -269,6 +269,23 @@ class Employee_model extends CI_Model
           $this->db->or_where_in('dp.gothra_id',$gothra);
           $this->db->where_in('dp.company_id', $company_id);
           $this->db->where_in('dp.is_deleted', 0);
+          $query = $this->db->get();
+          $result = $query->result();
+          return $result;        
+      }
+
+
+      function getYearlyPoojaInfo($company_id,$date)
+      {
+          $this->db->select('dp.row_id,dp.devotee_id,devotee.devotee_name,dp.event_type,dp.date,dp.event_id,dp.tithi_id,dp.nakshathra_id,dp.masa_id,dp.rashi_id,dp.gothra_id');
+          $this->db->from('tbl_dailypooja_management_info as dp');
+          
+         $this->db->join('tbl_devotee as devotee', 'devotee.row_id = dp.devotee_id');
+      
+          $this->db->where('dp.date',$date);
+          $this->db->where('dp.company_id', $company_id);
+          $this->db->where('dp.is_deleted', 0);
+          $this->db->where('dp.event_type', 'Date');
           $query = $this->db->get();
           $result = $query->result();
           return $result;        
