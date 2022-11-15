@@ -80,6 +80,7 @@ if ($success) {
                                     <th>ID</th>
                                     <th>Seva By</th>
                                     <th>Pooja Type</th>
+                                    <th>Month</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>

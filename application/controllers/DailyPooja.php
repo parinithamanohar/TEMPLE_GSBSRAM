@@ -63,9 +63,10 @@ class DailyPooja extends BaseController
             }
 
             $data_array_new[] = array(
-                $r->devotee_id,
+                $r->row_id,
                  $r->devotee_name,
                  $r->event_type,
+                 $r->month,
                  $viewButton.' '.$editButton.' '.$deleteButton.' '.$recieptButton
             );
        }
@@ -97,6 +98,7 @@ class DailyPooja extends BaseController
                 $dateinfo = date('d-m',strtotime($datedp));
                 }else{
                     $dateinfo = '';  
+                    $datedp = date('d-m-Y');
                 }
                 if(date('m',strtotime($datedp)) == 1){
                     $month = 'JANUARY';
