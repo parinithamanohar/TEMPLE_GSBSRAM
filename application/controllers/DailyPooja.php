@@ -42,6 +42,8 @@ class DailyPooja extends BaseController
             $this->loadViews("DailyPooja/dailyPooja", $this->global, $data, NULL);
         }
     }
+
+
     function getDailyPoojaDetails()
     {
       $draw = intval($this->input->post("draw"));
@@ -81,6 +83,8 @@ class DailyPooja extends BaseController
    echo json_encode($result);
    exit();
     }
+
+
     /**
      * This function is used to add new committee to the system
      */
@@ -171,11 +175,15 @@ class DailyPooja extends BaseController
 
                 $result = $this->DailyPooja_model->addPooja($eventInfo);
                 if($result > 0){
-                    $this->session->set_flashdata('success', 'New Event added successfully');
+                    $this->session->set_flashdata('success', 'New Pooja added successfully');
                 } else{
-                    $this->session->set_flashdata('error', 'Event creation failed');
+                    $this->session->set_flashdata('error', 'Pooja creation failed');
                 }
-                redirect('DailyPoojaListing');
+                if($event_type == 'Panchanga'){
+                redirect('PanchangaPoojaListing');
+                }else{
+                redirect('DailyPoojaListing');  
+                }
             }
     }
 
@@ -218,7 +226,7 @@ class DailyPooja extends BaseController
                 $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));
                 $event_type = $this->security->xss_clean($this->input->post('event_type'));
                 $datedp = $this->security->xss_clean($this->input->post('date'));
-                $dateinfo = date('Y-m-d',strtotime($datedp));
+                // $dateinfo = date('Y-m-d',strtotime($datedp));
                 $eventdp = $this->security->xss_clean($this->input->post('event_id'));
                 $tithidp = $this->security->xss_clean($this->input->post('tithi_id'));
                 $nakshathradp = $this->security->xss_clean($this->input->post('nakshathra_id'));
@@ -229,6 +237,37 @@ class DailyPooja extends BaseController
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
                 $amount = $this->security->xss_clean($this->input->post('amount'));
                 $remarks = $this->security->xss_clean($this->input->post('remarks'));
+                if(!empty( $datedp)){
+                    $dateinfo = date('d-m',strtotime($datedp));
+                    }else{
+                        $dateinfo = '';  
+                        $datedp = date('d-m-Y');
+                    }
+                    if(date('m',strtotime($datedp)) == 1){
+                        $month = 'JANUARY';
+                    }else if(date('m',strtotime($datedp)) == 2){
+                        $month = 'FEBRUARY'; 
+                    }else if(date('m',strtotime($datedp)) == 3){
+                        $month = 'MARCH'; 
+                    }else if(date('m',strtotime($datedp)) == 4){
+                        $month = 'APRIL'; 
+                    }else if(date('m',strtotime($datedp)) == 5){
+                        $month = 'MAY'; 
+                    }else if(date('m',strtotime($datedp)) == 6){
+                        $month = 'JUNE'; 
+                    }else if(date('m',strtotime($datedp)) == 7){
+                        $month = 'JULY'; 
+                    }else if(date('m',strtotime($datedp)) == 8){
+                        $month = 'AUGUST'; 
+                    }else if(date('m',strtotime($datedp)) == 9){
+                        $month = 'SEPTEMBER'; 
+                    }else if(date('m',strtotime($datedp)) == 10){
+                        $month = 'OCTOBER'; 
+                    }else if(date('m',strtotime($datedp)) == 11){
+                        $month = 'NOVEMBER'; 
+                    }else if(date('m',strtotime($datedp)) == 12){
+                        $month = 'DECEMBER'; 
+                    }
                 // if($event_type=='Date'){
                 //     $eventdp='0'; $tithidp='0'; $nakshathradp='0'; $masadp='0'; $rashidp='0'; $gothradp='0'; }
                 // if($event_type=='Event'){
@@ -247,6 +286,7 @@ class DailyPooja extends BaseController
                 $eventInfo = array('devotee_id'=>$devotee_id,
                 'event_type'=>$event_type,
                 'date'=>$dateinfo,
+                'month' =>$month,
                 'event_id'=>$eventdp,
                 'tithi_id'=>$tithidp,
                 'nakshathra_id'=>$nakshathradp,
@@ -302,6 +342,22 @@ class DailyPooja extends BaseController
         }
     } 
 
+    public function viewPanchangaPooja($row_id = null)
+    {
+        if ($this->isAdmin() == true ) {
+            $this->loadThis();
+        } else {
+            if ($row_id == null) {
+                redirect('DailyPoojaListing');
+            }
+            $data['dpInfo'] = $this->DailyPooja_model->getDPDetails($row_id);
+            // $data['committeeBillInfo'] = $this->bill->getBillInfoByCommitteeId($row_id);
+            // $data['billPaidInfo'] = $this->bill->getBillPaidInfoByCommitteeId($row_id);
+            $this->global['pageTitle'] = $this->company_name.': View Daily Pooja';
+            $this->loadViews("dailyDetails/viewPanchangaPoojaDetails", $this->global, $data, null);
+        }
+    } 
+
 
 
     
@@ -313,7 +369,7 @@ class DailyPooja extends BaseController
             $data['dpInfo'] = $this->DailyPooja_model->getDPDetails($row_id);
            $data['companyLogo'] = $this->company_logo;
                       
-            $this->global['pageTitle'] = ''.TAB_TITLE.' : Fee Receipt';
+            $this->global['pageTitle'] = ''.TAB_TITLE.' : Pooja Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
             $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
             $mpdf->autoScriptToLang = true;
@@ -325,8 +381,126 @@ class DailyPooja extends BaseController
             $html = $this->load->view('DailyPooja/dailyPoojaReciept',$data,true);
             $mpdf->WriteHTML($html);            
            
-            $mpdf->Output('Fee_Receipt.pdf', 'I'); 
+            $mpdf->Output('Pooja_Receipt.pdf', 'I'); 
         } 
+    }
+
+    public function panchangaReceiptPrint($row_id = NULL){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            error_reporting(0); 
+            $data['dpInfo'] = $this->DailyPooja_model->getDPDetails($row_id);
+           $data['companyLogo'] = $this->company_logo;
+                      
+            $this->global['pageTitle'] = ''.TAB_TITLE.' : Pooja Receipt';
+            // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf->autoScriptToLang = true;
+            $mpdf->autoLangToFont = true;
+                        $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
+            $mpdf->SetTitle('Fee Receipt');
+
+            $data['receipt_title_mgmt'] = EXCEL_TITLE;
+            $html = $this->load->view('DailyPooja/panchangaPoojaReciept',$data,true);
+            $mpdf->WriteHTML($html);            
+           
+            $mpdf->Output('Pooja_Receipt.pdf', 'I'); 
+        } 
+    }
+
+
+
+
+    function PanchangaPoojaListing()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        } else {   
+            $data['poojaInfo'] =$this->DailyPooja_model->getDailyPoojaInfo($this->company_id); 
+            $data['eventInfo'] =$this->DailyPooja_model->getEventInfo($this->company_id); 
+            $data['tithiInfo'] =$this->DailyPooja_model->getTithiInfo($this->company_id); 
+            $data['nakshathraInfo'] =$this->DailyPooja_model->getNakshathraInfo($this->company_id);
+            $data['masaInfo'] =$this->DailyPooja_model->getMasaInfo($this->company_id);  
+            $data['rashiInfo'] =$this->DailyPooja_model->getRashiInfo($this->company_id); 
+            $data['gothraInfo'] =$this->DailyPooja_model->getGothraInfo($this->company_id); 
+            $data['occationInfo'] = $this->setting_model->getAllOccationInfo($this->company_id);
+            $data['pakshaInfo'] = $this->setting_model->getAllPakshaInfo($this->company_id);
+            $data['subscriptionInfo'] = $this->setting_model->getAllSubscriptionInfo($this->company_id);
+
+            // $data['committeeTypeInfo'] =$this->Event_model->getCommitteeTypeInfo($this->company_id);  
+            $this->global['pageTitle'] = $this->company_name.' :DailyPooja Details ';
+            $this->loadViews("DailyPooja/panchangaPooja", $this->global, $data, NULL);
+        }
+    }
+
+
+
+    function getPanchangaPoojaDetails()
+    {
+      $draw = intval($this->input->post("draw"));
+      $start = intval($this->input->post("start"));
+      $length = intval($this->input->post("length"));
+        $data_array_new = [];
+        $data_array = $this->DailyPooja_model->PanchangaPoojaList($this->company_id);
+        
+       
+        foreach($data_array as $r) {
+            $viewButton ='<a class="btn  btn-sm btn-primary" href="'.site_url('viewPanchangaPooja/'.$r->row_id).'"title="View"><i class="fa fa-eye"></i></a>';
+             if($this->role == ROLE_ADMIN ) {
+             $editButton = '<a class="btn  btn-sm btn-info" href="'.site_url('editPanchangaPooja/'.$r->row_id).'"title="Edit"><i class="fas fa-edit"></i></i></a>';
+             $deleteButton = '<a class="btn btn-sm btn-danger deleteDailyPooja" data-row_id='.$r->row_id.' href="#" title="Delete"><i class="fas fa-trash"></i></a>';
+             $recieptButton = '<a href="'.site_url('panchangaReceiptPrint/'.$r->row_id).'" target="_blank">Receipt</a>';
+            }else{
+                $editButton='';
+                $deleteButton='' ;
+            }
+
+            $data_array_new[] = array(
+                $r->row_id,
+                 $r->devotee_name,
+                 $r->event_type,
+                 $r->masa,
+                 $viewButton.' '.$editButton.' '.$deleteButton.' '.$recieptButton
+            );
+       }
+   
+       $count = count($data_array);
+        $result = array(
+             "draw" => $draw,
+              "recordsTotal" => $count,
+              "recordsFiltered" => $count,
+              "data" => $data_array_new
+         );
+   echo json_encode($result);
+   exit();
+    }
+
+
+    function editPanchangaPooja($row_id = NULL)
+    {
+        if($this->isAdmin() == TRUE) {
+            $this->loadThis();
+        } else {
+
+            if($row_id == null){
+                redirect('eventListing');
+            }
+            $data['dpInfo'] = $this->DailyPooja_model->getDPDetails($row_id);
+            $data['poojaInfo'] =$this->DailyPooja_model->getDailyPoojaInfo($this->company_id); 
+            $data['eventInfo'] =$this->DailyPooja_model->getEventInfo($this->company_id); 
+            $data['tithiInfo'] =$this->DailyPooja_model->getTithiInfo($this->company_id); 
+            $data['nakshathraInfo'] =$this->DailyPooja_model->getNakshathraInfo($this->company_id);
+            $data['masaInfo'] =$this->DailyPooja_model->getMasaInfo($this->company_id);  
+            $data['rashiInfo'] =$this->DailyPooja_model->getRashiInfo($this->company_id); 
+            $data['gothraInfo'] =$this->DailyPooja_model->getGothraInfo($this->company_id); 
+            $data['occationInfo'] = $this->setting_model->getAllOccationInfo($this->company_id);
+            $data['pakshaInfo'] = $this->setting_model->getAllPakshaInfo($this->company_id);
+            $data['subscriptionInfo'] = $this->setting_model->getAllSubscriptionInfo($this->company_id);
+            $this->global['pageTitle'] = $this->company_name.' : Edit Panchanga Pooja ';
+            $this->loadViews("DailyPooja/editPanchangaPooja", $this->global, $data, NULL);
+        }
     }
 
 }

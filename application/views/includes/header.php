@@ -209,11 +209,33 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link " href="<?php echo base_url(); ?>DailyPoojaListing">
                                         <i class="fas fa-calendar-alt"></i>
                                         <span>Daily Pooja</span>
                                     </a>
+                                </li> -->
+
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" href="#poojaInfo" data-toggle="collapse" aria-expanded="false" >
+                                    <i class="fas fa-users"></i>
+                                        <span>Daily Pooja</span>
+                                    </a>
+                                    <ul class="collapse list-unstyled " id="poojaInfo">
+                                        <li class="nav-item nav-margin ">
+                                            <a class="nav-link" href="<?php echo base_url(); ?>DailyPoojaListing">
+                                            <i class="fas fa-calendar-alt"></i>
+                                                <span>Date Pooja</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item nav-margin ">
+                                            <a class="nav-link " href="<?php echo base_url(); ?>PanchangaPoojaListing">
+                                                <i class="fa fa-users"></i>
+                                                <span>Panchanga Pooja</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
                                 </li>
 
 

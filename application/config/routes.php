@@ -413,6 +413,7 @@ $route['downloadDevoteeReport'] = 'report/downloadDevotee';
 $route['downloadBankTReport'] = 'report/downloadBank';
 $route['downloadDailyPoojaReport'] = "report/downloadDailyPoojaReport";
 $route['downloadDailyPoojaMonthWiseReport'] = "report/downloadDailyPoojaMonthWiseReport";
+$route['downloadPanchangaPoojaReport'] = "report/downloadPanchangaPoojaReport";
 
 //income
 $route['getIncomeInfo'] = "income/getIncomeInfo";
@@ -445,6 +446,12 @@ $route['editDailyPooja/(:num)'] = "DailyPooja/editDailyPooja/$1";
 $route['updateDailyPooja'] = "DailyPooja/updateDailyPooja";
 $route['deleteDailyPooja'] = "DailyPooja/deleteDailyPooja";
 
+$route['PanchangaPoojaListing'] = "DailyPooja/PanchangaPoojaListing";  
+$route['PanchangaPoojaDetails'] = "DailyPooja/getPanchangaPoojaDetails";
+
+
+$route['editPanchangaPooja'] = "DailyPooja/editPanchangaPooja";   
+$route['editPanchangaPooja/(:num)'] = "DailyPooja/editPanchangaPooja/$1";
 
 // Daily Details
 $route['dailyDetailsListing'] = "DailyDetails/dailyDetailsListing";  
@@ -460,5 +467,7 @@ $route['Employeeindex'] = 'employee/index';
 
 
 $route['viewDailyPooja/(:num)'] = "DailyPooja/viewDailyPooja/$1";
+$route['viewPanchangaPooja/(:num)'] = "DailyPooja/viewPanchangaPooja/$1";
 
 $route['puFeePaymentReceiptPrint/(:any)'] = "DailyPooja/feePaymentReceiptPrint/$1";
+$route['panchangaReceiptPrint/(:any)'] = "DailyPooja/panchangaReceiptPrint/$1";

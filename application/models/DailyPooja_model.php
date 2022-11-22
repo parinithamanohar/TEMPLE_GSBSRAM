@@ -12,6 +12,23 @@ class DailyPooja_model extends CI_Model
         $this->db->select('dailypooja.row_id,dailypooja.devotee_id,dailypooja.event_type,devotee.devotee_name,dailypooja.month');
         $this->db->from('tbl_dailypooja_management_info as dailypooja');
         $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
+        $this->db->where('dailypooja.event_type', 'Date');
+        $this->db->where('dailypooja.company_id',$company_id);
+        $this->db->where('dailypooja.is_deleted', 0);
+        $this->db->order_by('dailypooja.row_id', 'DESC');
+        $query = $this->db->get();
+        $result = $query->result();        
+        return $result;
+    }
+
+    
+    function PanchangaPoojaList($company_id)
+    {
+        $this->db->select('dailypooja.row_id,dailypooja.devotee_id,masa.masa,dailypooja.event_type,devotee.devotee_name,dailypooja.month');
+        $this->db->from('tbl_dailypooja_management_info as dailypooja');
+        $this->db->join('tbl_devotee as devotee','devotee.row_id = dailypooja.devotee_id','left');
+        $this->db->join('tbl_masa as masa','masa.row_id = dailypooja.masa_id','left');
+        $this->db->where('dailypooja.event_type', 'Panchanga');
         $this->db->where('dailypooja.company_id',$company_id);
         $this->db->where('dailypooja.is_deleted', 0);
         $this->db->order_by('dailypooja.row_id', 'DESC');
@@ -52,7 +69,7 @@ class DailyPooja_model extends CI_Model
 
     function getDPDetails($row_id)
     {
-        $this->db->select('dailypooja.row_id,dailypooja.remarks,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
+        $this->db->select('dailypooja.row_id,dailypooja.remarks,devotee.contact_number,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
         $this->db->from('tbl_dailypooja_management_info as dailypooja');
         $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
         $this->db->join('tbl_events as events','events.row_id=dailypooja.event_id','left');
@@ -90,11 +107,50 @@ class DailyPooja_model extends CI_Model
         if(!empty($filter['pooja_toDate'])){
             $this->db->where('dailypooja.created_date_time<=', $filter['pooja_toDate']);
         }
-
+        $this->db->where('dailypooja.event_type', 'Date');
         $this->db->where('dailypooja.is_deleted', 0);
         $query = $this->db->get();      
         return $query->result();
     }  
+
+
+
+    function getPanchangaDetailsForReport($filter)
+    {
+        $this->db->select('dailypooja.row_id,dailypooja.remarks,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
+        $this->db->from('tbl_dailypooja_management_info as dailypooja');
+        $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
+        $this->db->join('tbl_events as events','events.row_id=dailypooja.event_id','left');
+        $this->db->join('tbl_tithi as tithi','tithi.row_id=dailypooja.tithi_id','left');
+        $this->db->join('tbl_nakshathra as nakshathra','nakshathra.row_id=dailypooja.nakshathra_id','left');
+        $this->db->join('tbl_masa as masa','masa.row_id=dailypooja.masa_id','left');
+        $this->db->join('tbl_rashi as rashi','rashi.row_id=dailypooja.rashi_id','left');
+        $this->db->join('tbl_gothra as gothra','gothra.row_id=dailypooja.gothra_id','left');
+        $this->db->join('tbl_paksha as paksha','paksha.row_id=dailypooja.paksha_id','left');
+        $this->db->join('tbl_occation as occation','occation.row_id=dailypooja.occation_id','left');
+        if(!empty($filter['pooja_fromDate'])){
+            $this->db->where('dailypooja.created_date_time>=', $filter['pooja_fromDate']);
+        }
+
+        if(!empty($filter['pooja_toDate'])){
+            $this->db->where('dailypooja.created_date_time<=', $filter['pooja_toDate']);
+        }
+
+        if(!empty($filter['masa_id'])){
+            $this->db->where('dailypooja.masa_id', $filter['masa_id']);
+        }
+
+        if(!empty($filter['tithi_id'])){
+            $this->db->where('dailypooja.tithi_id', $filter['tithi_id']);
+        }
+
+        $this->db->where('dailypooja.event_type', 'Panchanga');
+        $this->db->where('dailypooja.is_deleted', 0);
+        $query = $this->db->get();      
+        return $query->result();
+    } 
+
+
 
     function getDailyPoojaInfo($company_id)
     { 
@@ -182,7 +238,7 @@ class DailyPooja_model extends CI_Model
 
 
 
-function getDPDetailsMonthForReport($month)
+function getDPDetailsMonthForReport($month,$filter)
 {
     $this->db->select('dailypooja.row_id,dailypooja.remarks,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
     $this->db->from('tbl_dailypooja_management_info as dailypooja');
@@ -197,6 +253,10 @@ function getDPDetailsMonthForReport($month)
     $this->db->join('tbl_occation as occation','occation.row_id=dailypooja.occation_id','left');
     if(!empty($month)){
         $this->db->where('dailypooja.month', $month);
+        // $this->db->where('dailypooja.date<=', $date);
+    }
+    if(!empty($filter['month_date'])){
+        $this->db->where('dailypooja.date', $filter['month_date']);
         // $this->db->where('dailypooja.date<=', $date);
     }
     $this->db->where('dailypooja.event_type', 'Date');

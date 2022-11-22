@@ -1,6 +1,3 @@
-<?php
-$y = date('Y');
-?>
 <div class="main-content-container container-fluid px-4 pt-2">
     <div class="content-wrapper">
         <div class="row ">
@@ -8,7 +5,7 @@ $y = date('Y');
                 <div class="card card-small  p-0 ">
                     <div class="card-body p-1 card-content-title  ">
                         <div class="row ">
-                            <div class="col-lg-6 text-white">Detailed Date Pooja View</div>
+                            <div class="col-lg-6 text-white">Detailed Panchanga Pooja View</div>
                             <div class="col-lg-6"> <a href="#" onclick="GoBackWithRefresh();return false;"
                                     class="btn text-white btn-success btn-bck pull-right mobile-bck "><i
                                         class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;Back </a></div>
@@ -52,22 +49,22 @@ $y = date('Y');
                                         <th>Event Type<span class="float-right">:</span> </th>
                                         <td><?php echo strtoupper($dpInfo->event_type); ?></td>
                                     </tr>
-                                    <tr>
-                                        <th>Date<span class="float-right">:</span></th>
-                                        <td><?php  if($dpInfo->date=='1970-01-01'){echo $dpInfo->date='';} else { echo $dpInfo->date.'-'.$y;} ?></td>
-                                    </tr>
                                     <!-- <tr>
+                                        <th>Date<span class="float-right">:</span></th>
+                                        <td><?php  if($dpInfo->date=='1970-01-01'){echo $dpInfo->date='';} else { echo date('d-m',strtotime($dpInfo->date));} ?></td>
+                                    </tr> -->
+                                    <tr>
                                         <th>Tithi<span class="float-right">:</span></th>
                                         <td><?php echo $dpInfo->tithi; ?></td>
-                                    </tr> -->
+                                    </tr>
                                     <tr>
                                         <th>Nakshathra<span class="float-right">:</span></th>
                                         <td><?php echo $dpInfo->nakshathra; ?></td>
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                         <th>Masa<span class="float-right">:</span></th>
                                         <td><?php echo $dpInfo->masa; ?></td>
-                                    </tr> -->
+                                    </tr>
                                     <tr>
                                         <th>Rashi<span class="float-right">:</span></th>
                                         <td><?php echo $dpInfo->rashi; ?></td>
@@ -81,8 +78,8 @@ $y = date('Y');
                                         <td><?php echo strtoupper($dpInfo->occation); ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Amount<span class="float-right">:</span></th>
-                                        <td><?php echo strtoupper($dpInfo->amount); ?></td>
+                                        <th>Paksha<span class="float-right">:</span></th>
+                                        <td><?php echo strtoupper($dpInfo->paksha); ?></td>
                                     </tr>
                                     <!-- <tr>
                                         <th>State Code<span class="float-right">:</span></th>

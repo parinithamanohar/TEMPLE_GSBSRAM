@@ -68,10 +68,10 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6 column_padding_card">
+            <!-- <div class="col-lg-3 col-6 column_padding_card">
                 <div class="card card-small dash-card " style="background: #4a76ce">
                     <div class="card-body ">
-                        <span class="stats-small__label text-uppercase text-center text-white">Daily Pooja
+                        <span class="stats-small__label text-uppercase text-center text-white">Date Pooja
                             Report</span>
                         <h6 class="stats-small__value count text-white"></h6>
                         <div class="icon float-right">
@@ -80,6 +80,23 @@
                     </div>
                     <div class="card-footer text-center dash-footer p-2">
                         <a class="more-info" href=""  data-toggle="modal" data-target="#DailyPooja"><span>Click Here <i
+                                    class="fa fa-arrow-circle-right"></i></span></a>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="col-lg-3 col-6 column_padding_card">
+                <div class="card card-small dash-card " style="background: #4a76ce">
+                    <div class="card-body ">
+                        <span class="stats-small__label text-uppercase text-center text-white">Panchanga Pooja
+                            Report</span>
+                        <h6 class="stats-small__value count text-white"></h6>
+                        <div class="icon float-right">
+                            <i class="fa fa-users dash-icons"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center dash-footer p-2">
+                        <a class="more-info" href=""  data-toggle="modal" data-target="#panchangaPooja"><span>Click Here <i
                                     class="fa fa-arrow-circle-right"></i></span></a>
                     </div>
                 </div>
@@ -543,6 +560,91 @@
 </div>
 
 
+<div id="panchangaPooja" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header modal-call-report p-2">
+                <div class=" col-lg-8 col-12">
+                    <span class="text-white mobile-title" style="font-size : 20px">Panchanga Pooja Report</span>
+                    &nbsp;&nbsp; <span class="modal-title text-white mobile-title" style="font-size : 20px"></span>
+                </div>
+                <div class=" col-lg-2 col-12  ">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <?php $this->load->helper("form"); ?>
+                <form method="POST" id="assetReport" action="<?php echo base_url(); ?>downloadPanchangaPoojaReport">
+
+                    <div class="row">
+                        
+                    <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="masa_id">Masa</label>
+                                        <select class="form-control " id="masa_id" name="masa_id">
+                                            <option value=""> Select Masa </option>
+                                            <?php if(!empty($masaInfo)) {
+                                        foreach($masaInfo as $masa ){?>
+                                            <option value="<?php echo $masa->row_id;?>">
+                                                <?php echo $masa->masa;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="tithi_id">Tithi</label>
+                                        <select class="form-control " id="tithi_id" name="tithi_id">
+                                            <option value=""> Select Tithi </option>
+                                            <?php if(!empty($tithiInfo)) {
+                                        foreach($tithiInfo as $tithi ){?>
+                                            <option value="<?php echo $tithi->row_id;?>">
+                                                <?php echo $tithi->tithi;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                        <div class="col-md-6 col-sm-12">
+                            <label for="pooja_fromDate">Date From</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="pooja_fromDate" type="text" name="pooja_fromDate"
+                                    class="form-control datepicker  " placeholder=" Date From" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="pooja_toDate">Date To</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="pooja_toDate" type="text" name="pooja_toDate"
+                                    class="form-control datepicker  " placeholder="Date To" autocomplete="off">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" id="assetReport" class="btn btn-success">Download</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 <div id="DailyPoojaMonth" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg ">
@@ -584,7 +686,16 @@
                             </div>
                         </div>
 
-
+                        <div class="col-md-6 col-sm-12">
+                            <label for="pooja_fromDate">Date</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="month_date" type="text" name="month_date"
+                                    class="form-control datepicker  " placeholder=" Date" autocomplete="off">
+                            </div>
+                        </div>
 
                     </div>
             </div>

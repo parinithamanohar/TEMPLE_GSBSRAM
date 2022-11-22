@@ -28,6 +28,9 @@ if ($error) {
         <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
     </div>
 </div>
+<?php
+$y = date('Y');
+?>
 <div class="main-content-container container-fluid px-4 pt-2">
     <div class="content-wrapper">
         <div class="row">
@@ -36,7 +39,7 @@ if ($error) {
                 <div class="card ">
                     <div class="card-header text-white card-content-title p-1">
                         <div class="row ">
-                            <div class="col-md-5 col-8 text-white m-auto ">Edit DailyPooja Details</div>
+                            <div class="col-md-5 col-8 text-white m-auto ">Edit Date Pooja Details</div>
                             <div class=" col-md-5 col-4 m-auto "> <span class="mobile-right ">ID
                                     :<?php echo $dpInfo->row_id;?></span></div>
                             <div class="col-md-2 col-12 m-auto"> <a href="#" onclick="GoBackWithRefresh();return false;"
@@ -80,7 +83,7 @@ if ($error) {
                                                 <option value="Nakshathra">Nakshathra</option>
                                                 <option value="Masa">Masa</option>
                                                 <option value="Rashi">Rashi</option> -->
-                                            <option value="Panchanga">Panchanga</option>
+                                            <!-- <option value="Panchanga">Panchanga</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -92,7 +95,7 @@ if ($error) {
                                                 <span
                                                     class="input-group-text material-icons date-icon">date_range</span>
                                                 <input id="date" type="text" name="date"
-                                                    value="<?php  if($dpInfo->date=='1970-01-01'){echo $dpInfo->date='';} else { echo date('d-m-Y',strtotime($dpInfo->date));}?>"
+                                                    value="<?php  if($dpInfo->date=='1970-01-01'){echo $dpInfo->date='';} else { echo $dpInfo->date.'-'.$y;}?>"
                                                     class="form-control datepicker date-col-3 required"
                                                     placeholder="Select Date" autocomplete="off" />
 

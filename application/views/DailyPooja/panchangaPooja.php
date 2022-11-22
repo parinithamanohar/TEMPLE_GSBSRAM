@@ -57,7 +57,7 @@ if ($success) {
                         <div class="row ">
                             <div class="col-lg-6 col-sm-8 col-8">
                                 <span class="page-title">
-                                    <i class="fa fa-user"></i> Date Pooja Management
+                                    <i class="fa fa-user"></i> Panchanga Pooja Management
                                 </span>
                             </div>
                             <div class="col-lg-6 col-sm-8 col-4 ">
@@ -80,7 +80,7 @@ if ($success) {
                                     <th>ID</th>
                                     <th>Seva By</th>
                                     <th>Pooja Type</th>
-                                    <th>Month</th>
+                                    <th>Masa</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -98,7 +98,7 @@ if ($success) {
                     <!-- Modal Header -->
                     <div class="modal-header modal-call-report p-2">
                         <div class=" col-md-10 col-10">
-                            <span class="text-white mobile-title" style="font-size : 20px">Add Daily Pooja
+                            <span class="text-white mobile-title" style="font-size : 20px">Add Panchanga Pooja
                                 Details</span>
                         </div>
                         <div class=" col-md-2 col-2">
@@ -129,14 +129,14 @@ if ($success) {
                                     <div class="form-group">
                                         <label for="event_type">Pooja Type*</label>
                                         <select class="form-control " id="event_type" name="event_type" required>
-                                            <!-- <option value="">Select Pooja Type</option> -->
-                                            <option value="Date">Date</option>
+                                            <!-- <option value="">Select Pooja Type</option>
+                                            <option value="Date">Date</option> -->
                                             <!-- <option value="Event">Event</option>
                                                 <option value="Tithi">Tithi</option>
                                                 <option value="Nakshathra">Nakshathra</option>
                                                 <option value="Masa">Masa</option>
                                                 <option value="Rashi">Rashi</option>  -->
-                                            <!-- <option value="Panchanga">Panchanga</option> -->
+                                            <option value="Panchanga">Panchanga</option>
                                         </select>
                                     </div>
                                 </div>
@@ -390,10 +390,10 @@ jQuery(document).ready(function() {
         language: {
             search: "",
             searchPlaceholder: "Search records",
-            "lengthMenu": "Show _MENU_ DailyPooja",
-            "infoFiltered": "(filtered from _MAX_ total DailyPooja)",
-            "info": "Showing _START_ to _END_ of _TOTAL_ DailyPooja",
-            "infoEmpty": "Showing 0 to 0 of 0 DailyPooja",
+            "lengthMenu": "Show _MENU_ PanchangaPooja",
+            "infoFiltered": "(filtered from _MAX_ total PanchangaPooja)",
+            "info": "Showing _START_ to _END_ of _TOTAL_ PanchangaPooja",
+            "infoEmpty": "Showing 0 to 0 of 0 PanchangaPooja",
 
 
             processing: '<img src="' + baseURL + 'assets/dist/img/load.gif" width="150"  alt="loader">'
@@ -407,7 +407,7 @@ jQuery(document).ready(function() {
 
 
         "ajax": {
-            url: '<?php echo base_url(); ?>/DailyPoojaDetails ',
+            url: '<?php echo base_url(); ?>/PanchangaPoojaDetails',
             type: 'POST',
 
         },
@@ -473,13 +473,15 @@ $("#vImg").change(function() {
 });
 
 $(document).ready(function() {
+
+    $('.event_date_only').hide();
     $('.event_date').show();
-            $('.event_date_only').show();
-            $('.event_panchanga').hide();
-            $("#date").prop('required', true);
-            $("#paksha_id").prop('required', false);
-            $("#masa_id").prop('required', false);
-            $("#tithi_id").prop('required', false);
+            $('.event_date_only').hide();
+            $('.event_panchanga').show();
+            $("#date").prop('required', false);
+            $("#paksha_id").prop('required', true);
+            $("#masa_id").prop('required', true);
+            $("#tithi_id").prop('required', true);
 
     // $("#event_type").change(function() {
     //     event_type = $('#event_type').val();

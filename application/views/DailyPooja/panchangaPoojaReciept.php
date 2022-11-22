@@ -94,11 +94,14 @@ table{
                     <th width="120">ಮೊತ್ತ</th>
                 </tr> 
                 <tr>
-                    <td style="text-align: center;"><b>Pooja Date</b> - <?php echo $dpInfo->date.'-'.$y ?><br/>
+                    <td style="text-align: center;">
+                                     <b>Tithi</b> - <?php echo $dpInfo->tithi ?><br/>
                                      <b>Nakshatra</b> - <?php echo $dpInfo->nakshathra ?><br/>
+                                     <b>Masa</b> - <?php echo $dpInfo->masa ?><br/>
                                      <b>Rashi</b> - <?php echo $dpInfo->rashi ?><br/>
                                      <b>Gothra</b> - <?php echo $dpInfo->gothra ?><br/>
-                                     <b>Occassion</b> - <?php echo $dpInfo->occation ?></td>
+                                     <b>Occassion</b> - <?php echo $dpInfo->occation ?><br/>
+                                     <b>Paksha</b> - <?php echo $dpInfo->paksha ?></td>
                     <td style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></td>
                 </tr>
                 <tr>
