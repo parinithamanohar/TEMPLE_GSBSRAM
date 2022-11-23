@@ -636,6 +636,12 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
+            <div class="col-4">
+                    <select class="form-control text-dark" id="" name="reportFormat" required>
+                        <option value="VIEW">VIEW</option>     
+                        <option value="DOWNLOAD">DOWNLOAD</option>
+                    </select>
+                </div>
                 <button type="submit" id="assetReport" class="btn btn-success">Download</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
@@ -701,6 +707,12 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
+            <div class="col-4">
+                    <select class="form-control text-dark" id="" name="reportFormat" required>
+                        <option value="VIEW">VIEW</option>     
+                        <option value="DOWNLOAD">DOWNLOAD</option>
+                    </select>
+                </div>
                 <button type="submit" id="assetReport" class="btn btn-success">Download</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>

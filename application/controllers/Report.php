@@ -553,8 +553,10 @@ public function downloadDevotee(){
                         $this->loadThis();
                     } else {
                         $filter = array();
+                        error_reporting(0);
                         $pooja_month = $this->security->xss_clean($this->input->post('pooja_month'));
                         $month_date = $this->security->xss_clean($this->input->post('month_date'));
+                        $reportFormat = $this->security->xss_clean($this->input->post('reportFormat'));
                         if(!empty($month_date)) {
                             $filter['month_date']= date('d-m',strtotime($month_date));
                             }
@@ -564,6 +566,20 @@ public function downloadDevotee(){
                         // }else{
                         //     $pooja_date = '';  
                         // }
+
+                        if($reportFormat == 'VIEW'){
+                            $data['dt_filter'] = $filter;
+                            $data['pooja_month'] = $pooja_month;
+                            $data['company_id'] = $this->company_id;
+                            $data['DailyPooja_model'] = $this->DailyPooja_model;
+                            $this->global['pageTitle'] = ''.EXCEL_TITLE.' : YEARLY POOJA';
+                            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman']);
+                            $mpdf->AddPage('P','','','','',10,10,10,10,8,8);
+                            $mpdf->SetTitle('DAILY POOJA');
+                            $html = $this->load->view('report/dailyPoojaView',$data,true);
+                            $mpdf->WriteHTML($html);
+                            $mpdf->Output('YearlyPooja_Report.pdf', 'I');
+                        }else{
                            
                         $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                         $sheet = 0;
@@ -600,7 +616,7 @@ public function downloadDevotee(){
                             $this->excel->getActiveSheet()->getStyle('A3:K3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Seva By');
-                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Event Type');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Pooja Type');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Date');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Nakshatra');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Rashi');
@@ -644,7 +660,7 @@ public function downloadDevotee(){
                                 $this->excel->createSheet(); 
                             // }
                             
-                        }
+                       
                         
                         $filename ='Date_Pooja_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
                         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -654,6 +670,8 @@ public function downloadDevotee(){
                         ob_start();
                         setcookie('isDownLoaded',1);  
                         $objWriter->save("php://output");
+                    }
+                 }
                         
                     }
 
@@ -667,10 +685,12 @@ public function downloadDevotee(){
                             $this->loadThis();
                         } else {
                             $filter = array();
+                            error_reporting(0);
                             $pooja_fromDate = $this->security->xss_clean($this->input->post('pooja_fromDate'));
                             $pooja_toDate = $this->security->xss_clean($this->input->post('pooja_toDate'));
                             $masa_id = $this->security->xss_clean($this->input->post('masa_id'));
                             $tithi_id = $this->security->xss_clean($this->input->post('tithi_id'));
+                            $reportFormat = $this->security->xss_clean($this->input->post('reportFormat'));
                             $filter['tithi_id']=  $tithi_id;
                             $filter['masa_id']=  $masa_id;
 
@@ -683,9 +703,22 @@ public function downloadDevotee(){
                                 if(!empty($pooja_toDate)) {
                                 $filter['pooja_toDate']=  date('Y-m-d',strtotime($pooja_toDate));
                                 }
+
+                                if($reportFormat == 'VIEW'){
+                                    $data['dt_filter'] = $filter;
+                                    $data['company_id'] = $this->company_id;
+                                    $data['DailyPooja_model'] = $this->DailyPooja_model;
+                                    $this->global['pageTitle'] = ''.EXCEL_TITLE.' : DEVOTEE REPORT';
+                                    $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman']);
+                                    $mpdf->AddPage('P','','','','',10,10,10,10,8,8);
+                                    $mpdf->SetTitle('PANCHANGA POOJA');
+                                    $html = $this->load->view('report/panchangaView',$data,true);
+                                    $mpdf->WriteHTML($html);
+                                    $mpdf->Output('Panchanga_Report.pdf', 'I');
+                                }else{
         
-                            $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-                            $sheet = 0;
+                                $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                                $sheet = 0;
                                 $this->excel->setActiveSheetIndex($sheet);
                                 $this->excel->getActiveSheet()->setTitle($sheet);
                                 $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
@@ -720,7 +753,7 @@ public function downloadDevotee(){
                                 $this->excel->getActiveSheet()->getStyle('A3:M3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Seva By');
-                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Event Type');
+                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Pooja Type');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Tithi');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Nakshatra');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Masa');
@@ -763,7 +796,7 @@ public function downloadDevotee(){
                                     $this->excel->createSheet(); 
                                 // }
                                 
-                            }
+                            
                             
                             $filename ='Panchanga_Pooja_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
                             header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -773,7 +806,9 @@ public function downloadDevotee(){
                             ob_start();
                             setcookie('isDownLoaded',1);  
                             $objWriter->save("php://output");
-                            
+                                }
+                                
+                         }
                         }
 
    
