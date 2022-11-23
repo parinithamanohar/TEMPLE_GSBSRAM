@@ -46,7 +46,7 @@
                                         <td><?php echo $dpInfo->devotee_name; ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Event Type<span class="float-right">:</span> </th>
+                                        <th>Pooja Type<span class="float-right">:</span> </th>
                                         <td><?php echo strtoupper($dpInfo->event_type); ?></td>
                                     </tr>
                                     <!-- <tr>

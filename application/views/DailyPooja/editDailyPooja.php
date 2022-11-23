@@ -71,7 +71,7 @@ $y = date('Y');
                                 <input type="hidden" value="<?php echo $dpInfo->row_id;?>" name="row_id" id="row_id" />
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
-                                        <label for="event_type">Event Type*</label>
+                                        <label for="event_type">Pooja Type*</label>
                                         <select class="form-control " onchange="changeStatus()" id="event_type"
                                             name="event_type" required>
                                             <!-- <option value="">Select Event Type</option> -->
