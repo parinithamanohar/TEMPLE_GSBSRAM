@@ -396,6 +396,30 @@ jQuery(document).ready(function(){
 	});
 
 
+	jQuery(document).on("click", ".deleteExpenseName", function(){
+		var row_id = $(this).data("row_id"),
+			hitURL = baseURL + "deleteExpenseName",
+			currentRow = $(this);
+		
+		var confirmation = confirm("Are you sure to delete this Expense Name?");
+		
+		if(confirmation)
+		{
+			jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : { row_id : row_id } 
+			}).done(function(data){
+					
+				currentRow.parents('tr').remove();
+				if(data.status = true) { alert("Expense Name successfully deleted"); }
+				else if(data.status = false) { alert("Expense Name deletion failed"); }
+				else { alert("Access denied..!"); }
+			});
+		}
+	});
+
 	jQuery(document).on("click", ".deleteOccation", function(){
 		var row_id = $(this).data("row_id"),
 			hitURL = baseURL + "deleteOccation",
@@ -439,6 +463,56 @@ jQuery(document).ready(function(){
 				currentRow.parents('tr').remove();
 				if(data.status = true) { alert("Paksha successfully deleted"); }
 				else if(data.status = false) { alert("Paksha deletion failed"); }
+				else { alert("Access denied..!"); }
+			});
+		}
+	});
+
+
+
+	jQuery(document).on("click", ".deleteDonationDetail", function(){
+		var row_id = $(this).data("row_id"),
+			hitURL = baseURL + "deleteDonationDetail",
+			currentRow = $(this);
+		
+		var confirmation = confirm("Are you sure to delete this Donation Detail?");
+		
+		if(confirmation)
+		{
+			jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : { row_id : row_id } 
+			}).done(function(data){
+					
+				currentRow.parents('tr').remove();
+				if(data.status = true) { alert("Donation Detail successfully deleted"); }
+				else if(data.status = false) { alert("Donation Detail deletion failed"); }
+				else { alert("Access denied..!"); }
+			});
+		}
+	});
+
+	jQuery(document).on("click", ".deletePurpose", function(){
+		var row_id = $(this).data("row_id"),
+			hitURL = baseURL + "deletePurpose",
+			currentRow = $(this);
+		
+		var confirmation = confirm("Are you sure to delete this Purpose Detail?");
+		
+		if(confirmation)
+		{
+			jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : { row_id : row_id } 
+			}).done(function(data){
+					
+				currentRow.parents('tr').remove();
+				if(data.status = true) { alert("Purpose Detail successfully deleted"); }
+				else if(data.status = false) { alert("Purpose Detail deletion failed"); }
 				else { alert("Access denied..!"); }
 			});
 		}

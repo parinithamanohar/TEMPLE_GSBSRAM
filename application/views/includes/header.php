@@ -216,6 +216,14 @@
                                     </a>
                                 </li> -->
 
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link " href="<?php echo base_url(); ?>donationListing">
+                                    <i class="fa fa-money"></i>
+                                        <span>Donation Info</span>
+                                    </a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link dropdown-toggle" href="#poojaInfo" data-toggle="collapse" aria-expanded="false" >
                                     <i class="fas fa-users"></i>

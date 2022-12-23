@@ -336,6 +336,7 @@ $route['addTithi'] = 'setting/addTithi';
 $route['addRashi'] = 'setting/addRashi';
 $route['addCommittetype'] ='setting/addCommittetype';
 $route['addEvents'] = 'setting/addEvents';
+$route['addExpenseName'] = 'setting/addExpenseName';
 
 $route['addOccation'] = 'setting/addOccation';
 $route['addPaksha'] = 'setting/addPaksha';
@@ -355,7 +356,7 @@ $route['deleteCommittetype'] = 'setting/deleteCommittetype';
 $route['deleteEventtype'] = 'setting/deleteEventtype';
 $route['deleteOccation'] = 'setting/deleteOccation';
 $route['deletePaksha'] = 'setting/deletePaksha';
-
+$route['deleteExpenseName'] = 'setting/deleteExpenseName';
 
 
 //Assets
@@ -471,3 +472,17 @@ $route['viewPanchangaPooja/(:num)'] = "DailyPooja/viewPanchangaPooja/$1";
 
 $route['puFeePaymentReceiptPrint/(:any)'] = "DailyPooja/feePaymentReceiptPrint/$1";
 $route['panchangaReceiptPrint/(:any)'] = "DailyPooja/panchangaReceiptPrint/$1";
+
+$route['donationListing'] = "DailyPooja/donationListing";  
+$route['donationListing/(:num)'] = "DailyPooja/donationListing/$1";
+$route['addDonationDetails'] = "DailyPooja/addDonationDetails";
+$route['deleteDonationDetail'] = 'DailyPooja/deleteDonationDetail';
+$route['donationReceiptPrint/(:any)'] = "DailyPooja/donationReceiptPrint/$1";
+
+$route['addPurpose'] = 'setting/addPurpose';
+
+
+$route['downloadExpenseReport'] = "report/downloadExpenseReport";
+$route['downloadDonationReport'] = "report/downloadDonationReport";
+$route['deletePurpose'] = 'DailyPooja/deletePurpose';
+

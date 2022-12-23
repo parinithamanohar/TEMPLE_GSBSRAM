@@ -28,6 +28,8 @@ class Setting extends BaseController {
             $data['EventtypeInfo'] = $this->settings->getAllEventtypeInfo($this->company_id);
             $data['occationInfo'] = $this->settings->getAllOccationInfo($this->company_id);
             $data['pakshaInfo'] = $this->settings->getAllPakshaInfo($this->company_id);
+            $data['expenseNameInfo'] = $this->settings->getAllExpenseNameInfo($this->company_id);
+            $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
 
             $this->global['pageTitle'] = $this->company_name.' : Settings';
             $this->loadViews("settings/settingsDashboard", $this->global, $data,null);  
@@ -461,6 +463,55 @@ class Setting extends BaseController {
             $result = $this->settings->addPaksha($pakshaRole);
             if($result > 0){
                 $this->session->set_flashdata('success', 'New Paksha Added successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');
+        }
+    }
+
+
+    public function addExpenseName() {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+            $expense_name =$this->security->xss_clean($this->input->post('expense_name'));
+            $expenseInfo = array('expense_name'=>$expense_name,'company_id'=>$this->company_id);
+            $result = $this->settings->addExpenseName($expenseInfo);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'New Expense Name Added successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');
+        }
+    }
+
+
+    public function deleteExpenseName(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $expenseInfo = array('is_deleted' => 1);
+            $result = $this->settings->updateExpenseName($expenseInfo, $row_id);
+            if ($result == true) {echo (json_encode(array('status' => true)));} else {echo (json_encode(array('status' => false)));}
+        } 
+    }
+
+
+
+    public function addPurpose() {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+            $purpose_name =$this->security->xss_clean($this->input->post('purpose_name'));
+            $purposeInfo = array('purpose_name'=>$purpose_name,'company_id'=>$this->company_id);
+            $result = $this->settings->addPurpose($purposeInfo);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'New Purpose Added Successfully');
             } else{
                 $this->session->set_flashdata('error', 'Failed');
             }

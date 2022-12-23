@@ -21,6 +21,8 @@ class Report extends BaseController
         $this->load->model('committee_model');
         $this->load->model('Devotee_model');
         $this->load->model('DailyPooja_model');
+        $this->load->model('expenses_model');
+        $this->load->model('Event_model');
 
         $this->load->library('excel');
         $this->isLoggedIn();      
@@ -43,6 +45,7 @@ class Report extends BaseController
         //  $data['bank'] = $this->Bank_model->getAllBank($this->company_id);
         $data['tithiInfo'] =$this->DailyPooja_model->getTithiInfo($this->company_id); 
         $data['masaInfo'] =$this->DailyPooja_model->getMasaInfo($this->company_id);  
+        $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
 
         //  $data="";
          $this->global['pageTitle'] = $this->company_name.' : Report ';
@@ -810,6 +813,228 @@ public function downloadDevotee(){
                                 
                          }
                         }
+
+
+
+
+
+                        public function downloadExpenseReport(){
+                            if ($this->isAdmin() == true ) {
+                                setcookie('isDownLoaded',1);  
+                                $this->loadThis();
+                            } else {
+                                $filter = array();
+                                $expense_fromDate = $this->security->xss_clean($this->input->post('expense_fromDate'));
+                                $expense_toDate = $this->security->xss_clean($this->input->post('expense_toDate'));
+                                $event_type = $this->security->xss_clean($this->input->post('event_type'));
+                                $year = $this->security->xss_clean($this->input->post('year'));
+            
+                                $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                                $sheet = 0;
+                                    $this->excel->setActiveSheetIndex($sheet);
+                                    $this->excel->getActiveSheet()->setTitle($sheet);
+                                    $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
+                                    $this->excel->getActiveSheet()->setCellValue('A1', EXCEL_TITLE);
+                                    $this->excel->getActiveSheet()->setCellValue('A2',"Expense Report  - $year");
+                                    $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
+                                    $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
+                                    $this->excel->getActiveSheet()->mergeCells('A1:G1');
+                                    $this->excel->getActiveSheet()->mergeCells('A2:G2');
+                                    $this->excel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A2:G2')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('A1:G2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    
+                                    $excel_row = 3;
+                                    $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+                                    $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(35);
+                                    $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+                                    $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(28);
+                                    $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(28);
+                                    $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+                                    $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+                                    
+                                    $this->excel->getActiveSheet()->getStyle('A3:G3')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A3:G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Expense Name');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Payment Type');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Event Type');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Amount');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Expense Date');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Year');
+                                    $filter['report_type']= "Asset";
+                                    // $filter['stream_name']= $stream[$sheet];
+                                    if(!empty($expense_fromDate)) {
+                                    $filter['expense_fromDate']= date('Y-m-d',strtotime($expense_fromDate));
+                                    }
+                                    else{
+                                        $filter['expense_fromDate'] = ''; 
+                                    }
+                                    if(!empty($expense_toDate)) {
+                                    $filter['expense_toDate']=  date('Y-m-d',strtotime($expense_toDate));
+                                    }
+                                    else{
+                                        $filter['expense_toDate']= '';
+                                    }
+                                    $filter['event_type']= $event_type;
+                                    $filter['year']= $year;
+
+                    
+                                    $sl = 1;
+                                    $excel_row = 4;
+                                    $total_amount = 0;
+                                    $expenseInfo = $this->expenses_model->getexpensesInfoForReport($filter,$this->company_id);
+                                        foreach($expenseInfo as $expense){
+                                            $total_amount+= $expense->amount;
+                                            if($expense->expense_date=="1970-01-01")
+                                            {
+                                                $expense_date = '';
+                                            }
+                                            else
+                                            {
+                                                $expense_date = date('d-m-Y',strtotime($expense->expense_date)) ; 
+                                            }
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $expense->expense_type);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row,$expense->account_type);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$expense->event_type);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $expense->amount);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $expense_date);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $expense->year);
+
+                                            $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                            $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':G'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                            $excel_row++;
+                                        }
+                                        $excel_row++;
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'TOTAL AMOUNT');
+                                        $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getFont()->setBold(true);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $total_amount);
+                                        $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getFont()->setBold(true);
+                                        $this->excel->createSheet(); 
+                                    // }
+                                    
+                                }
+                                
+                                $filename ='Expense_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
+                                header('Content-Type: application/vnd.ms-excel'); //mime type
+                                header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+                                header('Cache-Control: max-age=0'); //no cache
+                                $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+                                ob_start();
+                                setcookie('isDownLoaded',1);  
+                                $objWriter->save("php://output");
+                                
+                            }
+
+
+
+
+                            public function downloadDonationReport(){
+                                if ($this->isAdmin() == true ) {
+                                    setcookie('isDownLoaded',1);  
+                                    $this->loadThis();
+                                } else {
+                                    $filter = array();
+                                    $donation_fromDate = $this->security->xss_clean($this->input->post('donation_fromDate'));
+                                    $donation_toDate = $this->security->xss_clean($this->input->post('donation_toDate'));
+                                    $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                                    $sheet = 0;
+                                        $this->excel->setActiveSheetIndex($sheet);
+                                        $this->excel->getActiveSheet()->setTitle($sheet);
+                                        $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
+                                        $this->excel->getActiveSheet()->setCellValue('A1', EXCEL_TITLE);
+                                        $this->excel->getActiveSheet()->setCellValue('A2',"Donation Report");
+                                        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
+                                        $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
+                                        $this->excel->getActiveSheet()->mergeCells('A1:E1');
+                                        $this->excel->getActiveSheet()->mergeCells('A2:E2');
+                                        $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
+                                        $this->excel->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
+                                        $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('A1:E2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        
+                                        $excel_row = 3;
+                                        $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+                                        $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+                                        $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+                                        $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+                                        $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(28);
+                                        
+                                        $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(35);
+                                        $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
+                                        $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Purpose');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Donation From');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Amount');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Date');
+                                        $filter['report_type']= "Asset";
+                                        // $filter['stream_name']= $stream[$sheet];
+                                        if(!empty($donation_fromDate)) {
+                                        $filter['donation_fromDate']= date('Y-m-d',strtotime($donation_fromDate));
+                                        }
+                                        else{
+                                            $filter['donation_fromDate'] = ''; 
+                                        }
+                                        if(!empty($donation_toDate)) {
+                                        $filter['donation_toDate']=  date('Y-m-d',strtotime($donation_toDate));
+                                        }
+                                        else{
+                                            $filter['donation_toDate']= '';
+                                        }
+                            
+                            
+                                        $sl = 1;
+                                        $excel_row = 4;
+                                        $total_amount = 0;
+                                        $donationInfo = $this->DailyPooja_model->donationInfoForReport($filter,$this->company_id);
+                                            foreach($donationInfo as $donation){
+                                                $total_amount+= $donation->amount;
+                                                if($donation->date=="1970-01-01")
+                                                {
+                                                    $donation_date = '';
+                                                }
+                                                else
+                                                {
+                                                    $donation_date = date('d-m-Y',strtotime($donation->date)); 
+                                                }
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $donation->purpose_name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row,$donation->name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$donation->amount);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $donation_date);
+                            
+                                                $this->excel->getActiveSheet()->getStyle('A'.$excel_row.':B'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                                $this->excel->getActiveSheet()->getStyle('D'.$excel_row.':E'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                                $excel_row++;
+                                            }
+                                            $excel_row++;
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'TOTAL AMOUNT');
+                                            $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                            $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getFont()->setBold(true);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $total_amount);
+                                            $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                            $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getFont()->setBold(true);
+                                            $this->excel->createSheet(); 
+                                        // }
+                                        
+                                    }
+                                    
+                                    $filename ='Donation_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
+                                    header('Content-Type: application/vnd.ms-excel'); //mime type
+                                    header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+                                    header('Cache-Control: max-age=0'); //no cache
+                                    $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+                                    ob_start();
+                                    setcookie('isDownLoaded',1);  
+                                    $objWriter->save("php://output");
+                                    
+                                }
+
 
    
 }

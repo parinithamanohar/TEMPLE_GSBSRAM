@@ -21,6 +21,20 @@ class DailyPooja_model extends CI_Model
         return $result;
     }
 
+    function poojaListCount($company_id)
+    {
+        $this->db->select('dailypooja.row_id,dailypooja.devotee_id,dailypooja.event_type,devotee.devotee_name,dailypooja.month');
+        $this->db->from('tbl_dailypooja_management_info as dailypooja');
+        $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
+        $this->db->where('dailypooja.event_type', 'Date');
+        $this->db->where('dailypooja.company_id',$company_id);
+        $this->db->where('dailypooja.is_deleted', 0);
+        $this->db->order_by('dailypooja.row_id', 'DESC');
+        $query = $this->db->get();
+        $result = $query->num_rows();        
+        return $result;
+    }
+
     
     function PanchangaPoojaList($company_id)
     {
@@ -37,6 +51,21 @@ class DailyPooja_model extends CI_Model
         return $result;
     }
     
+    function PanchangaPoojaCount($company_id)
+    {
+        $this->db->select('dailypooja.row_id,dailypooja.devotee_id,masa.masa,dailypooja.event_type,devotee.devotee_name,dailypooja.month');
+        $this->db->from('tbl_dailypooja_management_info as dailypooja');
+        $this->db->join('tbl_devotee as devotee','devotee.row_id = dailypooja.devotee_id','left');
+        $this->db->join('tbl_masa as masa','masa.row_id = dailypooja.masa_id','left');
+        $this->db->where('dailypooja.event_type', 'Panchanga');
+        $this->db->where('dailypooja.company_id',$company_id);
+        $this->db->where('dailypooja.is_deleted', 0);
+        $this->db->order_by('dailypooja.row_id', 'DESC');
+        $query = $this->db->get();
+        $result = $query->num_rows();        
+        return $result;
+    }
+
     /**
      * This function is used to add new Event to system
      */
@@ -69,7 +98,7 @@ class DailyPooja_model extends CI_Model
 
     function getDPDetails($row_id)
     {
-        $this->db->select('dailypooja.row_id,dailypooja.remarks,devotee.contact_number,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
+        $this->db->select('dailypooja.row_id,dailypooja.month,dailypooja.remarks,devotee.contact_number,dailypooja.created_date_time,dailypooja.amount,occation.occation,paksha.paksha,dailypooja.paksha_id,dailypooja.occation_id,dailypooja.devotee_id,dailypooja.event_type,dailypooja.event_id,dailypooja.tithi_id,dailypooja.nakshathra_id,dailypooja.masa_id,dailypooja.rashi_id,dailypooja.gothra_id,dailypooja.date,devotee.devotee_name,events.events,tithi.tithi,nakshathra.nakshathra,masa.masa,rashi.rashi,gothra.gothra');
         $this->db->from('tbl_dailypooja_management_info as dailypooja');
         $this->db->join('tbl_devotee as devotee','devotee.row_id=dailypooja.devotee_id','left');
         $this->db->join('tbl_events as events','events.row_id=dailypooja.event_id','left');
@@ -264,6 +293,142 @@ function getDPDetailsMonthForReport($month,$filter)
     $query = $this->db->get();      
     return $query->result();
 } 
+
+
+
+
+function donationListingCount($filter='',$company_id)
+{
+    $this->db->from('tbl_donation_info as BaseTbl');
+    // $this->db->join('tbl_seva_details as seva','seva.seva_row_id=BaseTbl.row_id','left');
+    // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
+
+    if(!empty($filter['devotee_name'])){
+        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['devotee_name']."%')";
+        $this->db->where($likeCriteria);
+    }
+
+    if(!empty($filter['amount'])){
+        $this->db->where('BaseTbl.amount', $filter['amount']);
+    }
+    if(!empty($filter['payment_type_filter'])){
+        $this->db->where('BaseTbl.payment_type', $filter['payment_type_filter']);
+    }
+
+    $this->db->where('BaseTbl.company_id',$company_id);
+    $this->db->where('BaseTbl.is_deleted', 0);
+    $this->db->order_by('BaseTbl.row_id', 'desc');
+    $query = $this->db->get();
+    return $query->num_rows();
+}
+
+
+
+
+function donationListing($filter='',$company_id, $page, $segment)
+{
+    $this->db->from('tbl_donation_info as BaseTbl');
+    // $this->db->join('tbl_seva_details as seva','seva.seva_row_id=BaseTbl.row_id','left');
+    // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
+    if(!empty($filter['devotee_name'])){
+        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['devotee_name']."%')";
+        $this->db->where($likeCriteria);
+    }
+
+    if(!empty($filter['amount'])){
+        $this->db->where('BaseTbl.amount', $filter['amount']);
+    }
+
+    if(!empty($filter['payment_type_filter'])){
+        $this->db->where('BaseTbl.payment_type', $filter['payment_type_filter']);
+    }
+
+    $this->db->where('BaseTbl.company_id',$company_id);
+    $this->db->where('BaseTbl.is_deleted', 0);
+    $this->db->order_by('BaseTbl.row_id', 'desc');
+    $this->db->limit($page, $segment);
+    $query = $this->db->get();
+    $result = $query->result();        
+    return $result;
+}
+
+
+
+public function updateDonationDetail($donationInfo, $row_id) {
+    $this->db->where('row_id', $row_id);
+    $this->db->update('tbl_donation_info', $donationInfo);
+    return TRUE;
+}
+
+public function updatePurposeDetail($donationInfo, $row_id) {
+    $this->db->where('row_id', $row_id);
+    $this->db->update('tbl_purpose', $donationInfo);
+    return TRUE;
+}
+public function updateIncomeDetail($incomeInfo, $row_id) {
+    $this->db->where('donation_id', $row_id);
+    $this->db->update('tbl_income_info', $incomeInfo);
+    return TRUE;
+}
+
+
+function getdonationInfoById($row_id)
+{
+    $this->db->select('BaseTbl.row_id,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name');
+    $this->db->from('tbl_donation_info as BaseTbl');
+    $this->db->join('tbl_purpose as purpose','purpose.row_id=BaseTbl.purpose','left');
+    $this->db->where('BaseTbl.row_id',$row_id);
+    $this->db->where('BaseTbl.is_deleted', 0);
+    $query = $this->db->get();
+    $result = $query->row();        
+    return $result;
+}
+
+function addDonationInfoToDB($donationInfo)
+{
+    $this->db->trans_start();
+    $this->db->insert('tbl_donation_info', $donationInfo);
+    $insert_id = $this->db->insert_id();
+    $this->db->trans_complete();
+    return $insert_id;
+}
+
+
+
+function donationInfoForReport($filter='',$company_id)
+{
+    $this->db->from('tbl_donation_info as BaseTbl');
+    $this->db->join('tbl_purpose as purpose','purpose.row_id = BaseTbl.purpose','left');
+    // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
+    if(!empty($filter['devotee_name'])){
+        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['devotee_name']."%')";
+        $this->db->where($likeCriteria);
+    }
+
+    if(!empty($filter['amount'])){
+        $this->db->where('BaseTbl.amount', $filter['amount']);
+    }
+
+    if(!empty($filter['payment_type_filter'])){
+        $this->db->where('BaseTbl.payment_type', $filter['payment_type_filter']);
+    }
+
+
+    if(!empty($filter['donation_fromDate'])) {
+      $this->db->where('BaseTbl.date >=', $filter['donation_fromDate']);
+    }
+
+    if(!empty($filter['donation_toDate'])) {
+      $this->db->where('BaseTbl.date <=', $filter['donation_toDate']);
+    }
+
+    $this->db->where('BaseTbl.company_id',$company_id);
+    $this->db->where('BaseTbl.is_deleted', 0);
+    $this->db->order_by('BaseTbl.row_id', 'desc');
+    $query = $this->db->get();
+    $result = $query->result();        
+    return $result;
+}
 
 
 

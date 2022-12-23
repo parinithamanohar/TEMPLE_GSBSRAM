@@ -30,6 +30,16 @@ class Committee_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+    function getCommitteeNameById($row_id)
+    {
+        $this->db->from('tbl_committee_info as committee');
+        $this->db->where('committee.row_id',$row_id);
+        $this->db->where('committee.is_deleted', 0);
+        $query = $this->db->get();
+        $result = $query->row();        
+        return $result;
+    }
     
     /**
      * This function is used to add new committee to system

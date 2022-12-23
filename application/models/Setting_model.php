@@ -343,4 +343,47 @@ class Setting_model extends CI_Model
         return $query->result();
     }
 
+    
+    public function addExpenseName($expenseInfo) {
+        $this->db->trans_start();
+        $this->db->insert('tbl_expense_name', $expenseInfo);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+
+    public function getAllExpenseNameInfo($company_id) {
+        $this->db->from('tbl_expense_name as expense');
+        $this->db->where('expense.is_deleted', 0);
+        $this->db->where('expense.company_id',$company_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    
+    public function updateExpenseName($eventtypeRoleInfo, $row_id) {
+        $this->db->where('row_id', $row_id);
+        $this->db->update('tbl_expense_name', $eventtypeRoleInfo);
+        return TRUE;
+    }
+
+
+    public function addPurpose($seva) {
+        $this->db->trans_start();
+        $this->db->insert('tbl_purpose', $seva);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+
+
+    public function getAllPurposeInfo($company_id) {
+        $this->db->from('tbl_purpose as purpose');
+        $this->db->where('purpose.is_deleted', 0);
+        $this->db->where('purpose.company_id',$company_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

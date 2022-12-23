@@ -38,6 +38,7 @@ table{
 </style>
   <?php
   $y = date('Y');
+  $date = substr($dpInfo->date,0,-3);
   ?>
 <!--  -->
 
@@ -94,7 +95,7 @@ table{
                     <th width="120">ಮೊತ್ತ</th>
                 </tr> 
                 <tr>
-                    <td style="text-align: center;"><b>Pooja Date</b> - <?php echo $dpInfo->date.'-'.$y ?><br/>
+                    <td style="text-align: left;"><b>Pooja Date</b> - <?php echo $date.' - '.$dpInfo->month ?><br/>
                                      <b>Nakshatra</b> - <?php echo $dpInfo->nakshathra ?><br/>
                                      <b>Rashi</b> - <?php echo $dpInfo->rashi ?><br/>
                                      <b>Gothra</b> - <?php echo $dpInfo->gothra ?><br/>

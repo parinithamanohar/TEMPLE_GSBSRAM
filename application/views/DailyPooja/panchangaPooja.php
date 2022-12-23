@@ -55,12 +55,17 @@ if ($success) {
                 <div class="card card-small  p-0 m-b-1">
                     <div class="card-body p-2">
                         <div class="row ">
-                            <div class="col-lg-6 col-sm-8 col-8">
+                            <div class="col-lg-5 col-sm-8 col-8">
                                 <span class="page-title">
                                     <i class="fa fa-user"></i> Panchanga Pooja Management
                                 </span>
                             </div>
-                            <div class="col-lg-6 col-sm-8 col-4 ">
+                            <div class="col-lg-5 col-sm-8 col-8">
+                                <span class="page-title">
+                                  Total Count : <?php echo $panchangaPoojaCount ?>
+                                </span>
+                            </div>
+                            <div class="col-lg-2 col-sm-8 col-4 ">
                                 <a class="btn btn-primary mobile-btn pull-right" href="" data-toggle="modal"
                                     data-target="#Modal"><i class="fa fa-plus"></i> Add New </a>
                             </div>
@@ -77,7 +82,7 @@ if ($success) {
                             class="display table table-striped table-hover nowrap ">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <!-- <th>ID</th> -->
                                     <th>Seva By</th>
                                     <th>Pooja Type</th>
                                     <th>Masa</th>

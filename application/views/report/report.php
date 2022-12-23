@@ -118,6 +118,64 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- <div class="col-lg-3 col-6 column_padding_card">
+                <div class="card card-small dash-card " style="background: #4a76ce">
+                    <div class="card-body ">
+                        <span class="stats-small__label text-uppercase text-center text-white">Income
+                            Report</span>
+                        <h6 class="stats-small__value count text-white"></h6>
+                        <div class="icon float-right">
+                        <i class="fa fa-money dash-icons"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center dash-footer p-2">
+                        <a class="more-info" href="" data-toggle="modal" data-target="#Income"><span>Click Here <i
+                                    class="fa fa-arrow-circle-right"></i></span></a>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="col-lg-3 col-6 column_padding_card">
+                <div class="card card-small dash-card " style="background: #4a76ce">
+                    <div class="card-body ">
+                        <span class="stats-small__label text-uppercase text-center text-white">Expense
+                            Report</span>
+                        <h6 class="stats-small__value count text-white"></h6>
+                        <div class="icon float-right">
+                            <i class="fa fa-money dash-icons"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center dash-footer p-2">
+                        <a class="more-info" href="" data-toggle="modal" data-target="#Expense"><span>Click Here <i
+                                    class="fa fa-arrow-circle-right"></i></span></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-6 column_padding_card">
+                <div class="card card-small dash-card " style="background: #4a76ce">
+                    <div class="card-body ">
+                        <span class="stats-small__label text-uppercase text-center text-white">Donation
+                            Report</span>
+                        <h6 class="stats-small__value count text-white"></h6>
+                        <div class="icon float-right">
+                        <i class="fa fa-money dash-icons"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center dash-footer p-2">
+                        <a class="more-info" href="" data-toggle="modal" data-target="#DonationReport"><span>Click Here <i
+                                    class="fa fa-arrow-circle-right"></i></span></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <!-- <div class="col-lg-3 col-6 column_padding_card">
                 <div class="card card-small dash-card " style="background: #119a74">
                     <div class="card-body ">
@@ -320,7 +378,133 @@
 <!-- End Modal -->
 
 
+<div id="Expense" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header modal-call-report p-2">
+                <div class=" col-lg-8 col-12">
+                    <span class="text-white mobile-title" style="font-size : 20px">Expense Report</span>
+                    &nbsp;&nbsp; <span class="modal-title text-white mobile-title" style="font-size : 20px"></span>
+                </div>
+                <div class=" col-lg-2 col-12  ">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <?php $this->load->helper("form"); ?>
+                <form method="POST" id="" action="<?php echo base_url(); ?>downloadExpenseReport">
 
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="expense_fromDate">Expense Date From</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="expense_fromDate" type="text" name="expense_fromDate"
+                                    class="form-control datepicker  " placeholder=" Date From" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="expense_toDate">Expense Date To</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="expense_toDate" type="text" name="expense_toDate"
+                                    class="form-control datepicker  " placeholder="Date To" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 mt-2">
+                            <div class="form-group">
+                                <label for="post_status">Event Type</label>
+                                <select class="form-control required" id="" name="event_type">
+                                    <option value="">Select Event</option>
+                                    <option value="">ALL</option>
+                                    <?php foreach($eventInfo as $event) { ?>
+                                    <option value="<?php echo $event->events ?>"><?php echo $event->events ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 mt-2">
+                            <div class="form-group">
+                                <label for="post_status">Year</label>
+                                <select class="form-control required" id="" name="year">
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success">Download</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="DonationReport" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header modal-call-report p-2">
+                <div class=" col-lg-8 col-12">
+                    <span class="text-white mobile-title" style="font-size : 20px">Donation Report</span>
+                    &nbsp;&nbsp; <span class="modal-title text-white mobile-title" style="font-size : 20px"></span>
+                </div>
+                <div class=" col-lg-2 col-12  ">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <?php $this->load->helper("form"); ?>
+                <form method="POST" id="donationReport" action="<?php echo base_url(); ?>downloadDonationReport">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="donation_fromDate">Date From</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="donation_fromDate" type="text" name="donation_fromDate"
+                                    class="form-control datepicker" placeholder=" Date From" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="donation_toDate">Date To</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="donation_toDate" type="text" name="donation_toDate"
+                                    class="form-control datepicker  " placeholder="Date To" autocomplete="off">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" id="assetReport" class="btn btn-success">Download</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- modal Bigin -->
 
 <div id="devotee" class="modal fade" role="dialog">
@@ -381,6 +565,66 @@
 </div>
 
 <!-- End Modal -->
+
+
+
+
+
+<div id="Income" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header modal-call-report p-2">
+                <div class=" col-lg-8 col-12">
+                    <span class="text-white mobile-title" style="font-size : 20px">Income Report</span>
+                    &nbsp;&nbsp; <span class="modal-title text-white mobile-title" style="font-size : 20px"></span>
+                </div>
+                <div class=" col-lg-2 col-12  ">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <?php $this->load->helper("form"); ?>
+                <form method="POST" id="" action="<?php echo base_url(); ?>downloadIncomeReport">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="income_fromDate">Income Date From</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="income_fromDate" type="text" name="income_fromDate"
+                                    class="form-control datepicker  " placeholder=" Date From" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="income_toDate">Income Date To</label>
+                            <div class="input-group ">
+                                <span class="input-group-append">
+                                    <span class="input-group-text material-icons date-icon">date_range</span>
+                                </span>
+                                <input id="income_toDate" type="text" name="income_toDate"
+                                    class="form-control datepicker  " placeholder="Date To" autocomplete="off">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success">Download</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 

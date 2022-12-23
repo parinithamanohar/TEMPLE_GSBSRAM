@@ -50,13 +50,66 @@ if ($error) {
                             <!-- Default Light Table -->
                             <div class="row">
                                 <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="expense_type">Expense Name*</label>
-                                        <input type="text" class="form-control" id="expense_type"
-                                            value="<?php echo $expenseInfo->expense_type; ?>" name="expense_type"
-                                            placeholder="Enter Expense Type" autocomplete="off" required>
+                                        <div class="form-group">
+                                            <label for="account_type">Expense Name*</label>
+                                            <select class="form-control " id="expense_type" name="expense_type" required>
+                                            <option value="<?php echo  $expenseInfo->expense_type; ?>">Selected:
+                                                <?php echo $expenseInfo->expense_type; ?></option>
+                                                <?php if(!empty($expenseNameInfo)) {
+                                                    foreach($expenseNameInfo as $expense){ ?>
+                                                <option value="<?php echo $expense->expense_name ?>"><?php echo $expense->expense_name ?></option>
+                                                <?php }} ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+
+
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="account_type">Expense Type*</label>
+                                            <select class="form-control " id="type_of_expense" name="type_of_expense"
+                                                required>
+                                                <option value="<?php echo $expenseInfo->type_of_expense; ?>">Selected:
+                                                <?php echo $expenseInfo->type_of_expense; ?></option>
+                                                <option value="Event">Event</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-12 committee_name">
+                                        <div class="form-group">
+                                            <label for="purpose">Committee</label>
+                                            <select class="form-control " id="committee_name" name="committee_name">
+                                            <option value="<?php echo  $expenseInfo->committee_id; ?>">Selected:
+                                                <?php echo $expenseInfo->committee_name; ?></option>
+                                                <?php if(!empty($committeeInfo)) {
+                                                             foreach($committeeInfo as $role ){?>
+                                                <option value="<?php echo $role->row_id;?>">
+                                                    <?php echo $role->committee_name;?></option>
+                                                <?php }}?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-12 event_type">
+                                        <div class="form-group">
+                                            <label for="purpose">Event Type</label>
+                                            <select class="form-control " id="event_type" name="event_type">
+                                            <option value="<?php echo  $expenseInfo->event_type; ?>">Selected:
+                                                <?php echo $expenseInfo->event_type; ?></option>
+                                                <?php if(!empty($eventInfo)) {
+                                                             foreach($eventInfo as $role ){?>
+                                                <option value="<?php echo $role->events;?>">
+                                                    <?php echo $role->events;?></option>
+                                                <?php }}?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="amount">Amount*</label>
@@ -143,6 +196,17 @@ if ($error) {
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="account_type">Year*</label>
+                                            <select class="form-control " id="year" name="year"
+                                                required>
+                                                <option value="<?php echo $expenseInfo->year; ?>">Selected:
+                                                <?php echo $expenseInfo->year; ?></option>
+                                                <option value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="comments">Comments</label>
                                         <textarea class="form-control " name="comments" id="comments" rows="2"
@@ -189,6 +253,29 @@ function isNumberKey(evt) {
 }
 
 jQuery(document).ready(function() {
+
+    // $('.committee_name').hide();
+    //     $("#committee_name").prop('required', false);
+    //     $('.event_type').hide();
+    //     $("#event_type").prop('required', false);
+
+
+    type_of_expenses = $('#type_of_expense').val();
+
+if (type_of_expenses == 'Event') {
+        $('.committee_name').show();
+        $("#committee_name").prop('required', true);
+        $('.event_type').show();
+        $("#event_type").prop('required', true);
+    } else {
+        $('.committee_name').hide();
+        $("#committee_name").prop('required', false);
+        $('.event_type').hide();
+        $("#event_type").prop('required', false);
+    }
+
+
+        
     var trans_type = $("#account_type").val();
     if(trans_type=='Cash'){
         $("#bank_type_select").hide();
@@ -228,6 +315,24 @@ $("#account_type").change(function() {
     }
 
 });
+
+$("#type_of_expense").change(function() {
+    type_of_expense = $('#type_of_expense').val();
+    if (type_of_expense == 'Event') {
+        $('.committee_name').show();
+        $("#committee_name").prop('required', true);
+        $('.event_type').show();
+        $("#event_type").prop('required', true);
+    } else {
+        $('.committee_name').hide();
+        $("#committee_name").prop('required', false);
+        $('.event_type').hide();
+        $("#event_type").prop('required', false);
+    }
+});
+
+
+
 
 function readURL(input) {
     if (input.files && input.files[0]) {

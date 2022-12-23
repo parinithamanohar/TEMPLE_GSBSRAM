@@ -13,6 +13,9 @@ class Expenses extends BaseController
         $this->load->model('expenses_model');
         $this->load->model('bank_model');
         $this->load->model('cash_account_model');
+        $this->load->model('setting_model');
+        $this->load->model('committee_model');
+        $this->load->model('Event_model');
         $this->isLoggedIn();   
     }
     
@@ -48,6 +51,9 @@ class Expenses extends BaseController
             $data['partyInfo'] =$this->expenses_model->getPartyInfo($this->company_id);
             $data['bank'] = $this->bank_model->getAllBank($this->company_id);
             $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
+            $data['expenseNameInfo'] = $this->setting_model->getAllExpenseNameInfo($this->company_id);
+            $data['committeeInfo'] = $this->committee_model->committeeListing($this->company_id);
+            $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
             $data['expensesRecords'] = $this->expenses_model->expensesListing($searchText,$filter,$this->company_id, $returns["page"], $returns["segment"]);
             $this->global['pageTitle'] = $this->company_name.' :expense Details ';
             $this->loadViews("expenses/expenses", $this->global, $data, NULL);
@@ -74,8 +80,20 @@ class Expenses extends BaseController
                 $party_id = $this->input->post('party');
                 $bank_row_id = $this->input->post('bank_row_id');
                 $cash_row_id = $this->input->post('cash_row_id');
+                $type_of_expense = $this->input->post('type_of_expense');
+                $committee_name = $this->input->post('committee_name');
+                $event_type = $this->input->post('event_type');
+                $year = $this->input->post('year');
 
-                    $expensesInfo = array('account_type'=>$account_type,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+                if(!empty($committee_name)){
+                $committee_info = $this->committee_model->getCommitteeNameById($committee_name);
+                $com_name = $committee_info->committee_name;
+                }else{
+                    $com_name = '';
+                }
+
+
+                    $expensesInfo = array('account_type'=>$account_type,'year' =>$year,'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
                     'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
                          
                 $result = $this->expenses_model->addExpenses($expensesInfo);
@@ -104,6 +122,9 @@ class Expenses extends BaseController
             $data['partyInfo'] =$this->expenses_model->getPartyInfo($this->company_id);
             $data['bank'] = $this->bank_model->getAllBank($this->company_id);
             $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
+            $data['expenseNameInfo'] = $this->setting_model->getAllExpenseNameInfo($this->company_id);
+            $data['committeeInfo'] = $this->committee_model->committeeListing($this->company_id);
+            $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
             $this->global['pageTitle'] = $this->company_name.' : Edit expenses ';
             $this->loadViews("expenses/editExpenses", $this->global, $data, NULL);
         }
@@ -122,14 +143,25 @@ class Expenses extends BaseController
             $row_id = $this->input->post('row_id');
             $account_type = $this->security->xss_clean($this->input->post('account_type'));
             $expense_amount = $this->input->post('expense_amount');
-            log_message('debug','amount='.$expense_amount);
             $invoice_no = $this->input->post('invoice_no');
             $expense_type = $this->input->post('expense_type');
             $party_id = $this->input->post('party');
             $comments = $this->input->post('comments');
             $bank_row_id = $this->input->post('bank_row_id');
             $cash_row_id = $this->input->post('cash_row_id');
-                $expensesInfo = array('account_type'=>$account_type,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+            $type_of_expense = $this->input->post('type_of_expense');
+            $committee_name = $this->input->post('committee_name');
+            $event_type = $this->input->post('event_type');
+            $year = $this->input->post('year');
+
+            if(!empty($committee_name)){
+                $committee_info = $this->committee_model->getCommitteeNameById($committee_name);
+                $com_name = $committee_info->committee_name;
+                }else{
+                    $com_name = '';
+                }
+
+                $expensesInfo = array('account_type'=>$account_type,'year'=>$year,'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
                 'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
                     
                 $result = $this->expenses_model->updateExpense($expensesInfo,$row_id);
