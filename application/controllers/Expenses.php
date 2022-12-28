@@ -52,7 +52,7 @@ class Expenses extends BaseController
             $data['bank'] = $this->bank_model->getAllBank($this->company_id);
             $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
             $data['expenseNameInfo'] = $this->setting_model->getAllExpenseNameInfo($this->company_id);
-            $data['committeeInfo'] = $this->committee_model->committeeListing($this->company_id);
+            $data['committeeInfo'] = $this->setting_model->getAllCommittetypeInfo($this->company_id);
             $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
             $data['expensesRecords'] = $this->expenses_model->expensesListing($searchText,$filter,$this->company_id, $returns["page"], $returns["segment"]);
             $this->global['pageTitle'] = $this->company_name.' :expense Details ';
@@ -86,8 +86,8 @@ class Expenses extends BaseController
                 $year = $this->input->post('year');
 
                 if(!empty($committee_name)){
-                $committee_info = $this->committee_model->getCommitteeNameById($committee_name);
-                $com_name = $committee_info->committee_name;
+                $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
+                $com_name = $committee_info->type;
                 }else{
                     $com_name = '';
                 }
@@ -123,7 +123,7 @@ class Expenses extends BaseController
             $data['bank'] = $this->bank_model->getAllBank($this->company_id);
             $data['cashAccount'] = $this->cash_account_model->getAllCashAccounts($this->company_id);
             $data['expenseNameInfo'] = $this->setting_model->getAllExpenseNameInfo($this->company_id);
-            $data['committeeInfo'] = $this->committee_model->committeeListing($this->company_id);
+            $data['committeeInfo'] = $this->setting_model->getAllCommittetypeInfo($this->company_id);
             $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
             $this->global['pageTitle'] = $this->company_name.' : Edit expenses ';
             $this->loadViews("expenses/editExpenses", $this->global, $data, NULL);
@@ -155,8 +155,8 @@ class Expenses extends BaseController
             $year = $this->input->post('year');
 
             if(!empty($committee_name)){
-                $committee_info = $this->committee_model->getCommitteeNameById($committee_name);
-                $com_name = $committee_info->committee_name;
+                $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
+                $com_name = $committee_info->type;
                 }else{
                     $com_name = '';
                 }

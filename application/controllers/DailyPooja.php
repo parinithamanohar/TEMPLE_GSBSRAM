@@ -542,7 +542,7 @@ class DailyPooja extends BaseController
             $data['count'] =  $count;
 			$returns = $this->paginationCompress ( "donationListing/", $count, 100 );
             $data['donationRecords'] = $this->DailyPooja_model->donationListing($filter,$this->company_id, $returns["page"], $returns["segment"]);
-            $data['committeeInfo'] = $this->committee_model->committeeListing($this->company_id);
+            $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
 
             $this->global['pageTitle'] = $this->company_name.' :Donation Details ';
@@ -568,13 +568,13 @@ class DailyPooja extends BaseController
                 $donation_from = $this->security->xss_clean($this->input->post('donation_from'));    
                 $committee_name = $this->security->xss_clean($this->input->post('committee_name')); 
                 if(!empty($committee_name)){
-                $committee_info = $this->committee_model->getCommitteeNameById($committee_name);
+                $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
                 }
      
                 if($donation_from=='Devotee'){
                     $name = $devotee_name;
                 }else{
-                    $name = $committee_info->committee_name;  
+                    $name = $committee_info->type;  
                 }
               
                 $donationInfo = array(
