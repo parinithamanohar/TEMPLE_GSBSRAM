@@ -232,7 +232,7 @@ if ($error) {
                                                             <?php if(!empty($committeeInfo)) {
                                                              foreach($committeeInfo as $role ){?>
                                                             <option value="<?php echo $role->row_id;?>">
-                                                                <?php echo $role->committee_name;?></option>
+                                                                <?php echo $role->type;?></option>
                                                             <?php }}?>
                                                         </select>
                                                     </div>
