@@ -242,7 +242,7 @@ if ($error) {
                                                 <div class="col-lg-6 col-12 committee_name">
                                                     <div class="form-group">
                                                         <label for="purpose">Collected By*</label>
-                                                        <select class="form-control " id="committee_name" name="committee_name" required>
+                                                        <select class="form-control selectpicker" id="committee_name" name="committee_name" required data-live-search="true">
                                                             <option value=""> Select </option>
                                                             <?php if(!empty($committeeInfo)) {
                                                              foreach($committeeInfo as $role ){?>
@@ -289,7 +289,7 @@ if ($error) {
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="purpose">Seva*</label>
-                                                        <select class="form-control " id="seva_name" name="seva_name" required
+                                                        <select class="form-control selectpicker" id="seva_name" name="seva_name" required data-live-search="true"
                                                             >
                                                             <option value=""> Select Seva </option>
                                                             <?php if(!empty($sevaInfo)) {
@@ -304,7 +304,7 @@ if ($error) {
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="purpose">Purpose</label>
-                                                        <select class="form-control " id="purpose" name="purpose"
+                                                        <select class="form-control selectpicker" id="purpose" name="purpose" data-live-search="true"
                                                             >
                                                             <option value=""> Select Purpose </option>
                                                             <?php if(!empty($purposeInfo)) {

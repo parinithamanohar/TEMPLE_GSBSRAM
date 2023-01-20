@@ -96,7 +96,7 @@ if ($success) {
                         <div class="col-lg-6 col-12">
                                                         <div class="form-group">
                                                             <label for="events">Event*</label>
-                                                            <select class="form-control " id="events" name="events"
+                                                            <select class="form-control selectpicker" id="events" name="events" data-live-search="true"
                                                                 required>
                                                                 <option value=""> Select Event
                                                                 </option>

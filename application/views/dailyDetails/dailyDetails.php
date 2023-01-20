@@ -130,7 +130,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                 <label for="event_id">Event</label>
-                                <select class="form-control " id="event_id" name="event_id" >
+                                <select class="form-control selectpicker" id="event_id" name="event_id" data-live-search="true">
                                     <option value=""> Select Event </option>
                                     <?php if(!empty($eventInfo)) {
                                         foreach($eventInfo as $event ){?>
@@ -143,7 +143,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="tithi_id">Tithi</label>
-                                <select class="form-control " id="tithi_id" name="tithi_id" required>
+                                <select class="form-control selectpicker" id="tithi_id" name="tithi_id" required data-live-search="true">
                                     <option value=""> Select Tithi </option>
                                     <?php if(!empty($tithiInfo)) {
                                         foreach($tithiInfo as $tithi ){?>
@@ -156,7 +156,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="nakshathra_id">Nakshathra</label>
-                                <select class="form-control " id="nakshathra_id" name="nakshathra_id" required >
+                                <select class="form-control selectpicker" id="nakshathra_id" name="nakshathra_id" required data-live-search="true">
                                     <option value=""> Select Nakshathra </option>
                                     <?php if(!empty($nakshathraInfo)) {
                                         foreach($nakshathraInfo as $nakshathra ){?>
@@ -169,7 +169,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="masa_id">Masa</label>
-                                <select class="form-control " id="masa_id" name="masa_id" >
+                                <select class="form-control selectpicker" id="masa_id" name="masa_id" data-live-search="true">
                                     <option value=""> Select Masa </option>
                                     <?php if(!empty($masaInfo)) {
                                         foreach($masaInfo as $masa ){?>
@@ -195,7 +195,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="gothra_id">Gothra</label>
-                                <select class="form-control" id="gothra_id" name="gothra_id" >
+                                <select class="form-control selectpicker" id="gothra_id" name="gothra_id" data-live-search="true">
                                     <option value=""> Select Gothra </option>
                                     <?php if(!empty($gothraInfo)) {
                                         foreach($gothraInfo as $gothra ){?>
@@ -209,7 +209,7 @@ if ($success) {
                             <div class="col-lg-6 col-12" >
                             <div class="form-group">
                                 <label for="paksha_id">Paksha</label>
-                                <select class="form-control " id="paksha_id" name="paksha_id">
+                                <select class="form-control selectpicker" id="paksha_id" name="paksha_id" data-live-search="true">
                                     <option value=""> Select Paksha </option>
                                     <?php if(!empty($pakshaInfo)) {
                                         foreach($pakshaInfo as $paksha ){?>

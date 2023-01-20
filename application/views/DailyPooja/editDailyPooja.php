@@ -57,7 +57,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="devotee_id">Seva By*</label>
-                                        <select class="form-control " id="devotee_id" name="devotee_id" required>
+                                        <select class="form-control selectpicker" id="devotee_id" name="devotee_id" required data-live-search="true">
                                             <!-- <option value=""> Select Devotee </option> -->
                                             <option value="<?php echo $dpInfo->devotee_id?>">
                                                 Selected :<?php echo $dpInfo->devotee_name?>
@@ -73,7 +73,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="event_type">Pooja Type*</label>
-                                        <select class="form-control " onchange="changeStatus()" id="event_type"
+                                        <select class="form-control " onchange="changeStatus()" id="event_type" data-live-search="true"
                                             name="event_type" required>
                                             <!-- <option value="">Select Event Type</option> -->
                                             <option value="<?php echo $dpInfo->event_type?>">
@@ -124,7 +124,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_panchanga">
                                     <div class="form-group">
                                         <label for="tithi_id">Tithi*</label>
-                                        <select class="form-control " id="tithi_id" name="tithi_id">
+                                        <select class="form-control selectpicker" id="tithi_id" name="tithi_id" data-live-search="true">
                                             <!-- <option value=""> Select Tithi </option> -->
                                             <option value="<?php echo $dpInfo->tithi_id?>">
                                                 Selected :<?php echo $dpInfo->tithi?>
@@ -140,7 +140,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_date">
                                     <div class="form-group">
                                         <label for="nakshathra_id">Nakshathra*</label>
-                                        <select class="form-control " id="nakshathra_id" name="nakshathra_id">
+                                        <select class="form-control selectpicker" id="nakshathra_id" name="nakshathra_id" data-live-search="true">
                                             <!-- <option value=""> Select Nakshathra </option> -->
                                             <option value="<?php echo $dpInfo->nakshathra_id?>">
                                                 Selected :<?php echo $dpInfo->nakshathra?>
@@ -156,7 +156,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_panchanga" id="dpmasa">
                                     <div class="form-group">
                                         <label for="masa_id">Masa*</label>
-                                        <select class="form-control " id="masa_id" name="masa_id">
+                                        <select class="form-control selectpicker" id="masa_id" name="masa_id" data-live-search="true">
                                             <!-- <option value=""> Select Masa </option> -->
                                             <option value="<?php echo $dpInfo->masa_id?>">
                                                 Selected :<?php echo $dpInfo->masa?>
@@ -172,7 +172,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_date" id="dprashi">
                                     <div class="form-group">
                                         <label for="rashi_id">Rashi*</label>
-                                        <select class="form-control " id="rashi_id" name="rashi_id">
+                                        <select class="form-control selectpicker" id="rashi_id" name="rashi_id" data-live-search="true">
                                             <!-- <option value=""> Select Rashi </option> -->
                                             <option value="<?php echo $dpInfo->rashi_id?>">
                                                 Selected :<?php echo $dpInfo->rashi?>
@@ -188,7 +188,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_date" id="dpgothra">
                                     <div class="form-group">
                                         <label for="gothra_id">Gothra*</label>
-                                        <select class="form-control " id="gothra_id" name="gothra_id">
+                                        <select class="form-control selectpicker" id="gothra_id" name="gothra_id" data-live-search="true">
                                             <!-- <option value=""> Select Gothra </option> -->
                                             <option value="<?php echo $dpInfo->gothra_id?>">
                                                 Selected :<?php echo $dpInfo->gothra?>
@@ -204,7 +204,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_date">
                                     <div class="form-group">
                                         <label for="occation_id">Occasion*</label>
-                                        <select class="form-control " id="occation_id" name="occation_id" required>
+                                        <select class="form-control selectpicker" id="occation_id" name="occation_id" required data-live-search="true">
                                             <option value="<?php echo $dpInfo->occation_id?>">
                                                 Selected :<?php echo $dpInfo->occation?>
                                                 <?php if(!empty($occationInfo)) {
@@ -220,7 +220,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12 event_panchanga">
                                     <div class="form-group">
                                         <label for="paksha_id">Paksha*</label>
-                                        <select class="form-control " id="paksha_id" name="paksha_id">
+                                        <select class="form-control selectpicker" id="paksha_id" name="paksha_id" data-live-search="true">
                                             <option value="<?php echo $dpInfo->paksha_id?>">
                                                 Selected :<?php echo $dpInfo->paksha?>
                                                 <?php if(!empty($pakshaInfo)) {
@@ -236,7 +236,7 @@ $y = date('Y');
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="amount">Amount*</label>
-                                        <select class="form-control " id="amount" name="amount" required>
+                                        <select class="form-control selectpicker" id="amount" name="amount" required data-live-search="true">
                                             <!-- <option value=""> Select Devotee </option> -->
                                             <option value="<?php echo $dpInfo->amount?>">
                                                 Selected :<?php echo $dpInfo->amount?>

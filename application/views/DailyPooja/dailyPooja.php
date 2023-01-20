@@ -120,7 +120,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="devotee_id">Seva By*</label>
-                                        <select class="form-control " id="devotee_id" name="devotee_id" required>
+                                        <select class="form-control selectpicker" id="devotee_id" name="devotee_id" required data-live-search="true">
                                             <option value=""> Select Seva By </option>
                                             <?php if(!empty($poojaInfo)) {
                                         foreach($poojaInfo as $role ){?>
@@ -164,7 +164,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_panchanga">
                                     <div class="form-group">
                                         <label for="tithi_id">Tithi*</label>
-                                        <select class="form-control " id="tithi_id" name="tithi_id">
+                                        <select class="form-control selectpicker" id="tithi_id" name="tithi_id" data-live-search="true">
                                             <option value=""> Select Tithi </option>
                                             <?php if(!empty($tithiInfo)) {
                                         foreach($tithiInfo as $tithi ){?>
@@ -178,7 +178,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_date" id="dpnakshathra">
                                     <div class="form-group">
                                         <label for="nakshathra_id">Nakshathra*</label>
-                                        <select class="form-control " id="nakshathra_id" name="nakshathra_id" required>
+                                        <select class="form-control selectpicker" id="nakshathra_id" name="nakshathra_id" required data-live-search="true">
                                             <option value=""> Select Nakshathra </option>
                                             <?php if(!empty($nakshathraInfo)) {
                                         foreach($nakshathraInfo as $nakshathra ){?>
@@ -192,7 +192,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_panchanga">
                                     <div class="form-group">
                                         <label for="masa_id">Masa*</label>
-                                        <select class="form-control " id="masa_id" name="masa_id">
+                                        <select class="form-control selectpicker" id="masa_id" name="masa_id" data-live-search="true">
                                             <option value=""> Select Masa </option>
                                             <?php if(!empty($masaInfo)) {
                                         foreach($masaInfo as $masa ){?>
@@ -206,7 +206,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_date" id="dprashi">
                                     <div class="form-group">
                                         <label for="rashi_id">Rashi*</label>
-                                        <select class="form-control " id="rashi_id" name="rashi_id" required>
+                                        <select class="form-control selectpicker" id="rashi_id" name="rashi_id" required data-live-search="true">
                                             <option value=""> Select Rashi </option>
                                             <?php if(!empty($rashiInfo)) {
                                         foreach($rashiInfo as $rashi){?>
@@ -220,7 +220,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_date" id="dpgothra">
                                     <div class="form-group">
                                         <label for="gothra_id">Gothra*</label>
-                                        <select class="form-control " id="gothra_id" name="gothra_id" required>
+                                        <select class="form-control selectpicker" id="gothra_id" name="gothra_id" required data-live-search="true">
                                             <option value=""> Select Gothra </option>
                                             <?php if(!empty($gothraInfo)) {
                                         foreach($gothraInfo as $gothra ){?>
@@ -234,7 +234,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_date">
                                     <div class="form-group">
                                         <label for="occation_id">Occasion*</label>
-                                        <select class="form-control " id="occation_id" name="occation_id" required>
+                                        <select class="form-control selectpicker" id="occation_id" name="occation_id" required data-live-search="true">
                                             <option value=""> Select Occasion </option>
                                             <?php if(!empty($occationInfo)) {
                                         foreach($occationInfo as $occation ){?>
@@ -249,7 +249,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12 event_panchanga">
                                     <div class="form-group">
                                         <label for="paksha_id">Paksha*</label>
-                                        <select class="form-control " id="paksha_id" name="paksha_id">
+                                        <select class="form-control selectpicker" id="paksha_id" name="paksha_id" data-live-search="true">
                                             <option value=""> Select Paksha </option>
                                             <?php if(!empty($pakshaInfo)) {
                                         foreach($pakshaInfo as $paksha ){?>
@@ -263,7 +263,7 @@ if ($success) {
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="amount">Amount*</label>
-                                        <select class="form-control " id="amount" name="amount" required>
+                                        <select class="form-control selectpicker" id="amount" name="amount" required data-live-search="true"> 
                                             <option value=""> Select Amount </option>
                                             <?php if(!empty($subscriptionInfo)) {
                                         foreach($subscriptionInfo as $sub ){?>
