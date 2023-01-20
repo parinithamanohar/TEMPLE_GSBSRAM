@@ -517,5 +517,30 @@ jQuery(document).ready(function(){
 			});
 		}
 	});
+
+
+	jQuery(document).on("click", ".deleteSevaDetail", function(){
+		var row_id = $(this).data("row_id"),
+			hitURL = baseURL + "deleteSevaDetail",
+			currentRow = $(this);
+		
+		var confirmation = confirm("Are you sure to delete this Seva Detail?");
+		
+		if(confirmation)
+		{
+			jQuery.ajax({
+			type : "POST",
+			dataType : "json",
+			url : hitURL,
+			data : { row_id : row_id } 
+			}).done(function(data){
+					
+				currentRow.parents('tr').remove();
+				if(data.status = true) { alert("Seva Detail successfully deleted"); }
+				else if(data.status = false) { alert("Seva Detail deletion failed"); }
+				else { alert("Access denied..!"); }
+			});
+		}
+	});
 	
 });

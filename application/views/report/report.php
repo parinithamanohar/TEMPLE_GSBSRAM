@@ -424,6 +424,7 @@
                                 <select class="form-control required" id="" name="event_type">
                                     <option value="">Select Event</option>
                                     <option value="">ALL</option>
+                                    <option value="other">OTHER</option>
                                     <?php foreach($eventInfo as $event) { ?>
                                     <option value="<?php echo $event->events ?>"><?php echo $event->events ?></option>
                                     <?php } ?>
@@ -436,6 +437,7 @@
                                 <label for="post_status">Year</label>
                                 <select class="form-control required" id="" name="year">
                                     <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
                                 </select>
                             </div>
                         </div>

@@ -1,189 +1,153 @@
-
 <style>
-table{
+table {
     width: 100% !important;
 }
 
 /*.border{
     border: 2px solid black;
 }*/
-.border_full{
+.border_full {
     border: 1px solid black;
     /* height: 90% !important; */
 }
-.border_bottom{
+
+.border_bottom {
     border-bottom: 1px solid black;
 }
-.hr_line{
+
+.hr_line {
     margin: 5px 0px;
     color: black;
 }
 
-.table_bordered{
+.table_bordered {
     border-collapse: collapse;
 }
-.table_bordered th,.table_bordered td{
+
+.table_bordered th,
+.table_bordered td {
     border-top: 1px solid black;
     border-right: 1px solid black;
     padding: 3px;
 }
 
-.table_bordered th .border_right_none,.table_bordered td .border_right_none{
+.table_bordered th .border_right_none,
+.table_bordered td .border_right_none {
     border-right: 1px solid transparent !important;
 }
 
-.break { page-break-before: always; } 
-.break_after { page-break-before: none; } 
+.break {
+    page-break-before: always;
+}
 
-</style>
-
-<style type="text/css">
-u {    
-    border-bottom: 1px dotted #000;
-    text-decoration: none;
+.break_after {
+    page-break-before: none;
 }
 </style>
-  
+
 <!--  -->
 
-   <br/><br/><br/>
+<br /><br /><br />
 <div class="container-fluid border_full">
-    
+
     <div class="row">
         <div class="">
-             
-            <table class="table text_highlight">
+
+            <table class="table text_highlight" style="background-color:#FFD300">
                 <tr>
                     <td style="text-align:center;" width="80">
-                        <img  class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
+                        <img class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
                     </td>
                     <td width="700" style="text-align:center;">
-                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
-                        <b style="font-size: 24px;margin-bottom: 2px;color:red">SHRI RAMA MANDIRA</b><br/>
-                        <!-- <b style="font-size: 13px;margin-bottom: 2px;">Manchi Post - 574323 Buntwal Taluk, Dakshina Kannada District</b><br/>
-                        <b style="font-size: 13px;margin-bottom: 2px;">Ph : 08255 - 236453</b><br/><br/>
-                        <b style="font-size: 13px;margin-bottom: 2px;">ಪೂಜಾ ಸಮಯ ಬೆಳಗ್ಗೆ - 7:00, ಮಧ್ಯಾಹ್ನ -12:30, ರಾತ್ರಿ -8:30</b><br/>  -->
-
+                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
+                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br />
                         <!-- <b style="font-size: 13px;margin-bottom: 2px;">Unit of KJES </b><br/> -->
                         <span style="font-size: 13px;margin-bottom: 2px;">
-                        </span><br/>
+                        </span><br />
+                        <br />
+
+                    </td>
+                </tr>
+            </table>
+            <!-- <hr class="border_bottom hr_line"> -->
+
+            <h4 style="margin-left:300px"> Donation Reciept </h4>
+           
+                        <table class="table" style="font-size: 15px;margin-left:80px">
+
+                            <tr>
+                             
+                                <td><b>Receipt No.:</b> <span
+                                        style="color: red;"><?php echo $donationInfo->row_id; ?></span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Receipt Date :</b> <?php echo date('d-m-Y'); ?></td>
+                            </tr>
+
+                            <tr>
+                                <td width="400"><b>Name :</b> <?php echo $donationInfo->devotee_name; ?></td>
+
+                            </tr>
+
+                            <tr>
+                                <td><b>Number :</b>
+                                    <?php echo $donationInfo->mobile_number; ?></td>
+                            </tr>
+                            <tr>
+                                <td width="220"><b>Email :</b> <?php echo $donationInfo->email; ?></td>
+
+                            </tr>
+                            <tr>
+                                <td width="700"><b>Address : </b><?php echo $donationInfo->address; ?></td>
+
+                            </tr>
+                            <tr>
+                                <td width="400"><b>Amount :</b> Rs.<?php echo $donationInfo->amount; ?>/- (<?php echo getIndianCurrency(floatval($donationInfo->amount)).' only'; ?>)</td>
+
+                            </tr>
+                            <tr>
+                                <td><b>Payment Mode :</b> <?php echo $donationInfo->payment_type; ?></td>
+
+                            </tr>
+                            <tr>
+                                <td width="700"><b>Notes :</b> <?php echo $donationInfo->note; ?></td>
+
+                            </tr>
+
+                        </table>
+
+                        <h4 style="margin-left:500px"> Issued By :Counter </h4>
                         <br/>
-                       
-                    </td>
-                </tr>
-            </table>
-
-            <table>
+                          
+                
+            <!-- <table class="table table_bordered" style="font-size: 15px;">
                 <tr>
-                    <td width="400" style="padding-left:120px">NO.: <b style="color:red"><?php echo  $donationInfo->row_id; ?></p> </td>
-                    <td width="100" style="padding-left:140px">Date: <?php echo date('d-m-Y'); ?></td>
+                    <th>ವಿವರಗಳು</th>
+                    <th width="120">ಮೊತ್ತ</th>
                 </tr>
-            </table>
-
-            <table>
-                  
-                  
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    </tr>
-                    
-                    <tr>
-                    <td style="padding-left:30px">
-                    <p style="font-size: 12pt;font-family: times new roman;" class="">
-                     <i>Recieved with Gratitude Rs </i> &nbsp;<u><?php echo sprintf('%0.2f', $donationInfo->amount); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
-                    </p>
+                <tr>
+                    <td style="text-align: left;"><b>Pooja Date</b> - <?php echo $date.' - '.$dpInfo->month ?><br />
+                        <b>Nakshatra</b> - <?php echo $dpInfo->nakshathra ?><br />
+                        <b>Rashi</b> - <?php echo $dpInfo->rashi ?><br />
+                        <b>Gothra</b> - <?php echo $dpInfo->gothra ?><br />
+                        <b>Occassion</b> - <?php echo $dpInfo->occation ?>
                     </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                    <td style="padding-left:30px">
-                    <p style="font-size: 12pt;font-family: times new roman;" class="">
-                     <i>Rupees </i> &nbsp;&nbsp;<u> <?php echo getIndianCurrency(floatval($donationInfo->amount)); ?>&nbsp;&nbsp;</u><i> only</i>
-                    </p>
+                    <td style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></td>
+                </tr>
+                <tr>
+                    <th>ಒಟ್ಟು ಮೊತ್ತ</th>
+                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></th>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 13px;"><br><b>: <span
+                                style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b>
                     </td>
-                    </tr>
+                </tr>
+            </table> -->
 
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                    <td style="padding-left:30px">
-                    <p style="font-size: 12pt;font-family: times new roman;" class="">
-                     <i>from Sri / Smt</i>  &nbsp;&nbsp;<u> <?php echo strtoupper($donationInfo->name); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
-                    </p>
-                    </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                    <td style="padding-left:30px">
-                    <p style="font-size: 12pt;font-family: times new roman;" class="">
-                     <u> <?php echo strtoupper($donationInfo->address); ?></u>
-                    </p>
-                    </td>
-                    </tr>
-
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                    <td style="padding-left:30px">
-                    <p style="font-size: 12pt;font-family: times new roman;" class="">
-                     <i>towrads &nbsp;<u><?php echo $donationInfo->purpose_name ?>&nbsp;</u> SHRI RAMA MANDIRA by Cash</i>
-                    </p>
-                    </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-                     
-                    
-
-                    <tr>
-                        <td></td>
-                    </tr>               
-                                                                  
-            </table>
-
-            <table>
-            <!-- <tr>
-            <td style="padding-left:380px"><b style="color:red">Shri Durgaparameshwari Temple Monthimaru</b></td>
-            </tr> -->
-            </table>
-
-
-
-              
         </div>
     </div>
-  
+
 </div>
 
 <!-- <b style="font-size: 11px;">This is a system generated fee receipt. No seal and signature is required. Fees ones paid is not refundable.</b> -->

@@ -311,6 +311,7 @@ if ($error) {
                                             <label for="account_type">Year*</label>
                                             <select class="form-control " id="year" name="year" required>
                                                 <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
                                             </select>
                                         </div>
                                     </div>

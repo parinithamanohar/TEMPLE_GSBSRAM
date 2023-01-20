@@ -65,28 +65,48 @@ table{
             </table>
             <hr class="border_bottom hr_line">
 
-            <table class="table" style="font-size: 15px;">
-                
+            <table>
                 <tr>
-                    <td colspan="2">ರಶೀದಿ ಸಂಖ್ಯೆ.: <span style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2">ಹೆಸರು : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
-                </tr>
-              
-                <tr>
-                    <td width="220">ದೂರವಾಣಿ ಸಂಖ್ಯೆ  : <?php echo $dpInfo->contact_number; ?></td>
-                  
-                </tr>
-              
-                <tr>
-                    <td colspan="2">ದಿನಾಂಕ : <?php echo date('d-m-Y',strtotime($dpInfo->created_date_time)); ?></td>
-                </tr>
-                
+                    <td>
+                        <table class="table" style="font-size: 15px;">
 
-                
-               
-              
+                            <tr>
+                                <td colspan="4">ರಶೀದಿ ಸಂಖ್ಯೆ.: <span
+                                        style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
+                            </tr>
+                            <tr>
+                                <td width="350">ಹೆಸರು : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
+                            </tr>
+
+                            <tr>
+                                <td width="220">ದೂರವಾಣಿ ಸಂಖ್ಯೆ : <?php echo $dpInfo->contact_number; ?></td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">ದಿನಾಂಕ :
+                                    <?php echo date('d-m-Y',strtotime($dpInfo->created_date_time)); ?></td>
+                            </tr>
+
+
+
+
+
+                        </table>
+                    </td>
+                    <td>
+
+                        <table class="table" style="font-size: 15px;">
+
+                            <tr>
+                            
+                                <td >ವಿಳಾಸ: <span><?php echo  $dpInfo->devotee_address; ?></span></td>
+                            </tr>
+                                                    
+                        </table>
+
+                    </td>
+                </tr>
             </table>
             <table class="table table_bordered" style="font-size: 15px;">
                 <tr>

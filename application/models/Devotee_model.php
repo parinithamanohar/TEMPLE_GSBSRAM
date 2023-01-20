@@ -52,6 +52,10 @@ class Devotee_model extends CI_Model
             $this->db->where($likeCriteria);
         }
 
+        if(!empty($filter['post_status_f'])){
+            $this->db->where('BaseTbl.post_status', $filter['post_status_f']);
+        }
+
         $this->db->where('BaseTbl.company_id',$company_id);
         $this->db->where('BaseTbl.is_deleted', 0);
         $query = $this->db->get();
@@ -63,7 +67,7 @@ class Devotee_model extends CI_Model
      */
     function devoteeListing($searchText = '',$filter='',$company_id, $page, $segment)
     {
-        $this->db->select('BaseTbl.row_id,BaseTbl.devotee_id, BaseTbl.devotee_address, BaseTbl.devotee_name, BaseTbl.contact_number,BaseTbl.company_id');
+        $this->db->select('BaseTbl.row_id,BaseTbl.devotee_id, BaseTbl.devotee_address,BaseTbl.post_status,BaseTbl.devotee_name, BaseTbl.contact_number,BaseTbl.company_id');
         $this->db->from('tbl_devotee as BaseTbl');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.devotee_address  LIKE '%".$searchText."%'
@@ -80,6 +84,9 @@ class Devotee_model extends CI_Model
         // }
         if(!empty($filter['contact_number'])){
             $this->db->where('BaseTbl.contact_number', $filter['contact_number']);
+        }
+        if(!empty($filter['post_status_f'])){
+            $this->db->where('BaseTbl.post_status', $filter['post_status_f']);
         }
         // if(!empty($filter['devotee_address'])){
         //     $this->db->where('BaseTbl.devotee_address', $filter['devotee_address']);

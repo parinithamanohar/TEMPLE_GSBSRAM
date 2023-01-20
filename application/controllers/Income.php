@@ -228,7 +228,7 @@ class Income extends BaseController {
                 } else{
                     $this->session->set_flashdata('error', 'Income update failed');
                 }
-            redirect('incomeListing');
+            redirect('editIncomePageView/'.$row_id);
         }
     }
 

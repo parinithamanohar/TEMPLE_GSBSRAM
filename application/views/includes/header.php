@@ -225,6 +225,13 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="nav-link " href="<?php echo base_url(); ?>sevaListing">
+                                    <i class="fas fa-user"></i>
+                                        <span>Seva Info</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link dropdown-toggle" href="#poojaInfo" data-toggle="collapse" aria-expanded="false" >
                                     <i class="fas fa-users"></i>
                                         <span>Daily Pooja</span>

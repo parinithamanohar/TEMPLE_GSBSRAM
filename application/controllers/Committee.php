@@ -219,7 +219,7 @@ class Committee extends BaseController
                 else{
                     $this->session->set_flashdata('error', 'committee update failed');
                 }
-                redirect('committeeListing');
+                redirect('editCommitteePageView/'.$row_id);
             }
         }
     }

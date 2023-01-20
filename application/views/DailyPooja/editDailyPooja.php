@@ -51,6 +51,7 @@ $y = date('Y');
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addCommittee" action="<?php echo base_url() ?>updateDailyPooja"
                             method="post" role="form" enctype="multipart/form-data">
+                            <input type="hidden" name="pooja_type" value="DATE" >
                             <!-- <div class="row form-contents"> -->
                             <div class="row">
                                 <div class="col-lg-6 col-12">

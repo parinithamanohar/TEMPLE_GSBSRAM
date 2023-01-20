@@ -203,6 +203,7 @@ if ($error) {
                                                 <option value="<?php echo $expenseInfo->year; ?>">Selected:
                                                 <?php echo $expenseInfo->year; ?></option>
                                                 <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
                                             </select>
                                         </div>
                                     </div>

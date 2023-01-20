@@ -478,6 +478,7 @@ $route['donationListing/(:num)'] = "DailyPooja/donationListing/$1";
 $route['addDonationDetails'] = "DailyPooja/addDonationDetails";
 $route['deleteDonationDetail'] = 'DailyPooja/deleteDonationDetail';
 $route['donationReceiptPrint/(:any)'] = "DailyPooja/donationReceiptPrint/$1";
+$route['addSevaDetails'] = "DailyPooja/addSevaDetails";
 
 $route['addPurpose'] = 'setting/addPurpose';
 
@@ -485,4 +486,20 @@ $route['addPurpose'] = 'setting/addPurpose';
 $route['downloadExpenseReport'] = "report/downloadExpenseReport";
 $route['downloadDonationReport'] = "report/downloadDonationReport";
 $route['deletePurpose'] = 'DailyPooja/deletePurpose';
+
+$route['sevaListing'] = "DailyPooja/sevaListing";  
+$route['sevaListing/(:num)'] = "DailyPooja/sevaListing/$1";
+
+$route['deleteSevaDetail'] = 'DailyPooja/deleteSevaDetail';
+
+
+$route['editSevaPageView'] = "DailyPooja/editSevaDetail";  
+$route['editSevaPageView/(:any)'] = "DailyPooja/editSevaDetail/$1"; 
+
+$route['updateSevaDetails'] = "DailyPooja/updateSevaDetails";  
+
+$route['editDonationView'] = "DailyPooja/editDonationView";  
+$route['editDonationView/(:any)'] = "DailyPooja/editDonationView/$1"; 
+
+$route['updateDonationDetails'] = "DailyPooja/updateDonationDetails";  
 

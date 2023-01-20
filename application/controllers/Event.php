@@ -133,7 +133,7 @@ class Event extends BaseController
                 else{
                     $this->session->set_flashdata('error', 'Event update failed');
                 }
-                redirect('eventListing');
+                redirect('editEvent/'.$row_id);
             }
         // }
     }

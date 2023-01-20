@@ -224,7 +224,7 @@ class DailyDetails extends BaseController
                 else{
                     $this->session->set_flashdata('error', 'Details update failed');
                 }
-                redirect('dailyDetailsListing');
+                redirect('editDailyDetails/'.$row_id);
             }
         // }
     }

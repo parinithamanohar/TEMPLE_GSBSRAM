@@ -87,6 +87,27 @@ if ($error) {
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
                                         </div>
                                     </th>
+                                    <th width="150" style="padding: 0px;">
+                                        <div class="form-group position-relative mb-0"><input
+                                                class="form-control is-valid mobile-width " type="text"
+                                                name="collected_by_f" id="" value="<?php echo $collected_by_f ?>"
+                                                class="form-control input-sm pull-right"
+                                                style="text-transform: uppercase" placeholder="By Collected By"
+                                                autocomplete="off">
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
+                                        </div>
+                                    </th>
+
+                                    <th width="150" style="padding: 0px;">
+                                        <div class="form-group position-relative mb-0"><input
+                                                class="form-control is-valid mobile-width " type="text"
+                                                name="seva_name_f" id="" value="<?php echo $seva_name_f ?>"
+                                                class="form-control input-sm pull-right"
+                                                style="text-transform: uppercase" placeholder="By Seva Name"
+                                                autocomplete="off">
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
+                                        </div>
+                                    </th>
 
                                     <th width="150" style="padding: 0px;">
                                         <div class="form-group position-relative mb-0"><input
@@ -103,7 +124,7 @@ if ($error) {
                                                 value="<?php echo $amount ?>" class="form-control input-sm pull-right "
                                                 style="text-transform: uppercase" placeholder="By Amount"
                                                 autocomplete="off">
-                                            <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-money"></i></div>
                                         </div>
                                     </th>
                                     <th width="150" style="padding: 0px;">
@@ -112,7 +133,7 @@ if ($error) {
                                                 value="<?php echo $payment_type_filter ?>" class="form-control input-sm pull-right "
                                                 style="text-transform: uppercase" placeholder="By Payment Type"
                                                 autocomplete="off">
-                                            <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-money"></i></div>
                                         </div>
                                     </th>
 
@@ -122,6 +143,8 @@ if ($error) {
                             </tr>
                             <tr class=" text-white bg-black ">
                                 <th>Devotee Name</th>
+                                <th>Collected By</th>
+                                <th>Seva Name</th>
                                 <th>Address</th>
                                 <th>Amount</th>
                                 <th>Payment Type</th>
@@ -134,21 +157,24 @@ if ($error) {
                         {
                     ?>
                             <tr class="text-black">
+                                <td><?php echo $record->devotee_name ?></td>
                                 <td><?php echo $record->name ?></td>
+                                <td><?php echo $record->seva_name ?></td>
 
                                 <td><?php echo $record->address ?></td>
                                 <td><?php echo $record->amount ?></td>
                                 <td><?php echo $record->payment_type ?></td>
                                 <td class="text-center">
 
-                                    <!-- <a class="btn  btn-sm btn-info"
-                                        href="<?php echo base_url().'editDevoteePageView/'.$record->row_id; ?>"
-                                        title="Edit"><i class="fas fa-edit"></i></a> -->
-                                    <!-- <a href="<?php echo base_url().'donationReceiptPrint/'.$record->row_id; ?>"
-                                        target="_blank"><i class="fa fa-print"></i>Receipt</a> -->
+                                <a class="btn  btn-sm btn-info"
+                                        href="<?php echo base_url().'editDonationView/'.$record->row_id; ?>"
+                                        title="Edit"><i class="fas fa-edit"></i></a>
+                                    
                                     <a class="btn btn-sm btn-danger deleteDonationDetail" href="#"
                                         data-row_id="<?php echo $record->row_id; ?>" title="Delete"><i
                                             class="fas fa-trash"></i></a>
+                                            <a href="<?php echo base_url().'donationReceiptPrint/'.$record->row_id; ?>"
+                                        target="_blank">Receipt</a>
                                 </td>
                             </tr>
                             <?php
@@ -201,7 +227,7 @@ if ($error) {
                                             <div class="form-row">
 
 
-                                            <div class="col-lg-6 col-12">
+                                            <!-- <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="purpose">Donation From</label>
                                                         <select class="form-control " id="donation_from" name="donation_from" required>
@@ -210,25 +236,14 @@ if ($error) {
                                                             <option value="Committee">Committee</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
-
-
-
-                                                <div class="form-group col-md-6 devotee_name">
-                                                    <label for="fname">Devotee Name*</label>
-                                                    <input class="form-control is-valid mobile-width " type="text"
-                                                        name="devotee_name" id="devotee_name" value=""
-                                                        class="form-control input-sm pull-right "
-                                                        style="text-transform: uppercase" placeholder="Name"
-                                                        autocomplete="off">
-                                                </div>
 
                                                 <div class="col-lg-6 col-12 committee_name">
                                                     <div class="form-group">
-                                                        <label for="purpose">Committee</label>
-                                                        <select class="form-control " id="committee_name" name="committee_name">
-                                                            <option value=""> Select Committee </option>
+                                                        <label for="purpose">Collected By*</label>
+                                                        <select class="form-control " id="committee_name" name="committee_name" required>
+                                                            <option value=""> Select </option>
                                                             <?php if(!empty($committeeInfo)) {
                                                              foreach($committeeInfo as $role ){?>
                                                             <option value="<?php echo $role->row_id;?>">
@@ -236,6 +251,17 @@ if ($error) {
                                                             <?php }}?>
                                                         </select>
                                                     </div>
+                                                </div>
+
+
+
+                                                <div class="form-group col-md-6 devotee_name">
+                                                    <label for="fname">Devotee Name*</label>
+                                                    <input class="form-control is-valid mobile-width " type="text" onkeydown="return alphaOnly(event)"
+                                                        name="devotee_name" id="devotee_name" value=""
+                                                        class="form-control input-sm pull-right "
+                                                        style="text-transform: uppercase" placeholder="Name"
+                                                        autocomplete="off" required>
                                                 </div>
 
 
@@ -249,8 +275,8 @@ if ($error) {
 
                                             </div>
 
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                             <div class="form-row">
+                                              <!--  <div class="form-group col-md-6">
                                                     <label for="fname">Amount*</label>
                                                     <input class="form-control is-valid mobile-width " type="text"
                                                         name="amount" id="amount" value=""
@@ -258,6 +284,21 @@ if ($error) {
                                                         class="form-control input-sm pull-right "
                                                         style="text-transform: uppercase" placeholder="Amount" required
                                                         autocomplete="off">
+                                                </div> -->
+
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="purpose">Seva*</label>
+                                                        <select class="form-control " id="seva_name" name="seva_name" required
+                                                            >
+                                                            <option value=""> Select Seva </option>
+                                                            <?php if(!empty($sevaInfo)) {
+                                                             foreach($sevaInfo as $role ){?>
+                                                            <option value="<?php echo $role->row_id;?>">
+                                                                <?php echo $role->seva_name;?> - <?php echo $role->amount;?>Rs</option>
+                                                            <?php }}?>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-lg-6 col-12">
@@ -275,6 +316,15 @@ if ($error) {
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group col-md-6">
+                                                    <label for="fname">Mobile Number</label>
+                                                    <input class="form-control is-valid mobile-width " type="text"
+                                                        name="mobile_number" id="mobile_number" value="" onkeypress="return isNumberKey(event)"
+                                                        class="form-control input-sm pull-right" minlength="10" maxlength="10"
+                                                        style="text-transform: uppercase" placeholder="Mobile Number"
+                                                        autocomplete="off">
+                                                </div>
+
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="purpose">Payment Type*</label>
@@ -287,13 +337,41 @@ if ($error) {
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group col-md-6">
+                                                    <label for="fname">Email</label>
+                                                    <input class="form-control is-valid mobile-width " type="email"
+                                                        name="email" id="email" value=""
+                                                        class="form-control input-sm pull-right"
+                                                        style="text-transform: uppercase" placeholder="Email"
+                                                        autocomplete="off">
+                                                </div>
+
+                                                <div class="form-group col-md-6 reference_number">
+                                                    <label for="fname">Reference Number</label>
+                                                    <input class="form-control is-valid mobile-width " type="text"
+                                                        name="reference_number" id="reference_number" value=""
+                                                        class="form-control input-sm pull-right"
+                                                        style="text-transform: uppercase" placeholder="Reference Number"
+                                                        autocomplete="off">
+                                                </div>
+
                                                 <div class="col-lg-12 col-12">
                                                     <div class="form-group">
                                                         <label for="role">Address</label>
-                                                        <textarea class="form-control required"
+                                                        <textarea class="form-control"
                                                             value="<?php echo set_value('devotee_address'); ?>"
                                                             name="devotee_address" id="devotee_address" rows="4"
                                                             placeholder="Address" autocomplete="off"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="role">Note</label>
+                                                        <textarea class="form-control"
+                                                            value=""
+                                                            name="note" id="note" rows="4"
+                                                            placeholder="Note" autocomplete="off"></textarea>
                                                     </div>
                                                 </div>
 
@@ -324,6 +402,17 @@ if ($error) {
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8">
 </script>
 <script type="text/javascript">
+
+    
+$("#payment_type").change(function() {
+            payment_type = $('#payment_type').val();
+        if (payment_type == 'BANK') {
+            $('.reference_number').show();
+        } else {
+            $('.reference_number').hide();
+        }
+     });
+
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode > 31 &&
@@ -338,11 +427,13 @@ function alphaOnly(event) {
 };
 
 jQuery(document).ready(function() {
+    $('.reference_number').hide();
 
-    $('.devotee_name').hide();
-    $("#devotee_name").prop('required', false);
-    $('.committee_name').hide();
-    $("#committee_name").prop('required', false);
+
+    // $('.devotee_name').hide();
+    // $("#devotee_name").prop('required', false);
+    // $('.committee_name').hide();
+    // $("#committee_name").prop('required', false);
 
     jQuery('ul.pagination li a').click(function(e) {
         e.preventDefault();
@@ -366,20 +457,6 @@ jQuery(document).ready(function() {
 
 
 
-        $("#donation_from").change(function() {
-            donation_from = $('#donation_from').val();
-        if (donation_from == 'Devotee') {
-            $('.devotee_name').show();
-            $("#devotee_name").prop('required', true);
-            $('.committee_name').hide();
-            $("#committee_name").prop('required', false);
-        } else {
-            $('.devotee_name').hide();
-            $("#devotee_name").prop('required', false);
-            $('.committee_name').show();
-            $("#committee_name").prop('required', true);
-        }
-    });
 
 
 

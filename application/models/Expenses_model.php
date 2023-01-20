@@ -193,6 +193,10 @@ class Expenses_model extends CI_Model
            $this->db->where('BaseTbl.event_type', $filter['event_type']);
        }
 
+       if(!empty($filter['type_of_expense'])){
+        $this->db->where('BaseTbl.type_of_expense', $filter['type_of_expense']);
+    }
+
        if(!empty($filter['year'])){
         $this->db->where('BaseTbl.year', $filter['year']);
     }

@@ -121,6 +121,20 @@ if ($error) {
                                         </div>
                                     </th>
 
+                                    <th width="150" style="padding: 0px;">
+                                        <div class="form-group position-relative mb-0">
+                                            <select class="form-control s-valid mobile-width input-sm pull-right" style="text-transform: uppercase" id="post_status_f" name="post_status_f">
+                                        <?php if(!empty($post_status_f)){ ?>
+                                            <option value="<?php echo $post_status_f ?>" selected> Selected: <?php echo $post_status_f ?></option>
+                                            <?php } ?>
+                                            <option value="">Select</option> 
+                                            <option value="YES">YES</option> 
+                                            <option value="NO">NO</option>                                                                                  
+                                        </select>
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-phone"></i></div>
+                                        </div>
+                                    </th>
+
                                     <th width="180" class="text-center btn-padding"><button type="submit"
                                             class="btn btn-success btn-block mobile-width"> Search</button></th>
                                 </form>
@@ -130,6 +144,7 @@ if ($error) {
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Mobile</th>
+                                <th>Post Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             <?php
@@ -143,6 +158,7 @@ if ($error) {
                                 <td><?php echo $record->devotee_name ?></td>
                                 <td><?php echo $record->devotee_address ?></td>
                                 <td><?php echo $record->contact_number ?></td>
+                                <td><?php echo $record->post_status ?></td>
                                 <td class="text-center">
 
                                     <a class="btn  btn-sm btn-info"

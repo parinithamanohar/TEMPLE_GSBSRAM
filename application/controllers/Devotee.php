@@ -32,14 +32,17 @@ class Devotee extends BaseController
             $devotee_name = $this->security->xss_clean($this->input->post('devotee_name'));
             $contact_number = $this->security->xss_clean($this->input->post('contact_number'));
             $devotee_address = $this->security->xss_clean($this->input->post('devotee_address'));
+            $post_status_f = $this->security->xss_clean($this->input->post('post_status_f'));
             // $data['devotee_id'] = $devotee_id;
             $data['devotee_name'] = $devotee_name;
             $data['contact_number'] = $contact_number;
             $data['devotee_address'] = $devotee_address;
+            $data['post_status_f'] = $post_status_f;
             // $filter['devotee_id'] = $devotee_id;
             $filter['devotee_name'] = $devotee_name;
             $filter['contact_number'] = $contact_number;
             $filter['devotee_address'] = $devotee_address;
+            $filter['post_status_f'] = $post_status_f;
 
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
@@ -222,7 +225,7 @@ class Devotee extends BaseController
                 } else {
                     $this->session->set_flashdata('error', 'devotee update failed');
                 }
-                redirect('devoteeListing');
+                redirect('editDevoteePageView/'.$row_id);
             }
         }
     }

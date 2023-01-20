@@ -1,6 +1,6 @@
 
           <footer class=" main-footer d-flex p-0 px-3 bg-white border-top noprint">
-            <span class="copyright ml-auto my-auto mr-2 noprint">Copyright © 2022-23
+            <span class="copyright ml-auto my-auto mr-2 noprint">Copyright © 2023-24
               <a href="http://www.parrophins.com/" target="_blank" rel="nofollow">Parrophins.</a> All rights reserved
             </span>
           </footer>

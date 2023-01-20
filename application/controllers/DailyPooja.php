@@ -242,6 +242,8 @@ class DailyPooja extends BaseController
                 $occation_id = $this->security->xss_clean($this->input->post('occation_id'));
                 $amount = $this->security->xss_clean($this->input->post('amount'));
                 $remarks = $this->security->xss_clean($this->input->post('remarks'));
+                $pooja_type = $this->security->xss_clean($this->input->post('pooja_type'));
+
                 if(!empty( $datedp)){
                     $dateinfo = date('d-m',strtotime($datedp));
                     }else{
@@ -314,7 +316,11 @@ class DailyPooja extends BaseController
                 else{
                     $this->session->set_flashdata('error', 'Daily Pooja update failed');
                 }
-                redirect('DailyPoojaListing');
+                if($pooja_type == 'DATE'){
+                redirect('editDailyPooja/'.$row_id);
+                }else{
+                    redirect('editPanchangaPooja/'.$row_id); 
+                }
             }
       
     }
@@ -523,15 +529,21 @@ class DailyPooja extends BaseController
             // $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));  
             $devotee_name = $this->security->xss_clean($this->input->post('devotee_name'));
             $amount = $this->security->xss_clean($this->input->post('amount'));
+            $collected_by_f = $this->security->xss_clean($this->input->post('collected_by_f'));
+            $seva_name_f = $this->security->xss_clean($this->input->post('seva_name_f'));
             $payment_type_filter = $this->security->xss_clean($this->input->post('payment_type_filter'));
 
             // $data['devotee_id'] = $devotee_id;
             $data['devotee_name'] = $devotee_name;
             $data['amount'] = $amount;
+            $data['collected_by_f'] = $collected_by_f;
+            $data['seva_name_f'] = $seva_name_f;
             $data['payment_type_filter'] = $payment_type_filter;
 
             $filter['devotee_name'] = $devotee_name;
             $filter['amount'] = $amount;
+            $filter['collected_by_f'] = $collected_by_f;
+            $filter['seva_name_f'] = $seva_name_f;
             $filter['payment_type_filter'] = $payment_type_filter;
             
             // $data['purposeInfo'] = $this->setting_model->getAllPurposeInfo($this->company_id);
@@ -544,6 +556,8 @@ class DailyPooja extends BaseController
             $data['donationRecords'] = $this->DailyPooja_model->donationListing($filter,$this->company_id, $returns["page"], $returns["segment"]);
             $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
+            $data['sevaInfo'] = $this->DailyPooja_model->getAllSevaInfo($this->company_id);
+
 
             $this->global['pageTitle'] = $this->company_name.' :Donation Details ';
             $this->loadViews("DailyPooja/donation", $this->global, $data, NULL);
@@ -565,25 +579,42 @@ class DailyPooja extends BaseController
                 $devotee_address = $this->security->xss_clean($this->input->post('devotee_address'));
                 $purpose = $this->security->xss_clean($this->input->post('purpose'));    
                 $payment_type = $this->security->xss_clean($this->input->post('payment_type'));    
-                $donation_from = $this->security->xss_clean($this->input->post('donation_from'));    
+                $seva_name = $this->security->xss_clean($this->input->post('seva_name'));    
                 $committee_name = $this->security->xss_clean($this->input->post('committee_name')); 
+                $mobile_number = $this->security->xss_clean($this->input->post('mobile_number')); 
+                $reference_number = $this->security->xss_clean($this->input->post('reference_number')); 
+                $note = $this->security->xss_clean($this->input->post('note')); 
+                $email = $this->security->xss_clean($this->input->post('email')); 
+
+
                 if(!empty($committee_name)){
                 $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
                 }
+
+                if(!empty($seva_name)){
+                    $seva_info = $this->DailyPooja_model->getSevaInfoById($seva_name);
+                    }
      
-                if($donation_from=='Devotee'){
-                    $name = $devotee_name;
-                }else{
+                // if($donation_from=='Devotee'){
+                //     $name = $devotee_name;
+                // }else{
                     $name = $committee_info->type;  
-                }
+                // }
               
                 $donationInfo = array(
                     'date'=>date('Y-m-d',strtotime($in_date)),
                     'name'=>$name,
+                    'devotee_name' =>$devotee_name,
                     'committee_id'=>$committee_name,
-                    'amount' =>$amount,
+                    'seva_id'    => $seva_name,
+                    'seva_name'    => $seva_info->seva_name,
+                    'amount' =>$seva_info->amount,
                     'address' =>$devotee_address,
                     'purpose' =>$purpose,
+                    'email'   => $email,
+                    'note'    => $note,
+                    'mobile_number' => $mobile_number,
+                    'reference_number' => $reference_number,
                     'payment_type' =>$payment_type,
                     'created_by'=> $this->company_id, 
                     'company_id'=> $this->company_id, 
@@ -595,7 +626,7 @@ class DailyPooja extends BaseController
                     'income_date'=>date('Y-m-d',strtotime($in_date)),
                     'income_name'=>'DONATION',
                     'donation_id'    =>$return_id,
-                    'amount' =>$amount,
+                    'amount' =>$seva_info->amount,
                     'income_by' =>$devotee_name,
                     'payment_type' =>$payment_type,
                     'created_by'=> $this->company_id, 
@@ -652,6 +683,13 @@ class DailyPooja extends BaseController
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Donation Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
             $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf->SetWatermarkImage(
+                'assets/dist/img/bharathi_logo.png',
+                0.2,
+                array(110,100),
+                array(45,35),
+            );
+            $mpdf->showWatermarkImage = true;
             $mpdf->autoScriptToLang = true;
             $mpdf->autoLangToFont = true;
                         $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
@@ -664,6 +702,243 @@ class DailyPooja extends BaseController
             $mpdf->Output('Donation_Receipt.pdf', 'I'); 
         } 
     }
+
+
+    function sevaListing()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        } else {      
+
+            $seva_name = $this->security->xss_clean($this->input->post('seva_name'));
+            $amount = $this->security->xss_clean($this->input->post('amount'));
+
+            $data['seva_name'] = $seva_name;
+            $data['amount'] = $amount;
+
+            $filter['seva_name'] = $seva_name;
+            $filter['amount'] = $amount;
+            
+            $this->load->library('pagination');
+            $count = $this->DailyPooja_model->sevaListingCount($filter,$this->company_id);
+            $data['count'] =  $count;
+			$returns = $this->paginationCompress ( "sevaListing/", $count, 100 );
+            $data['sevaInfo'] = $this->DailyPooja_model->sevaListing($filter,$this->company_id, $returns["page"], $returns["segment"]);
+
+            $this->global['pageTitle'] = $this->company_name.' :Seva Details ';
+            $this->loadViews("DailyPooja/seva", $this->global, $data, NULL);
+        }
+    }
+
+
+
+
+    public function addSevaDetails(){
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+             
+           
+                $seva_name = $this->security->xss_clean($this->input->post('seva_name'));
+                $amount = $this->security->xss_clean($this->input->post('amount')); 
+
+              
+                $sevaInfo = array(
+                    'seva_name'=>$seva_name,
+                    'amount' =>$amount,
+                    'created_by'=> $this->company_id, 
+                    'company_id'=> $this->company_id, 
+                    'created_date'=>date('Y-m-d'));
+
+                  $return_id = $this->DailyPooja_model->addSevaInfoToDB($sevaInfo);
+                    
+                if($return_id > 0){
+
+                    $this->session->set_flashdata('success', 'Seva added successfully');
+                } else{
+                    $this->session->set_flashdata('error', 'Seva adding failed');
+                }   
+                redirect('sevaListing');
+            
+        }
+    }
+
+
+
+
+    public function deleteSevaDetail(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $sevaInfo = array('is_deleted' => 1);
+            $result = $this->DailyPooja_model->updateSevaDetail($sevaInfo, $row_id);
+            if ($result == true) {echo (json_encode(array('status' => true)));} else {echo (json_encode(array('status' => false)));}
+        } 
+    }
+
+
+
+    function editSevaDetail($row_id = NULL)
+    {
+        if($this->isAdmin() == TRUE) {
+            $this->loadThis();
+        } else {
+
+            if($row_id == null){
+                redirect('eventListing');
+            }
+            $data['sevaInfo'] = $this->DailyPooja_model->getSevaInfoById($row_id);
+
+      
+            $this->global['pageTitle'] = $this->company_name.' : Edit Seva Info ';
+            $this->loadViews("DailyPooja/editSevaInfo", $this->global, $data, NULL);
+        }
+    }
+
+
+
+    public function updateSevaDetails(){
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+             
+           
+                $seva_name = $this->security->xss_clean($this->input->post('seva_name'));
+                $amount = $this->security->xss_clean($this->input->post('amount')); 
+                $row_id = $this->security->xss_clean($this->input->post('row_id')); 
+
+              
+                $sevaInfo = array(
+                    'seva_name'=>$seva_name,
+                    'amount' =>$amount,
+                    'updated_by'=> $this->company_id, 
+                    'company_id'=> $this->company_id, 
+                    'updated_date'=>date('Y-m-d'));
+
+                  $return_id = $this->DailyPooja_model->updateSevaDetail($sevaInfo,$row_id);
+                    
+                if($return_id > 0){
+
+                    $this->session->set_flashdata('success', 'Seva Updated successfully');
+                } else{
+                    $this->session->set_flashdata('error', 'Seva Updation failed');
+                }   
+                redirect('editSevaPageView/'.$row_id);
+
+            
+        }
+    }
+
+
+    function editDonationView($row_id = NULL)
+    {
+        if($this->isAdmin() == TRUE) {
+            $this->loadThis();
+        } else {
+
+            if($row_id == null){
+                redirect('donationListing');
+            }
+            $data['donationInfo'] = $this->DailyPooja_model->getdonationInfoById($row_id);
+            $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
+            $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
+            $data['sevaInfo'] = $this->DailyPooja_model->getAllSevaInfo($this->company_id);
+
+      
+            $this->global['pageTitle'] = $this->company_name.' : Edit Donation Info ';
+            $this->loadViews("DailyPooja/editDonationInfo", $this->global, $data, NULL);
+        }
+    }
+
+
+
+
+    public function updateDonationDetails(){
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+             
+                $in_date = $this->security->xss_clean($this->input->post('in_date'));
+           
+                $devotee_name = $this->security->xss_clean($this->input->post('devotee_name'));
+                $amount = $this->security->xss_clean($this->input->post('amount'));
+                $devotee_address = $this->security->xss_clean($this->input->post('devotee_address'));
+                $purpose = $this->security->xss_clean($this->input->post('purpose'));    
+                $payment_type = $this->security->xss_clean($this->input->post('payment_type'));    
+                $seva_name = $this->security->xss_clean($this->input->post('seva_name'));    
+                $committee_name = $this->security->xss_clean($this->input->post('committee_name')); 
+                $mobile_number = $this->security->xss_clean($this->input->post('mobile_number')); 
+                $reference_number = $this->security->xss_clean($this->input->post('reference_number')); 
+                $note = $this->security->xss_clean($this->input->post('note')); 
+                $email = $this->security->xss_clean($this->input->post('email')); 
+
+                $row_id = $this->security->xss_clean($this->input->post('row_id')); 
+
+                if(!empty($committee_name)){
+                $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
+                }
+
+                if(!empty($seva_name)){
+                    $seva_info = $this->DailyPooja_model->getSevaInfoById($seva_name);
+                    }
+     
+                // if($donation_from=='Devotee'){
+                //     $name = $devotee_name;
+                // }else{
+                    $name = $committee_info->type;  
+                // }
+              
+                $donationInfo = array(
+                    'date'=>date('Y-m-d',strtotime($in_date)),
+                    'name'=>$name,
+                    'devotee_name' =>$devotee_name,
+                    'committee_id'=>$committee_name,
+                    'seva_id'    => $seva_name,
+                    'seva_name'    => $seva_info->seva_name,
+                    'amount' =>$seva_info->amount,
+                    'address' =>$devotee_address,
+                    'purpose' =>$purpose,
+                    'note'    => $note,
+                    'mobile_number' => $mobile_number,
+                    'email'         => $email,
+                    'reference_number' => $reference_number,
+                    'payment_type' =>$payment_type,
+                    'created_by'=> $this->company_id, 
+                    'company_id'=> $this->company_id, 
+                    'created_date_time'=>date('Y-m-d H:i:s'));
+
+                  $return_id = $this->DailyPooja_model->updateDonationDetail($donationInfo,$row_id);
+
+                  $incomeInfo = array(
+                    'income_date'=>date('Y-m-d',strtotime($in_date)),
+                    'income_name'=>'DONATION',
+                    'donation_id'    =>$return_id,
+                    'amount' =>$seva_info->amount,
+                    'income_by' =>$devotee_name,
+                    'payment_type' =>$payment_type,
+                    'created_by'=> $this->company_id, 
+                    'company_id'=> $this->company_id, 
+                    'created_date_time'=>date('Y-m-d H:i:s'));
+
+                  $this->DailyPooja_model->updateIncomeDetail($incomeInfo,$row_id);
+
+                    
+                if($return_id > 0){
+
+                    $this->session->set_flashdata('success', 'Donation Updated successfully');
+                } else{
+                    $this->session->set_flashdata('error', 'Donation Updation failed');
+                }   
+                redirect('editDonationView/'.$row_id);
+            
+        }
+    }
+
 
 }
 

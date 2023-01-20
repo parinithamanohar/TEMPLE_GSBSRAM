@@ -1,119 +1,149 @@
-
 <style>
-table{
+table {
     width: 100% !important;
 }
 
 /*.border{
     border: 2px solid black;
 }*/
-.border_full{
+.border_full {
     border: 1px solid black;
     /* height: 90% !important; */
 }
-.border_bottom{
+
+.border_bottom {
     border-bottom: 1px solid black;
 }
-.hr_line{
+
+.hr_line {
     margin: 5px 0px;
     color: black;
 }
 
-.table_bordered{
+.table_bordered {
     border-collapse: collapse;
 }
-.table_bordered th,.table_bordered td{
+
+.table_bordered th,
+.table_bordered td {
     border-top: 1px solid black;
     border-right: 1px solid black;
     padding: 3px;
 }
 
-.table_bordered th .border_right_none,.table_bordered td .border_right_none{
+.table_bordered th .border_right_none,
+.table_bordered td .border_right_none {
     border-right: 1px solid transparent !important;
 }
 
-.break { page-break-before: always; } 
-.break_after { page-break-before: none; } 
+.break {
+    page-break-before: always;
+}
 
+.break_after {
+    page-break-before: none;
+}
 </style>
-  <?php
+<?php
   $y = date('Y');
   $date = substr($dpInfo->date,0,-3);
   ?>
 <!--  -->
 
-   <br/><br/><br/>
+<br /><br /><br />
 <div class="container-fluid border_full">
-    
+
     <div class="row">
         <div class="">
-             
+
             <table class="table text_highlight">
                 <tr>
                     <td style="text-align:center;" width="80">
-                        <img  class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
+                        <img class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
                     </td>
                     <td width="700" style="text-align:center;">
-                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
-                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br/>
+                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
+                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br />
                         <!-- <b style="font-size: 13px;margin-bottom: 2px;">Unit of KJES </b><br/> -->
                         <span style="font-size: 13px;margin-bottom: 2px;">
-                        </span><br/>
-                        <br/>
-                       
+                        </span><br />
+                        <br />
+
                     </td>
                 </tr>
             </table>
             <hr class="border_bottom hr_line">
+            <table>
+                <tr>
+                    <td>
+                        <table class="table" style="font-size: 15px;">
 
-            <table class="table" style="font-size: 15px;">
-                
-                <tr>
-                    <td colspan="2">ರಶೀದಿ ಸಂಖ್ಯೆ.: <span style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2">ಹೆಸರು : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
-                </tr>
-              
-                <tr>
-                    <td width="220">ದೂರವಾಣಿ ಸಂಖ್ಯೆ  : <?php echo $dpInfo->contact_number; ?></td>
-                  
-                </tr>
-              
-                <tr>
-                    <td colspan="2">ದಿನಾಂಕ : <?php echo date('d-m-Y',strtotime($dpInfo->created_date_time)); ?></td>
-                </tr>
-                
+                            <tr>
+                                <td colspan="4">ರಶೀದಿ ಸಂಖ್ಯೆ.: <span
+                                        style="color: red;"><?php echo  $dpInfo->row_id; ?></span></td>
+                            </tr>
+                            <tr>
+                                <td width="350">ಹೆಸರು : <?php echo strtoupper($dpInfo->devotee_name); ?></td>
+                            </tr>
 
-                
-               
-              
+                            <tr>
+                                <td width="220">ದೂರವಾಣಿ ಸಂಖ್ಯೆ : <?php echo $dpInfo->contact_number; ?></td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">ದಿನಾಂಕ :
+                                    <?php echo date('d-m-Y',strtotime($dpInfo->created_date_time)); ?></td>
+                            </tr>
+
+
+
+
+
+                        </table>
+                    </td>
+                    <td>
+
+                        <table class="table" style="font-size: 15px;">
+
+                            <tr>
+                            
+                                <td >ವಿಳಾಸ: <span><?php echo  $dpInfo->devotee_address; ?></span></td>
+                            </tr>
+                                                    
+                        </table>
+
+                    </td>
+                </tr>
             </table>
             <table class="table table_bordered" style="font-size: 15px;">
                 <tr>
                     <th>ವಿವರಗಳು</th>
                     <th width="120">ಮೊತ್ತ</th>
-                </tr> 
+                </tr>
                 <tr>
-                    <td style="text-align: left;"><b>Pooja Date</b> - <?php echo $date.' - '.$dpInfo->month ?><br/>
-                                     <b>Nakshatra</b> - <?php echo $dpInfo->nakshathra ?><br/>
-                                     <b>Rashi</b> - <?php echo $dpInfo->rashi ?><br/>
-                                     <b>Gothra</b> - <?php echo $dpInfo->gothra ?><br/>
-                                     <b>Occassion</b> - <?php echo $dpInfo->occation ?></td>
+                    <td style="text-align: left;"><b>Pooja Date</b> - <?php echo $date.' - '.$dpInfo->month ?><br />
+                        <b>Nakshatra</b> - <?php echo $dpInfo->nakshathra ?><br />
+                        <b>Rashi</b> - <?php echo $dpInfo->rashi ?><br />
+                        <b>Gothra</b> - <?php echo $dpInfo->gothra ?><br />
+                        <b>Occassion</b> - <?php echo $dpInfo->occation ?>
+                    </td>
                     <td style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></td>
                 </tr>
                 <tr>
-                    <th>ಒಟ್ಟು  ಮೊತ್ತ</th>
+                    <th>ಒಟ್ಟು ಮೊತ್ತ</th>
                     <th style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></th>
                 </tr>
                 <tr>
-                    <td colspan="2" style="font-size: 13px;"><br><b>: <span style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b></td>
+                    <td colspan="2" style="font-size: 13px;"><br><b>: <span
+                                style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b>
+                    </td>
                 </tr>
             </table>
 
         </div>
     </div>
-  
+
 </div>
 
 <!-- <b style="font-size: 11px;">This is a system generated fee receipt. No seal and signature is required. Fees ones paid is not refundable.</b> -->

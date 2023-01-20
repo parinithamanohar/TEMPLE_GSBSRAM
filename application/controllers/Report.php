@@ -877,7 +877,11 @@ public function downloadDevotee(){
                                     else{
                                         $filter['expense_toDate']= '';
                                     }
-                                    $filter['event_type']= $event_type;
+                                    if($event_type == 'other'){
+                                    $filter['type_of_expense']= 'Other';
+                                    }else{
+                                        $filter['event_type']= $event_type;  
+                                    }
                                     $filter['year']= $year;
 
                     
