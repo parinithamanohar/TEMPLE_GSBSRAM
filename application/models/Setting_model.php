@@ -386,4 +386,11 @@ class Setting_model extends CI_Model
         return $query->result();
     }
 
+     
+    public function updateNakshatraName($nakshatraInfo, $row_id) {
+        $this->db->where('row_id', $row_id);
+        $this->db->update('tbl_nakshathra', $nakshatraInfo);
+        return TRUE;
+    }
+
 }

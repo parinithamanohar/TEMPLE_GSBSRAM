@@ -93,7 +93,7 @@ if ($error) {
 <script type="text/javascript">
 function GoBackWithRefresh(event) {
     if ('referrer' in document) {
-        window.location = '<?php echo base_url(); ?>/eventListing';
+        window.location = '<?php echo base_url(); ?>/sevaListing';
         /* OR */
         //location.replace(document.referrer);
     } else {

@@ -304,16 +304,18 @@ function donationListingCount($filter='',$company_id)
     // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
 
     if(!empty($filter['devotee_name'])){
-        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['devotee_name']."%')";
+        $likeCriteria = "(BaseTbl.devotee_name  LIKE '%".$filter['devotee_name']."%')";
         $this->db->where($likeCriteria);
     }
 
     if(!empty($filter['collected_by_f'])){
-        $this->db->where('BaseTbl.name', $filter['collected_by_f']);
+        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['collected_by_f']."%')";
+        $this->db->where($likeCriteria);
     }
 
     if(!empty($filter['seva_name_f'])){
-        $this->db->where('BaseTbl.seva_name', $filter['seva_name_f']);
+        $likeCriteria = "(BaseTbl.seva_name  LIKE '%".$filter['seva_name_f']."%')";
+        $this->db->where($likeCriteria);
     }
 
     if(!empty($filter['amount'])){
@@ -321,6 +323,10 @@ function donationListingCount($filter='',$company_id)
     }
     if(!empty($filter['payment_type_filter'])){
         $this->db->where('BaseTbl.payment_type', $filter['payment_type_filter']);
+    }
+
+    if(!empty($filter['donation_type'])){
+        $this->db->where('BaseTbl.donation_type', $filter['donation_type']);
     }
 
     $this->db->where('BaseTbl.company_id',$company_id);
@@ -339,7 +345,12 @@ function donationListing($filter='',$company_id, $page, $segment)
     // $this->db->join('tbl_seva_details as seva','seva.seva_row_id=BaseTbl.row_id','left');
     // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
     if(!empty($filter['devotee_name'])){
-        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['devotee_name']."%')";
+        $likeCriteria = "(BaseTbl.devotee_name  LIKE '%".$filter['devotee_name']."%')";
+        $this->db->where($likeCriteria);
+    }
+
+    if(!empty($filter['collected_by_f'])){
+        $likeCriteria = "(BaseTbl.name  LIKE '%".$filter['collected_by_f']."%')";
         $this->db->where($likeCriteria);
     }
 
@@ -347,16 +358,21 @@ function donationListing($filter='',$company_id, $page, $segment)
         $this->db->where('BaseTbl.amount', $filter['amount']);
     }
 
-    if(!empty($filter['collected_by_f'])){
-        $this->db->where('BaseTbl.name', $filter['collected_by_f']);
-    }
+    // if(!empty($filter['collected_by_f'])){
+    //     $this->db->where('BaseTbl.name', $filter['collected_by_f']);
+    // }
 
     if(!empty($filter['seva_name_f'])){
-        $this->db->where('BaseTbl.seva_name', $filter['seva_name_f']);
+        $likeCriteria = "(BaseTbl.seva_name  LIKE '%".$filter['seva_name_f']."%')";
+        $this->db->where($likeCriteria);
     }
 
     if(!empty($filter['payment_type_filter'])){
         $this->db->where('BaseTbl.payment_type', $filter['payment_type_filter']);
+    }
+
+    if(!empty($filter['donation_type'])){
+        $this->db->where('BaseTbl.donation_type', $filter['donation_type']);
     }
 
     $this->db->where('BaseTbl.company_id',$company_id);
@@ -390,7 +406,7 @@ public function updateIncomeDetail($incomeInfo, $row_id) {
 
 function getdonationInfoById($row_id)
 {
-    $this->db->select('BaseTbl.row_id,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id');
+    $this->db->select('BaseTbl.row_id,BaseTbl.donation_type,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id');
     $this->db->from('tbl_donation_info as BaseTbl');
     $this->db->join('tbl_purpose as purpose','purpose.row_id=BaseTbl.purpose','left');
     $this->db->where('BaseTbl.row_id',$row_id);
@@ -436,6 +452,14 @@ function donationInfoForReport($filter='',$company_id)
 
     if(!empty($filter['donation_toDate'])) {
       $this->db->where('BaseTbl.date <=', $filter['donation_toDate']);
+    }
+
+    if(!empty($filter['purpose'])){
+        $this->db->where('purpose.row_id', $filter['purpose']);
+    }
+
+    if(!empty($filter['donation_type'])){
+        $this->db->where('BaseTbl.donation_type', $filter['donation_type']);
     }
 
     $this->db->where('BaseTbl.company_id',$company_id);

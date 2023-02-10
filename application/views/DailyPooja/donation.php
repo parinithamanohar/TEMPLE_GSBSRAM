@@ -32,7 +32,7 @@ if ($error) {
                         <div class="row c-m-b">
                             <div class="col-5">
                                 <span class="page-title">
-                                    <i class="fa fa-money"></i> Donation Info
+                                    <i class="fa fa-money"></i> Donation/ Seva Info
                                 </span>
                             </div>
                             <div class="col-5 mobile-title">
@@ -82,7 +82,7 @@ if ($error) {
                                                 class="form-control is-valid mobile-width " type="text"
                                                 name="devotee_name" id="" value="<?php echo $devotee_name ?>"
                                                 class="form-control input-sm pull-right"
-                                                style="text-transform: uppercase" placeholder="By Devotee Name"
+                                                style="" placeholder="By Devotee Name"
                                                 autocomplete="off">
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
                                         </div>
@@ -92,7 +92,7 @@ if ($error) {
                                                 class="form-control is-valid mobile-width " type="text"
                                                 name="collected_by_f" id="" value="<?php echo $collected_by_f ?>"
                                                 class="form-control input-sm pull-right"
-                                                style="text-transform: uppercase" placeholder="By Collected By"
+                                                style="" placeholder="By Collected By"
                                                 autocomplete="off">
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
                                         </div>
@@ -101,19 +101,30 @@ if ($error) {
                                     <th width="150" style="padding: 0px;">
                                         <div class="form-group position-relative mb-0"><input
                                                 class="form-control is-valid mobile-width " type="text"
-                                                name="seva_name_f" id="" value="<?php echo $seva_name_f ?>"
+                                                name="donation_type" id="" value="<?php echo $donation_type ?>"
                                                 class="form-control input-sm pull-right"
-                                                style="text-transform: uppercase" placeholder="By Seva Name"
+                                                style="" placeholder="By Donation Type"
                                                 autocomplete="off">
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
                                         </div>
                                     </th>
 
-                                    <th width="150" style="padding: 0px;">
+                                    <th width="250" style="padding: 0px;">
+                                        <div class="form-group position-relative mb-0"><input
+                                                class="form-control is-valid mobile-width " type="text"
+                                                name="seva_name_f" id="" value="<?php echo $seva_name_f ?>"
+                                                class="form-control input-sm pull-right"
+                                                style="" placeholder="By Seva Name"
+                                                autocomplete="off">
+                                            <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
+                                        </div>
+                                    </th>
+
+                                    <th width="100" style="padding: 0px;">
                                         <div class="form-group position-relative mb-0"><input
                                                 class="form-control is-valid mobile-width " type="text" name="address"
                                                 id="address" value="<?php  ?>" class="form-control input-sm pull-right"
-                                                style="text-transform: uppercase" placeholder="Address"
+                                                style="" placeholder="Address"
                                                 autocomplete="off" readonly>
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-user"></i></div>
                                         </div>
@@ -122,7 +133,7 @@ if ($error) {
                                         <div class="form-group position-relative mb-0"><input
                                                 class="form-control is-valid mobile-width" type="text" name="amount"
                                                 value="<?php echo $amount ?>" class="form-control input-sm pull-right "
-                                                style="text-transform: uppercase" placeholder="By Amount"
+                                                style="" placeholder="By Amount"
                                                 autocomplete="off">
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-money"></i></div>
                                         </div>
@@ -131,7 +142,7 @@ if ($error) {
                                         <div class="form-group position-relative mb-0"><input
                                                 class="form-control is-valid mobile-width" type="text" name="payment_type_filter"
                                                 value="<?php echo $payment_type_filter ?>" class="form-control input-sm pull-right "
-                                                style="text-transform: uppercase" placeholder="By Payment Type"
+                                                style="" placeholder="By Payment Type"
                                                 autocomplete="off">
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-money"></i></div>
                                         </div>
@@ -144,6 +155,7 @@ if ($error) {
                             <tr class=" text-white bg-black ">
                                 <th>Devotee Name</th>
                                 <th>Collected By</th>
+                                <th>Type</th>
                                 <th>Seva Name</th>
                                 <th>Address</th>
                                 <th>Amount</th>
@@ -159,6 +171,7 @@ if ($error) {
                             <tr class="text-black">
                                 <td><?php echo $record->devotee_name ?></td>
                                 <td><?php echo $record->name ?></td>
+                                <td><?php echo $record->donation_type ?></td>
                                 <td><?php echo $record->seva_name ?></td>
 
                                 <td><?php echo $record->address ?></td>
@@ -207,7 +220,7 @@ if ($error) {
                     <!-- Modal Header -->
                     <div class="modal-header modal-call-report p-2">
                         <div class=" col-md-10 col-10">
-                            <span class="text-white mobile-title" style="font-size : 20px">Add Donation
+                            <span class="text-white mobile-title" style="font-size : 20px">Add Donation/ Seva
                                 Details</span>
                         </div>
                         <div class=" col-md-2 col-2">
@@ -273,6 +286,17 @@ if ($error) {
                                                         value="<?php echo date('d-m-Y') ?>" autocomplete="off">
                                                 </div>
 
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="purpose">Select Donation/ Seva*</label>
+                                                        <select class="form-control" id="donation_type" name="donation_type" required>
+                                                            <option value=""> Select </option>
+                                                            <option value="DONATION">DONATION</option>
+                                                            <option value="SEVA">SEVA</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                              <div class="form-row">
@@ -286,11 +310,11 @@ if ($error) {
                                                         autocomplete="off">
                                                 </div> -->
 
-                                                <div class="col-lg-6 col-12">
+                                                <div class="col-lg-6 col-12 seva_display">
                                                     <div class="form-group">
                                                         <label for="purpose">Seva*</label>
-                                                        <select class="form-control selectpicker" id="seva_name" name="seva_name" required data-live-search="true"
-                                                            >
+                                                        <select class="form-control selectpicker" id="seva_name" name="seva_name[]" required data-live-search="true"
+                                                            multiple>
                                                             <option value=""> Select Seva </option>
                                                             <?php if(!empty($sevaInfo)) {
                                                              foreach($sevaInfo as $role ){?>
@@ -299,6 +323,15 @@ if ($error) {
                                                             <?php }}?>
                                                         </select>
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group col-md-6 donation_display">
+                                                    <label for="fname">Donation Amount*</label>
+                                                    <input class="form-control is-valid mobile-width " type="text" onkeypress="return isNumberKey(event)"
+                                                        name="donation_amount" id="donation_amount" value=""
+                                                        class="form-control input-sm pull-right "
+                                                        style="text-transform: uppercase" placeholder="Donation Amount"
+                                                        autocomplete="off">
                                                 </div>
 
                                                 <div class="col-lg-6 col-12">
@@ -402,7 +435,6 @@ if ($error) {
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8">
 </script>
 <script type="text/javascript">
-
     
 $("#payment_type").change(function() {
             payment_type = $('#payment_type').val();
@@ -411,6 +443,21 @@ $("#payment_type").change(function() {
         } else {
             $('.reference_number').hide();
         }
+     });
+
+     $("#donation_type").change(function() {
+        donation_type = $('#donation_type').val();
+        if (donation_type == 'DONATION') {
+            $('.donation_display').show();
+            $('.seva_display').hide();
+            $('#donation_amount').prop('required',true);
+            $('#seva_name').prop('required',false);
+        } else {
+            $('.donation_display').hide();
+            $('.seva_display').show();  
+            $('#seva_name').prop('required',true); 
+            $('#donation_amount').prop('required',false);    
+         }
      });
 
 function isNumberKey(evt) {
@@ -428,8 +475,8 @@ function alphaOnly(event) {
 
 jQuery(document).ready(function() {
     $('.reference_number').hide();
-
-
+    $('.seva_display').hide();
+    $('.donation_display').hide();
     // $('.devotee_name').hide();
     // $("#devotee_name").prop('required', false);
     // $('.committee_name').hide();

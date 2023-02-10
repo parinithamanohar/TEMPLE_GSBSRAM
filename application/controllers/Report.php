@@ -23,6 +23,7 @@ class Report extends BaseController
         $this->load->model('DailyPooja_model');
         $this->load->model('expenses_model');
         $this->load->model('Event_model');
+        $this->load->model('setting_model','settings');
 
         $this->load->library('excel');
         $this->isLoggedIn();      
@@ -46,6 +47,7 @@ class Report extends BaseController
         $data['tithiInfo'] =$this->DailyPooja_model->getTithiInfo($this->company_id); 
         $data['masaInfo'] =$this->DailyPooja_model->getMasaInfo($this->company_id);  
         $data['eventInfo'] =$this->Event_model->getEventInfo($this->company_id); 
+        $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
 
         //  $data="";
          $this->global['pageTitle'] = $this->company_name.' : Report ';
@@ -945,37 +947,44 @@ public function downloadDevotee(){
                                     $filter = array();
                                     $donation_fromDate = $this->security->xss_clean($this->input->post('donation_fromDate'));
                                     $donation_toDate = $this->security->xss_clean($this->input->post('donation_toDate'));
+                                    $purpose = $this->security->xss_clean($this->input->post('purpose'));
+                                    $donation_type = $this->security->xss_clean($this->input->post('donation_type'));
+
                                     $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                                     $sheet = 0;
                                         $this->excel->setActiveSheetIndex($sheet);
                                         $this->excel->getActiveSheet()->setTitle($sheet);
                                         $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
                                         $this->excel->getActiveSheet()->setCellValue('A1', EXCEL_TITLE);
-                                        $this->excel->getActiveSheet()->setCellValue('A2',"Donation Report");
+                                        $this->excel->getActiveSheet()->setCellValue('A2',"Donation/ Seva Report");
                                         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
                                         $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
-                                        $this->excel->getActiveSheet()->mergeCells('A1:E1');
-                                        $this->excel->getActiveSheet()->mergeCells('A2:E2');
-                                        $this->excel->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-                                        $this->excel->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
-                                        $this->excel->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                        $this->excel->getActiveSheet()->getStyle('A1:E2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->mergeCells('A1:G1');
+                                        $this->excel->getActiveSheet()->mergeCells('A2:G2');
+                                        $this->excel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true);
+                                        $this->excel->getActiveSheet()->getStyle('A2:G2')->getFont()->setBold(true);
+                                        $this->excel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('A1:G2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                         
                                         $excel_row = 3;
                                         $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
                                         $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
-                                        $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
-                                        $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
-                                        $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(28);
+                                        $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+                                        $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+                                        $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(35);
                                         
-                                        $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(35);
+                                        $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+                                        $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+
                                         $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
                                         $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Purpose');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Donation From');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Amount');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Date');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Type');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Purpose');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Donation From');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Seva');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Amount');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Date');
                                         $filter['report_type']= "Asset";
                                         // $filter['stream_name']= $stream[$sheet];
                                         if(!empty($donation_fromDate)) {
@@ -990,7 +999,8 @@ public function downloadDevotee(){
                                         else{
                                             $filter['donation_toDate']= '';
                                         }
-                            
+                                        $filter['purpose']= $purpose;
+                                        $filter['donation_type']= $donation_type;
                             
                                         $sl = 1;
                                         $excel_row = 4;
@@ -1007,13 +1017,15 @@ public function downloadDevotee(){
                                                     $donation_date = date('d-m-Y',strtotime($donation->date)); 
                                                 }
                                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $donation->purpose_name);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row,$donation->name);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$donation->amount);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $donation_date);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $donation->donation_type);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, $donation->purpose_name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$donation->name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row,$donation->seva_name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row,$donation->amount);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $donation_date);
                             
                                                 $this->excel->getActiveSheet()->getStyle('A'.$excel_row.':B'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                                $this->excel->getActiveSheet()->getStyle('D'.$excel_row.':E'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                                $this->excel->getActiveSheet()->getStyle('F'.$excel_row.':F'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                                 $excel_row++;
                                             }
                                             $excel_row++;

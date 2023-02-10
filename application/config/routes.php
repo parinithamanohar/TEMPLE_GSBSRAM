@@ -503,3 +503,14 @@ $route['editDonationView/(:any)'] = "DailyPooja/editDonationView/$1";
 
 $route['updateDonationDetails'] = "DailyPooja/updateDonationDetails";  
 
+$route['updateNakshathra'] = "setting/updateNakshathra";  
+
+$route['updateGothra'] = "setting/updateGothra";  
+
+$route['updateMasa'] = "setting/updateMasa";  
+
+$route['updateRashi'] = "setting/updateRashi"; 
+
+$route['getSevaInfoByDonationId'] = 'DailyPooja/getSevaInfoByDonationId';
+
+

@@ -447,17 +447,22 @@ if ($warning) {
                                                 <th>Action</th>
                                             </tr>
                                             <?php if (!empty($gothraInfo)) {
-                        foreach ($gothraInfo as $gothra) { ?>
+                                        foreach ($gothraInfo as $gothra) { ?>
                                             <tr class="text-dark">
-                                                <td><?php echo $gothra->gothra; ?></td>
+                                            <form role="form"  action="<?php echo base_url() ?>updateGothra" method="post" role="form">
+                                                <input type="hidden" name="row_id" value="<?php echo $gothra->row_id; ?>">
+                                                <td><input type="text" name="gothra_update" value="<?php echo $gothra->gothra; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteGothra" href="#"
                                                         data-row_id="<?php echo $gothra->row_id; ?>"
                                                         title="Delete"><i class="fa fa-trash"></i></a>
+                                            <input type="submit" class="btn btn-primary"
+                                            value="Update" />
                                                 </td>
+                                           </form>
                                             </tr>
                                             <?php }
-                      } else { ?>
+                                         } else { ?>
                                             <td colspan="2" style="background-color: #83c8ea7d;">Gothra Not
                                                 Found</td>
                                             <?php } ?>
@@ -508,12 +513,17 @@ if ($warning) {
                                             <?php if (!empty($nakshathraInfo)) {
                                               foreach ($nakshathraInfo as $nakshathra) { ?>
                                             <tr class="text-dark">
-                                                <td><?php echo $nakshathra->nakshathra; ?></td>
+                                            <form role="form" action="<?php echo base_url() ?>updateNakshathra" method="post" role="form">
+                                              <input type="hidden" name="row_id" value="<?php echo $nakshathra->row_id; ?>">
+                                                <td><input type="text" name="nakshatra_update" value="<?php echo $nakshathra->nakshathra; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteNakshathra" href="#"
                                                         data-row_id="<?php echo $nakshathra->row_id; ?>" title="Delete"><i
                                                             class="fa fa-trash"></i></a>
+                                                <input  type="submit" class="btn  btn-primary"
+                                            value="Update" />
                                                 </td>
+                                                </form>
                                             </tr>
                                             <?php }
                                             } else { ?>
@@ -568,12 +578,17 @@ if ($warning) {
                                             <?php if (!empty($masaInfo)) {
                         foreach ($masaInfo as $masa) { ?>
                                             <tr class="text-dark">
-                                                <td><?php echo $masa->masa; ?></td>
+                                            <form role="form" action="<?php echo base_url() ?>updateMasa" method="post" role="form">
+                                            <input type="hidden" name="row_id" value="<?php echo $masa->row_id; ?>">
+                                                <td><input type="text" name="masa_update" value="<?php echo $masa->masa; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteMasa" href="#"
                                                         data-row_id="<?php echo $masa->row_id; ?>" title="Delete"><i
                                                             class="fa fa-trash"></i></a>
+                                                            <input type="submit" class="btn btn-primary"
+                                            value="Update" />
                                                 </td>
+                                           </form>
                                             </tr>
                                             <?php }
                       } else { ?>
@@ -685,14 +700,20 @@ if ($warning) {
                                             </tr>
                                             <?php if (!empty($rashiInfo)) {
                                             foreach ($rashiInfo as $rashi) { ?>
+                                             <form role="form" id=""
+                                             action="<?php echo base_url() ?>updateRashi" method="post" role="form">
                                             <tr class="text-dark">
-                                                <td><?php echo $rashi->rashi; ?></td>
+                                                <input type="hidden" name="row_id" value="<?php echo $rashi->row_id ?>">
+                                                <td><input type="text" name="rashi_update" value="<?php echo $rashi->rashi ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteRashi" href="#"
                                                         data-row_id="<?php echo $rashi->row_id; ?>" title="Delete"><i
                                                             class="fa fa-trash"></i></a>
+                                                            <input type="submit" class="btn btn-primary"
+                                            value="Update" />
                                                 </td>
                                             </tr>
+                                            </form>
                                             <?php }
                       } else { ?>
                                             <td colspan="2" style="background-color: #83c8ea7d;">Rashi Not Found

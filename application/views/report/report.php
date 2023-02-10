@@ -13,7 +13,7 @@
                     <div class="card-footer text-center dash-footer p-2">
                         <!-- reemoved # -->
 
-                        <a class="more-info" href=""  data-toggle="modal" data-target="#devotee"><span>Click Here <i
+                        <a class="more-info" href="" data-toggle="modal" data-target="#devotee"><span>Click Here <i
                                     class="fa fa-arrow-circle-right"></i></span></a>
                     </div>
                     <!-- href="" data-toggle="modal" data-target="#Devotee" -->
@@ -96,8 +96,8 @@
                         </div>
                     </div>
                     <div class="card-footer text-center dash-footer p-2">
-                        <a class="more-info" href=""  data-toggle="modal" data-target="#panchangaPooja"><span>Click Here <i
-                                    class="fa fa-arrow-circle-right"></i></span></a>
+                        <a class="more-info" href="" data-toggle="modal" data-target="#panchangaPooja"><span>Click Here
+                                <i class="fa fa-arrow-circle-right"></i></span></a>
                     </div>
                 </div>
             </div>
@@ -113,8 +113,8 @@
                         </div>
                     </div>
                     <div class="card-footer text-center dash-footer p-2">
-                        <a class="more-info" href=""  data-toggle="modal" data-target="#DailyPoojaMonth"><span>Click Here <i
-                                    class="fa fa-arrow-circle-right"></i></span></a>
+                        <a class="more-info" href="" data-toggle="modal" data-target="#DailyPoojaMonth"><span>Click Here
+                                <i class="fa fa-arrow-circle-right"></i></span></a>
                     </div>
                 </div>
             </div>
@@ -159,16 +159,16 @@
             <div class="col-lg-3 col-6 column_padding_card">
                 <div class="card card-small dash-card " style="background: #4a76ce">
                     <div class="card-body ">
-                        <span class="stats-small__label text-uppercase text-center text-white">Donation
+                        <span class="stats-small__label text-uppercase text-center text-white">Donation/ Seva
                             Report</span>
                         <h6 class="stats-small__value count text-white"></h6>
                         <div class="icon float-right">
-                        <i class="fa fa-money dash-icons"></i>
+                            <i class="fa fa-money dash-icons"></i>
                         </div>
                     </div>
                     <div class="card-footer text-center dash-footer p-2">
-                        <a class="more-info" href="" data-toggle="modal" data-target="#DonationReport"><span>Click Here <i
-                                    class="fa fa-arrow-circle-right"></i></span></a>
+                        <a class="more-info" href="" data-toggle="modal" data-target="#DonationReport"><span>Click Here
+                                <i class="fa fa-arrow-circle-right"></i></span></a>
                     </div>
                 </div>
             </div>
@@ -446,7 +446,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit"  class="btn btn-success">Download</button>
+                <button type="submit" class="btn btn-success">Download</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </form>
@@ -460,7 +460,7 @@
             <!-- Modal Header -->
             <div class="modal-header modal-call-report p-2">
                 <div class=" col-lg-8 col-12">
-                    <span class="text-white mobile-title" style="font-size : 20px">Donation Report</span>
+                    <span class="text-white mobile-title" style="font-size : 20px">Donation/ Seva Report</span>
                     &nbsp;&nbsp; <span class="modal-title text-white mobile-title" style="font-size : 20px"></span>
                 </div>
                 <div class=" col-lg-2 col-12  ">
@@ -491,6 +491,37 @@
                                 </span>
                                 <input id="donation_toDate" type="text" name="donation_toDate"
                                     class="form-control datepicker  " placeholder="Date To" autocomplete="off">
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6 col-12 mt-2">
+                            <div class="form-group">
+                                <label for="purpose">Purpose</label>
+                                <select class="form-control selectpicker" id="" name="purpose"
+                                    data-live-search="true">
+                                    <option value=""> Select Purpose </option>
+                                    <option value=""> ALL</option>
+                                    <?php if(!empty($purposeInfo)) {
+                                                             foreach($purposeInfo as $role ){ ?>
+                                    <option value="<?php echo $role->row_id;?>">
+                                        <?php echo $role->purpose_name;?></option>
+                                    <?php }}?>
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-lg-6 col-12 mt-2">
+                            <div class="form-group">
+                                <label for="purpose">Select Donation/ Seva</label>
+                                <select class="form-control selectpicker" id="" name="donation_type"
+                                    data-live-search="true">
+                                    <option value=""> Select </option>
+                                    <option value=""> ALL</option>
+                                    <option value="DONATION">DONATION</option>
+                                    <option value="SEVA">SEVA</option>
+                                </select>
                             </div>
                         </div>
 
@@ -548,7 +579,7 @@
             <div class="modal-footer">
                 <div class="col-4">
                     <select class="form-control text-dark" id="reportFormat" name="reportFormat" required>
-                        <option value="VIEW">VIEW</option>     
+                        <option value="VIEW">VIEW</option>
                         <option value="DOWNLOAD">DOWNLOAD</option>
                     </select>
                 </div>
@@ -618,7 +649,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit"  class="btn btn-success">Download</button>
+                <button type="submit" class="btn btn-success">Download</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </form>
@@ -825,34 +856,34 @@
                 <form method="POST" id="assetReport" action="<?php echo base_url(); ?>downloadPanchangaPoojaReport">
 
                     <div class="row">
-                        
-                    <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="masa_id">Masa</label>
-                                        <select class="form-control " id="masa_id" name="masa_id">
-                                            <option value=""> Select Masa </option>
-                                            <?php if(!empty($masaInfo)) {
-                                        foreach($masaInfo as $masa ){?>
-                                            <option value="<?php echo $masa->row_id;?>">
-                                                <?php echo $masa->masa;?></option>
-                                            <?php }}?>
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="tithi_id">Tithi</label>
-                                        <select class="form-control " id="tithi_id" name="tithi_id">
-                                            <option value=""> Select Tithi </option>
-                                            <?php if(!empty($tithiInfo)) {
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="masa_id">Masa</label>
+                                <select class="form-control " id="masa_id" name="masa_id">
+                                    <option value=""> Select Masa </option>
+                                    <?php if(!empty($masaInfo)) {
+                                        foreach($masaInfo as $masa ){?>
+                                    <option value="<?php echo $masa->row_id;?>">
+                                        <?php echo $masa->masa;?></option>
+                                    <?php }}?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="tithi_id">Tithi</label>
+                                <select class="form-control " id="tithi_id" name="tithi_id">
+                                    <option value=""> Select Tithi </option>
+                                    <?php if(!empty($tithiInfo)) {
                                         foreach($tithiInfo as $tithi ){?>
-                                            <option value="<?php echo $tithi->row_id;?>">
-                                                <?php echo $tithi->tithi;?></option>
-                                            <?php }}?>
-                                        </select>
-                                    </div>
-                                </div>
+                                    <option value="<?php echo $tithi->row_id;?>">
+                                        <?php echo $tithi->tithi;?></option>
+                                    <?php }}?>
+                                </select>
+                            </div>
+                        </div>
 
 
                         <div class="col-md-6 col-sm-12">
@@ -882,9 +913,9 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-            <div class="col-4">
+                <div class="col-4">
                     <select class="form-control text-dark" id="" name="reportFormat" required>
-                        <option value="VIEW">VIEW</option>     
+                        <option value="VIEW">VIEW</option>
                         <option value="DOWNLOAD">DOWNLOAD</option>
                     </select>
                 </div>
@@ -914,13 +945,14 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <?php $this->load->helper("form"); ?>
-                <form method="POST" id="assetReport" action="<?php echo base_url(); ?>downloadDailyPoojaMonthWiseReport">
+                <form method="POST" id="assetReport"
+                    action="<?php echo base_url(); ?>downloadDailyPoojaMonthWiseReport">
 
                     <div class="row">
-                    <div class="col-lg-12 col-12">
+                        <div class="col-lg-12 col-12">
                             <div class="form-group">
                                 <label for="pooja_month">Month</label>
-                                <select class="form-control required" id="pooja_month" name="pooja_month" >
+                                <select class="form-control required" id="pooja_month" name="pooja_month">
                                     <option value="">Select Month</option>
                                     <option value="JANUARY">JANUARY</option>
                                     <option value="FEBRUARY">FEBRUARY</option>
@@ -944,8 +976,8 @@
                                 <span class="input-group-append">
                                     <span class="input-group-text material-icons date-icon">date_range</span>
                                 </span>
-                                <input id="month_date" type="text" name="month_date"
-                                    class="form-control datepicker  " placeholder=" Date" autocomplete="off">
+                                <input id="month_date" type="text" name="month_date" class="form-control datepicker  "
+                                    placeholder=" Date" autocomplete="off">
                             </div>
                         </div>
 
@@ -953,9 +985,9 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-            <div class="col-4">
+                <div class="col-4">
                     <select class="form-control text-dark" id="" name="reportFormat" required>
-                        <option value="VIEW">VIEW</option>     
+                        <option value="VIEW">VIEW</option>
                         <option value="DOWNLOAD">DOWNLOAD</option>
                     </select>
                 </div>

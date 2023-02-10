@@ -532,6 +532,7 @@ class DailyPooja extends BaseController
             $collected_by_f = $this->security->xss_clean($this->input->post('collected_by_f'));
             $seva_name_f = $this->security->xss_clean($this->input->post('seva_name_f'));
             $payment_type_filter = $this->security->xss_clean($this->input->post('payment_type_filter'));
+            $donation_type = $this->security->xss_clean($this->input->post('donation_type'));
 
             // $data['devotee_id'] = $devotee_id;
             $data['devotee_name'] = $devotee_name;
@@ -539,12 +540,14 @@ class DailyPooja extends BaseController
             $data['collected_by_f'] = $collected_by_f;
             $data['seva_name_f'] = $seva_name_f;
             $data['payment_type_filter'] = $payment_type_filter;
+            $data['donation_type'] = $donation_type;
 
             $filter['devotee_name'] = $devotee_name;
             $filter['amount'] = $amount;
             $filter['collected_by_f'] = $collected_by_f;
             $filter['seva_name_f'] = $seva_name_f;
             $filter['payment_type_filter'] = $payment_type_filter;
+            $filter['donation_type'] = $donation_type;
             
             // $data['purposeInfo'] = $this->setting_model->getAllPurposeInfo($this->company_id);
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
@@ -585,15 +588,31 @@ class DailyPooja extends BaseController
                 $reference_number = $this->security->xss_clean($this->input->post('reference_number')); 
                 $note = $this->security->xss_clean($this->input->post('note')); 
                 $email = $this->security->xss_clean($this->input->post('email')); 
+                $donation_type = $this->security->xss_clean($this->input->post('donation_type'));
+                $donation_amount = $this->security->xss_clean($this->input->post('donation_amount'));
 
+                $serialized_array = serialize($seva_name); 
+                // $unserialized_array = unserialize($seva_name); 
 
+                // var_dump($serialized_array); // gives back a string, perfectly for db saving!
+                // var_dump($unserialized_array); // gives back the array again
+
+                $seva_name_all = '';
+                $total_amount = 0;
                 if(!empty($committee_name)){
                 $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
                 }
-
+                if($donation_type == 'SEVA'){
                 if(!empty($seva_name)){
-                    $seva_info = $this->DailyPooja_model->getSevaInfoById($seva_name);
+                    foreach($seva_name as $seva){
+                    $seva_info = $this->DailyPooja_model->getSevaInfoById($seva);
+                    $seva_name_all.= $seva_info->seva_name.',';
+                    $total_amount+= $seva_info->amount;
                     }
+                }
+              }else{
+                $total_amount = $donation_amount;
+              }
      
                 // if($donation_from=='Devotee'){
                 //     $name = $devotee_name;
@@ -606,10 +625,11 @@ class DailyPooja extends BaseController
                     'name'=>$name,
                     'devotee_name' =>$devotee_name,
                     'committee_id'=>$committee_name,
-                    'seva_id'    => $seva_name,
-                    'seva_name'    => $seva_info->seva_name,
-                    'amount' =>$seva_info->amount,
-                    'address' =>$devotee_address,
+                    'seva_id'    => $serialized_array,
+                    'seva_name'    => $seva_name_all,
+                    'amount' =>  $total_amount,
+                    'donation_type' =>$donation_type,
+                    'address' => $devotee_address,
                     'purpose' =>$purpose,
                     'email'   => $email,
                     'note'    => $note,
@@ -624,9 +644,9 @@ class DailyPooja extends BaseController
 
                   $incomeInfo = array(
                     'income_date'=>date('Y-m-d',strtotime($in_date)),
-                    'income_name'=>'DONATION',
+                    'income_name'=> $donation_type,
                     'donation_id'    =>$return_id,
-                    'amount' =>$seva_info->amount,
+                    'amount' =>$total_amount,
                     'income_by' =>$devotee_name,
                     'payment_type' =>$payment_type,
                     'created_by'=> $this->company_id, 
@@ -683,12 +703,12 @@ class DailyPooja extends BaseController
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Donation Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
             $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
-            $mpdf->SetWatermarkImage(
-                'assets/dist/img/bharathi_logo.png',
-                0.2,
-                array(110,100),
-                array(45,35),
-            );
+            // $mpdf->SetWatermarkImage(
+            //     'assets/dist/img/bharathi_logo.png',
+            //     0.2,
+            //     array(110,100),
+            //     array(45,35),
+            // );
             $mpdf->showWatermarkImage = true;
             $mpdf->autoScriptToLang = true;
             $mpdf->autoLangToFont = true;
@@ -847,7 +867,7 @@ class DailyPooja extends BaseController
             $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
             $data['sevaInfo'] = $this->DailyPooja_model->getAllSevaInfo($this->company_id);
-
+            $data['sevaIdArray'] = unserialize($data['donationInfo']->seva_id);
       
             $this->global['pageTitle'] = $this->company_name.' : Edit Donation Info ';
             $this->loadViews("DailyPooja/editDonationInfo", $this->global, $data, NULL);
@@ -876,16 +896,29 @@ class DailyPooja extends BaseController
                 $reference_number = $this->security->xss_clean($this->input->post('reference_number')); 
                 $note = $this->security->xss_clean($this->input->post('note')); 
                 $email = $this->security->xss_clean($this->input->post('email')); 
+                $donation_type = $this->security->xss_clean($this->input->post('donation_type')); 
+                $donation_amount = $this->security->xss_clean($this->input->post('donation_amount')); 
+                $serialized_array = serialize($seva_name); 
 
                 $row_id = $this->security->xss_clean($this->input->post('row_id')); 
+                $seva_name_all = '';
+                $total_amount = 0;
 
                 if(!empty($committee_name)){
                 $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
                 }
 
-                if(!empty($seva_name)){
-                    $seva_info = $this->DailyPooja_model->getSevaInfoById($seva_name);
-                    }
+                    if($donation_type == 'SEVA'){
+                        if(!empty($seva_name)){
+                            foreach($seva_name as $seva){
+                            $seva_info = $this->DailyPooja_model->getSevaInfoById($seva);
+                            $seva_name_all.= $seva_info->seva_name.',';
+                            $total_amount+= $seva_info->amount;
+                            }
+                        }
+                      }else{
+                        $total_amount = $donation_amount;
+                      }
      
                 // if($donation_from=='Devotee'){
                 //     $name = $devotee_name;
@@ -898,27 +931,28 @@ class DailyPooja extends BaseController
                     'name'=>$name,
                     'devotee_name' =>$devotee_name,
                     'committee_id'=>$committee_name,
-                    'seva_id'    => $seva_name,
-                    'seva_name'    => $seva_info->seva_name,
-                    'amount' =>$seva_info->amount,
-                    'address' =>$devotee_address,
+                    'seva_id'    => $serialized_array,
+                    'seva_name'    => $seva_name_all,
+                    'amount' =>  $total_amount,
+                    'donation_type' =>$donation_type,
+                    'address' => $devotee_address,
                     'purpose' =>$purpose,
+                    'email'   => $email,
                     'note'    => $note,
                     'mobile_number' => $mobile_number,
-                    'email'         => $email,
                     'reference_number' => $reference_number,
                     'payment_type' =>$payment_type,
-                    'created_by'=> $this->company_id, 
+                    'updated_by'=> $this->company_id, 
                     'company_id'=> $this->company_id, 
-                    'created_date_time'=>date('Y-m-d H:i:s'));
+                    'updated_date_time'=>date('Y-m-d H:i:s'));
 
                   $return_id = $this->DailyPooja_model->updateDonationDetail($donationInfo,$row_id);
 
                   $incomeInfo = array(
                     'income_date'=>date('Y-m-d',strtotime($in_date)),
-                    'income_name'=>'DONATION',
-                    'donation_id'    =>$return_id,
-                    'amount' =>$seva_info->amount,
+                    'income_name'=> $donation_type,
+                    // 'donation_id'    =>$return_id,
+                    'amount' => $total_amount,
                     'income_by' =>$devotee_name,
                     'payment_type' =>$payment_type,
                     'created_by'=> $this->company_id, 
@@ -938,6 +972,24 @@ class DailyPooja extends BaseController
             
         }
     }
+
+
+
+
+    function getSevaInfoByDonationId()
+    {
+        if($this->isAdmin() == TRUE) {
+            $this->loadThis();
+        } else {
+            $donation_id = $this->security->xss_clean($this->input->post('donation_id')); 
+            $donationInfo = $this->DailyPooja_model->getdonationInfoById($donation_id);
+            $data['sevaIdArray'] = unserialize($donationInfo->seva_id);
+            echo json_encode($data);
+            exit(0);
+
+        }
+    }
+
 
 
 }

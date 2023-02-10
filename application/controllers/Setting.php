@@ -518,4 +518,80 @@ class Setting extends BaseController {
             redirect('settings');
         }
     }
+
+
+
+    public function updateNakshathra(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $nakshathra = $this->input->post('nakshatra_update');
+            $nakshatraInfo = array('nakshathra' => $nakshathra);
+            $result = $this->settings->updateNakshatraName($nakshatraInfo, $row_id);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'Nakshatra Updated Successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');       
+         } 
+    }
+
+
+    
+    public function updateGothra(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $gothra = $this->input->post('gothra_update');
+            $gothraInfo = array('gothra' => $gothra);
+            $result = $this->settings->updateGothra($gothraInfo, $row_id);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'Gothra Updated Successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');       
+         } 
+    }
+
+
+    public function updateMasa(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $masa = $this->input->post('masa_update');
+            $masaInfo = array('masa' => $masa);
+            $result = $this->settings->updateMasa($masaInfo, $row_id);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'Masa Updated Successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');       
+         } 
+    }
+
+
+    public function updateRashi(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $rashi = $this->input->post('rashi_update');
+            $rashiInfo = array('rashi' => $rashi);
+            $result = $this->settings->updateRashi($rashiInfo, $row_id);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'Rashi Updated Successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');
+         } 
+    }
+
+
 }
