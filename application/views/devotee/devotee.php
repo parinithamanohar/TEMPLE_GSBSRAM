@@ -213,6 +213,18 @@ if ($error) {
                             <!-- Default Light Table -->
                             <div class="row form-contents">
                                 <div class="row">
+                                <div class="col-lg-12 col-12">
+                                        <div class="form-group mt-0 pt-0">
+                                            <label for="post_status">Search Devotee</label>
+                                            <select class="form-control required selectpicker" data-live-search="true" style="width: auto;">
+                                                <option value="">Search</option>
+                                                <?php if(!empty($allDevoteeInfo)) {
+                                                 foreach($allDevoteeInfo as $all) {?>
+                                                <option value=""><?php echo $all->devotee_name ?> - <?php echo $all->contact_number ?></option>
+                                                <?php }} ?>
+                                            </select>
+                                        </div>
+                                 </div>
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="fname">Full Name*</label>

@@ -64,7 +64,7 @@ table {
                     <td width="700" style="text-align:center;">
                         <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
                         <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br />
-                        <!-- <b style="font-size: 13px;margin-bottom: 2px;">Unit of KJES </b><br/> -->
+                        <b style="font-size: 13px;margin-bottom: 2px;">Near Kalmady Bridge, Malpe Main Road Udupi District,Karnataka, India 576108</b>
                         <span style="font-size: 13px;margin-bottom: 2px;">
                         </span><br />
                         <br />

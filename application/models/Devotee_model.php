@@ -242,6 +242,20 @@ class Devotee_model extends CI_Model
     
     
 
+    function allDevoteeInfo($company_id)
+    {
+        $this->db->select('BaseTbl.row_id,BaseTbl.devotee_id, BaseTbl.devotee_address,BaseTbl.post_status,BaseTbl.devotee_name, BaseTbl.contact_number,BaseTbl.company_id');
+        $this->db->from('tbl_devotee as BaseTbl');
+
+
+        $this->db->where('BaseTbl.company_id',$company_id);
+        $this->db->where('BaseTbl.is_deleted', 0);
+        $this->db->order_by('BaseTbl.row_id', 'ASEC');
+        $query = $this->db->get();
+        $result = $query->result();        
+        return $result;
+    }
+
     
 }
 

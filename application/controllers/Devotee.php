@@ -51,6 +51,8 @@ class Devotee extends BaseController
             $data['count'] =  $count;
 			$returns = $this->paginationCompress ( "devoteeListing/", $count, 100 );
             $data['devoteeRecords'] = $this->devotee_model->devoteeListing($searchText,$filter,$this->company_id, $returns["page"], $returns["segment"]);
+            $data['allDevoteeInfo'] = $this->devotee_model->allDevoteeInfo($this->company_id);
+
             $data['committeeTypeInfo'] = $this->devotee_model->getCommitteeTypeInfo($this->company_id);  
             $this->global['pageTitle'] = $this->company_name.' :devotee Details ';
             $this->loadViews("devotee/devotee", $this->global, $data, NULL);
