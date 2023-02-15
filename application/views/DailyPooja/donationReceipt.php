@@ -122,7 +122,7 @@ table {
 
                         </table>
 
-                        <h4 style="margin-left:500px"> Collected By : Committee </h4>
+                        <h4 style="margin-left:450px"> Collected By : <?php echo $donationInfo->type; ?> </h4>
                         <br/>
                           
                 

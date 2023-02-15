@@ -406,9 +406,10 @@ public function updateIncomeDetail($incomeInfo, $row_id) {
 
 function getdonationInfoById($row_id)
 {
-    $this->db->select('BaseTbl.row_id,BaseTbl.donation_type,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id');
+    $this->db->select('BaseTbl.row_id,BaseTbl.donation_type,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id,commi.type');
     $this->db->from('tbl_donation_info as BaseTbl');
     $this->db->join('tbl_purpose as purpose','purpose.row_id=BaseTbl.purpose','left');
+    $this->db->join('tbl_committetype as commi','commi.row_id=BaseTbl.committee_id','left');
     $this->db->where('BaseTbl.row_id',$row_id);
     $this->db->where('BaseTbl.is_deleted', 0);
     $query = $this->db->get();
