@@ -220,7 +220,7 @@ if ($error) {
                                                 <option value="">Search</option>
                                                 <?php if(!empty($allDevoteeInfo)) {
                                                  foreach($allDevoteeInfo as $all) {?>
-                                                <option value=""><?php echo $all->devotee_name ?> - <?php echo $all->contact_number ?></option>
+                                                <option value=""><?php echo $all->devotee_name ?>- <?php echo $all->contact_number ?>- <?php echo substr($all->devotee_address, 0, 50); ?></option>
                                                 <?php }} ?>
                                             </select>
                                         </div>
