@@ -436,14 +436,14 @@ jQuery(document).ready(function() {
         e.preventDefault();
         var link = jQuery(this).get(0).href;
         var value = link.substring(link.lastIndexOf('/') + 1);
-        jQuery("#searchList").attr("action", baseURL + "devoteeListing/" + value);
+        jQuery("#searchList").attr("action", baseURL + "familyListing/" + value);
         jQuery("#searchList").submit();
     });
     jQuery('ul.pagination li a').click(function(e) {
         e.preventDefault();
         var link = jQuery(this).get(0).href;
         var value = link.substring(link.lastIndexOf('/') + 1);
-        jQuery("#byFilterMethod").attr("action", baseURL + "devoteeListing/" + value);
+        jQuery("#byFilterMethod").attr("action", baseURL + "familyListing/" + value);
         jQuery("#byFilterMethod").submit();
     });
     jQuery('.datepicker').datepicker({

@@ -253,14 +253,14 @@ jQuery(document).ready(function() {
         e.preventDefault();
         var link = jQuery(this).get(0).href;
         var value = link.substring(link.lastIndexOf('/') + 1);
-        jQuery("#searchList").attr("action", baseURL + "donationListing/" + value);
+        jQuery("#searchList").attr("action", baseURL + "sevaListing/" + value);
         jQuery("#searchList").submit();
     });
     jQuery('ul.pagination li a').click(function(e) {
         e.preventDefault();
         var link = jQuery(this).get(0).href;
         var value = link.substring(link.lastIndexOf('/') + 1);
-        jQuery("#byFilterMethod").attr("action", baseURL + "donationListing/" + value);
+        jQuery("#byFilterMethod").attr("action", baseURL + "sevaListing/" + value);
         jQuery("#byFilterMethod").submit();
     });
     jQuery('.datepicker').datepicker({
