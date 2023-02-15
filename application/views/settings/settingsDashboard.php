@@ -61,7 +61,7 @@ if ($warning) {
         <div class="row">
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#caste">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Commitee Role</h6>
@@ -121,7 +121,7 @@ if ($warning) {
             </div>
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#relation">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Relation Info</h6>
@@ -179,7 +179,7 @@ if ($warning) {
             </div>
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#asset">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Asset Type</h6>
@@ -236,7 +236,7 @@ if ($warning) {
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#year">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Year</h6>
@@ -295,7 +295,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#subscription">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Amount</h6>
@@ -354,7 +354,7 @@ if ($warning) {
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#income">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Income Type</h6>
@@ -412,7 +412,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#gothra">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Gothra</h6>
@@ -477,7 +477,7 @@ if ($warning) {
             </div>
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#nakshathra">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Nakshathra</h6>
@@ -541,7 +541,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#masa">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Masa</h6>
@@ -605,7 +605,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#tithi">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Tithi</h6>
@@ -663,7 +663,7 @@ if ($warning) {
             </div>
             
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#rashi">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Rashi</h6>
@@ -728,7 +728,7 @@ if ($warning) {
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#Committetype">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Committe type</h6>
@@ -799,7 +799,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#Event">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Events</h6>
@@ -858,7 +858,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#occation">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Occation Info</h6>
@@ -916,7 +916,7 @@ if ($warning) {
             </div>
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#paksha">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Paksha Info</h6>
@@ -975,7 +975,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#Expense">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Expense Name</h6>
@@ -1034,7 +1034,7 @@ if ($warning) {
 
 
             <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
-                <div class="card-header border-bottom card_head_dashboard settings_card" data-toggle="collapse"
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
                     data-target="#purpose">
                     <a class="float-right mb-0 setting_pointer">Click here </a>
                     <h6 class="m-0 text-dark">Purpose Info</h6>
