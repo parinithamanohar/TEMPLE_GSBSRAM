@@ -101,7 +101,7 @@ table {
                                 <td width="700"><b>Address : </b><?php echo $donationInfo->address; ?></td>
 
                             </tr>
-                            <?php if($donationInfo->donation_type == 'SEVA'){ ?>
+                            <!-- <?php if($donationInfo->donation_type == 'SEVA'){ ?>
                             <tr>
                                 <td width="700"><b>Seva : </b><?php echo $donationInfo->seva_name; ?></td>
 
@@ -114,7 +114,31 @@ table {
                             <tr>
                                 <td><b>Payment Mode :</b> <?php echo $donationInfo->payment_type; ?></td>
 
-                            </tr>
+                            </tr> -->
+
+                 <table class="table table_bordered" style="font-size: 15px;">
+                <tr>
+                    <th>Seva</th>
+                    <th width="120">Amount</th>
+                </tr> 
+                <?php if($donationInfo->donation_type == 'SEVA'){ ?>
+                <tr>
+                    <td style="text-align: center;"><?php echo $donationInfo->seva_name ?> </td>
+                    <td style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></td>
+                </tr>
+                <?php } ?>
+                <tr>
+                    <th>Total Amount</th>
+                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></th>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 13px;"><br><b>: <span style="text-transform: none;"><?php echo getIndianCurrency(floatval($donationInfo->amount)).' only'; ?></span></b></td>
+                </tr>
+            </table>
+
+
+
+
                             <tr>
                                 <td width="700"><b>Notes :</b> <?php echo $donationInfo->note; ?></td>
 
