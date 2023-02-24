@@ -55,9 +55,9 @@ table {
 
             <table class="table text_highlight" style="background-color:#FFD300">
                 <tr>
-                    <td style="text-align:center;" width="80">
-                        <img class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
-                    </td>
+                    <!-- <td style="text-align:center;" width="80">
+                        <!-- <img class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo"> 
+                    </td> -->
                     <td width="700" style="text-align:center;">
                         <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
                         <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br />
