@@ -138,8 +138,8 @@ if ($error) {
 
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
-                                        <label for="purpose">Purpose</label>
-                                        <select class="form-control selectpicker" id="purpose" name="purpose"
+                                        <label for="purpose">Purpose*</label>
+                                        <select class="form-control selectpicker" id="purpose" name="purpose" required
                                             data-live-search="true">
                                             <?php if(!empty($donationInfo->purpose)){ ?>
                                             <option value="<?php echo $donationInfo->purpose ?>"> Selected:

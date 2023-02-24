@@ -406,7 +406,7 @@ public function updateIncomeDetail($incomeInfo, $row_id) {
 
 function getdonationInfoById($row_id)
 {
-    $this->db->select('BaseTbl.row_id,BaseTbl.donation_type,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id,commi.type');
+    $this->db->select('BaseTbl.row_id,BaseTbl.seva_amount,BaseTbl.donation_type,BaseTbl.email,BaseTbl.committee_id,BaseTbl.payment_type,BaseTbl.date,BaseTbl.purpose,BaseTbl.amount,BaseTbl.name,BaseTbl.address,purpose.purpose_name,BaseTbl.devotee_name,BaseTbl.reference_number,BaseTbl.mobile_number,BaseTbl.note,BaseTbl.seva_name,BaseTbl.seva_id,commi.type');
     $this->db->from('tbl_donation_info as BaseTbl');
     $this->db->join('tbl_purpose as purpose','purpose.row_id=BaseTbl.purpose','left');
     $this->db->join('tbl_committetype as commi','commi.row_id=BaseTbl.committee_id','left');
@@ -440,6 +440,10 @@ function donationInfoForReport($filter='',$company_id)
 
     if(!empty($filter['amount'])){
         $this->db->where('BaseTbl.amount', $filter['amount']);
+    }
+
+    if(!empty($filter['collected_by'])){
+        $this->db->where('BaseTbl.name', $filter['collected_by']);
     }
 
     if(!empty($filter['payment_type_filter'])){

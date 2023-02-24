@@ -451,7 +451,7 @@ if ($warning) {
                                             <tr class="text-dark">
                                             <form role="form"  action="<?php echo base_url() ?>updateGothra" method="post" role="form">
                                                 <input type="hidden" name="row_id" value="<?php echo $gothra->row_id; ?>">
-                                                <td><input type="text" name="gothra_update" value="<?php echo $gothra->gothra; ?>"></td>
+                                                <td><input type="text" class="form-control" name="gothra_update" value="<?php echo $gothra->gothra; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteGothra" href="#"
                                                         data-row_id="<?php echo $gothra->row_id; ?>"
@@ -515,7 +515,7 @@ if ($warning) {
                                             <tr class="text-dark">
                                             <form role="form" action="<?php echo base_url() ?>updateNakshathra" method="post" role="form">
                                               <input type="hidden" name="row_id" value="<?php echo $nakshathra->row_id; ?>">
-                                                <td><input type="text" name="nakshatra_update" value="<?php echo $nakshathra->nakshathra; ?>"></td>
+                                                <td><input type="text" class="form-control" name="nakshatra_update" value="<?php echo $nakshathra->nakshathra; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteNakshathra" href="#"
                                                         data-row_id="<?php echo $nakshathra->row_id; ?>" title="Delete"><i
@@ -580,7 +580,7 @@ if ($warning) {
                                             <tr class="text-dark">
                                             <form role="form" action="<?php echo base_url() ?>updateMasa" method="post" role="form">
                                             <input type="hidden" name="row_id" value="<?php echo $masa->row_id; ?>">
-                                                <td><input type="text" name="masa_update" value="<?php echo $masa->masa; ?>"></td>
+                                                <td><input type="text" class="form-control" name="masa_update" value="<?php echo $masa->masa; ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteMasa" href="#"
                                                         data-row_id="<?php echo $masa->row_id; ?>" title="Delete"><i
@@ -704,7 +704,7 @@ if ($warning) {
                                              action="<?php echo base_url() ?>updateRashi" method="post" role="form">
                                             <tr class="text-dark">
                                                 <input type="hidden" name="row_id" value="<?php echo $rashi->row_id ?>">
-                                                <td><input type="text" name="rashi_update" value="<?php echo $rashi->rashi ?>"></td>
+                                                <td><input type="text" class="form-control" name="rashi_update" value="<?php echo $rashi->rashi ?>"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-danger deleteRashi" href="#"
                                                         data-row_id="<?php echo $rashi->row_id; ?>" title="Delete"><i

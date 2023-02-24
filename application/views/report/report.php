@@ -511,6 +511,22 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-6 col-12 mt-2">
+                            <div class="form-group">
+                                <label for="purpose">Collected By</label>
+                                <select class="form-control selectpicker" id="" name="collected_by"
+                                    data-live-search="true">
+                                    <option value=""> Select </option>
+                                    <option value=""> ALL</option>
+                                    <?php if(!empty($committeeInfo)) {
+                                                             foreach($committeeInfo as $data ){ ?>
+                                    <option value="<?php echo $data->type;?>">
+                                        <?php echo $data->type;?></option>
+                                    <?php }}?>
+                                </select>
+                            </div>
+                        </div>
+
                         
                         <div class="col-lg-6 col-12 mt-2">
                             <div class="form-group">

@@ -336,8 +336,8 @@ if ($error) {
 
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="purpose">Purpose</label>
-                                                        <select class="form-control selectpicker" id="purpose" name="purpose" data-live-search="true"
+                                                        <label for="purpose">Purpose*</label>
+                                                        <select class="form-control selectpicker" id="purpose" name="purpose" data-live-search="true" required
                                                             >
                                                             <option value=""> Select Purpose </option>
                                                             <?php if(!empty($purposeInfo)) {

@@ -101,12 +101,64 @@ table {
                                 <td width="700"><b>Address : </b><?php echo $donationInfo->address; ?></td>
 
                             </tr>
+                        
+                          
+                            </table>
                             <?php if($donationInfo->donation_type == 'SEVA'){ ?>
-                            <tr>
-                                <td width="700"><b>Seva : </b><?php echo $donationInfo->seva_name; ?></td>
-
-                            </tr>
+                            <table class="table table_bordered" style="font-size: 15px;">
+                            <tr><td style="border: none"></td></tr>
+                <tr>
+                    <th>Seva Info</th>
+                    <th width="120">Amount</th>
+                </tr> 
+                <tr>
+                    <td style="text-align: left;">
+                    <?php foreach($seva_name as $seva){ ?>
+                                    <b><?php echo $seva ?></b><br/>
+                                
                             <?php } ?>
+                                  </td>
+                    <td style="text-align: right;"><?php foreach($seva_amount as $amount){ ?>
+                                    <b><?php echo $amount ?></b><br/>
+                                
+                            <?php } ?></td>
+                </tr>
+                <tr>
+                    <th>Total Amount</th>
+                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></th>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 13px;"><b><span style="text-transform: none;"></span></b></td>
+                </tr>
+            </table>
+            <?php }else if($donationInfo->donation_type == 'DONATION'){ ?>
+                            <table class="table table_bordered" style="font-size: 15px;">
+                            <tr><td style="border: none"></td></tr>
+                <tr>
+                    <th>Donation Info</th>
+                    <th width="120">Amount</th>
+                </tr> 
+                <tr>
+                    <td style="text-align: left;">
+                                    <b><?php echo $donationInfo->purpose_name ?></b><br/>
+                                                                  
+                                </td>
+                    <td style="text-align: right;">
+                                    <b><?php echo $donationInfo->amount ?></b><br/>
+                                
+                            </td>
+                </tr>
+                <tr>
+                    <th>Total Amount</th>
+                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></th>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size: 13px;"><b><span style="text-transform: none;"></span></b></td>
+                </tr>
+            </table>
+            <?php } ?>
+            <table class="table" style="font-size: 15px;">
+
                             <tr>
                                 <td width="400"><b>Amount :</b> Rs.<?php echo $donationInfo->amount; ?>/- (<?php echo getIndianCurrency(floatval($donationInfo->amount)).' only'; ?>)</td>
 

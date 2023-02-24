@@ -598,6 +598,7 @@ class DailyPooja extends BaseController
                 // var_dump($unserialized_array); // gives back the array again
 
                 $seva_name_all = '';
+                $seva_amount_all = '';
                 $total_amount = 0;
                 if(!empty($committee_name)){
                 $committee_info = $this->committee_model->getCommitteeTypeById($committee_name);
@@ -605,10 +606,12 @@ class DailyPooja extends BaseController
                 if($donation_type == 'SEVA'){
                 if(!empty($seva_name)){
                     foreach($seva_name as $seva){
+                        if(!empty($seva)){
                     $seva_info = $this->DailyPooja_model->getSevaInfoById($seva);
                     $seva_name_all.= $seva_info->seva_name.',';
+                    $seva_amount_all.= $seva_info->amount.',';
                     $total_amount+= $seva_info->amount;
-                    }
+                    }}
                 }
               }else{
                 $total_amount = $donation_amount;
@@ -627,6 +630,7 @@ class DailyPooja extends BaseController
                     'committee_id'=>$committee_name,
                     'seva_id'    => $serialized_array,
                     'seva_name'    => $seva_name_all,
+                    'seva_amount'  => $seva_amount_all,
                     'amount' =>  $total_amount,
                     'donation_type' =>$donation_type,
                     'address' => $devotee_address,
@@ -699,6 +703,14 @@ class DailyPooja extends BaseController
             error_reporting(0); 
             $data['donationInfo'] = $this->DailyPooja_model->getdonationInfoById($row_id);
             $data['companyLogo'] = $this->company_logo;
+            $seva_name = $data['donationInfo']->seva_name;
+            $seva_amount = $data['donationInfo']->seva_amount;
+
+            $str_arr = preg_split ("/\,/", $seva_name); 
+            $data['seva_name'] = $str_arr;
+
+            $str_amount = preg_split ("/\,/", $seva_amount); 
+            $data['seva_amount'] = $str_amount;
                       
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Donation Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
@@ -902,6 +914,7 @@ class DailyPooja extends BaseController
 
                 $row_id = $this->security->xss_clean($this->input->post('row_id')); 
                 $seva_name_all = '';
+                $seva_amount_all = '';
                 $total_amount = 0;
 
                 if(!empty($committee_name)){
@@ -911,9 +924,12 @@ class DailyPooja extends BaseController
                     if($donation_type == 'SEVA'){
                         if(!empty($seva_name)){
                             foreach($seva_name as $seva){
+                                if(!empty($seva)){
                             $seva_info = $this->DailyPooja_model->getSevaInfoById($seva);
                             $seva_name_all.= $seva_info->seva_name.',';
+                            $seva_amount_all.= $seva_info->amount.',';
                             $total_amount+= $seva_info->amount;
+                            }
                             }
                         }
                       }else{
@@ -933,6 +949,7 @@ class DailyPooja extends BaseController
                     'committee_id'=>$committee_name,
                     'seva_id'    => $serialized_array,
                     'seva_name'    => $seva_name_all,
+                    'seva_amount'    => $seva_amount_all,
                     'amount' =>  $total_amount,
                     'donation_type' =>$donation_type,
                     'address' => $devotee_address,
