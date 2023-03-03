@@ -81,25 +81,7 @@ if ($error) {
                                             placeholder="Devotee Name" autocomplete="off" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="purpose">Donation Type*</label>
-                                        <select class="form-control selectpicker" id=""
-                                            name="type_of_donation" data-live-search="true" required>
-                                            <?php if(!empty($donationInfo->type_of_donation)){ ?>
-                                            <option value="<?php echo $donationInfo->type_of_donation ?>" selected>
-                                                Selected: <?php echo $donationInfo->type_of_donation ?></option>
-                                            <?php } else { ?>
-                                            <option value=""> Select</option>
-                                            <?php } ?>
-                                            <?php if(!empty($donationTypeInfo)) {
-                                                             foreach($donationTypeInfo as $type){?>
-                                            <option value="<?php echo $type->donation_type;?>">
-                                                <?php echo $type->donation_type;?></option>
-                                            <?php }}?>
-                                        </select>
-                                    </div>
-                                </div>
+                            
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
                                         <label for="fname">Date</label>
@@ -124,6 +106,25 @@ if ($error) {
                                             <option value="DONATION">DONATION</option>
                                             <option value="SEVA">SEVA</option>
                                             </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12 donation_display">
+                                    <div class="form-group">
+                                        <label for="purpose">Donation Type*</label>
+                                        <select class="form-control selectpicker" id="type_of_donation"
+                                            name="type_of_donation" data-live-search="true">
+                                            <?php if(!empty($donationInfo->type_of_donation)){ ?>
+                                            <option value="<?php echo $donationInfo->type_of_donation ?>" selected>
+                                                Selected: <?php echo $donationInfo->type_of_donation ?></option>
+                                            <?php } else { ?>
+                                            <option value=""> Select</option>
+                                            <?php } ?>
+                                            <?php if(!empty($donationTypeInfo)) {
+                                                             foreach($donationTypeInfo as $type){?>
+                                            <option value="<?php echo $type->donation_type;?>">
+                                                <?php echo $type->donation_type;?></option>
+                                            <?php }}?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 seva_display">
@@ -289,11 +290,13 @@ $("#donation_type").change(function() {
             $('.seva_display').hide();
             $('#donation_amount').prop('required',true);
             $('#seva_name').prop('required',false);
+            $('#type_of_donation').prop('required',true);
         } else {
             $('.donation_display').hide();
             $('.seva_display').show();  
             $('#seva_name').prop('required',true); 
-            $('#donation_amount').prop('required',false);    
+            $('#donation_amount').prop('required',false);  
+            $('#type_of_donation').prop('required',false);  
          }
      });
 
@@ -351,11 +354,13 @@ jQuery(document).ready(function() {
             $('.seva_display').hide();
             $('#donation_amount').prop('required',true);
             $('#seva_name').prop('required',false);
+            $('#type_of_donation').prop('required',true);
         } else {
             $('.donation_display').hide();
             $('.seva_display').show();  
             $('#seva_name').prop('required',true); 
             $('#donation_amount').prop('required',false);    
+            $('#type_of_donation').prop('required',false);
          }
      
 

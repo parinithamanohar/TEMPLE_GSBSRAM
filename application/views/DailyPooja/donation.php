@@ -277,19 +277,7 @@ if ($error) {
                                                         autocomplete="off" required>
                                                 </div>
 
-                                                <div class="col-lg-6 col-12 committee_name">
-                                                    <div class="form-group">
-                                                        <label for="purpose">Donation Type*</label>
-                                                        <select class="form-control selectpicker" id="" name="type_of_donation" required data-live-search="true">
-                                                            <option value=""> Select </option>
-                                                            <?php if(!empty($donationTypeInfo)) {
-                                                             foreach($donationTypeInfo as $role ){?>
-                                                            <option value="<?php echo $role->donation_type;?>">
-                                                                <?php echo $role->donation_type;?></option>
-                                                            <?php }}?>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                           
 
 
                                                 <div class="form-group col-md-6">
@@ -307,6 +295,20 @@ if ($error) {
                                                             <option value=""> Select </option>
                                                             <option value="DONATION">DONATION</option>
                                                             <option value="SEVA">SEVA</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-12 donation_display">
+                                                    <div class="form-group">
+                                                        <label for="purpose">Donation Type*</label>
+                                                        <select class="form-control selectpicker" id="type_of_donation" name="type_of_donation" data-live-search="true">
+                                                            <option value=""> Select </option>
+                                                            <?php if(!empty($donationTypeInfo)) {
+                                                             foreach($donationTypeInfo as $role ){?>
+                                                            <option value="<?php echo $role->donation_type;?>">
+                                                                <?php echo $role->donation_type;?></option>
+                                                            <?php }}?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -465,12 +467,14 @@ $("#payment_type").change(function() {
             $('.donation_display').show();
             $('.seva_display').hide();
             $('#donation_amount').prop('required',true);
+            $('#type_of_donation').prop('required',true);
             $('#seva_name').prop('required',false);
         } else {
             $('.donation_display').hide();
             $('.seva_display').show();  
             $('#seva_name').prop('required',true); 
-            $('#donation_amount').prop('required',false);    
+            $('#donation_amount').prop('required',false);   
+            $('#type_of_donation').prop('required',false); 
          }
      });
 

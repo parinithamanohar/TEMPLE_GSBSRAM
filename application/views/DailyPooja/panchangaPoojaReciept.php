@@ -54,7 +54,7 @@ table{
                     </td>
                     <td width="700" style="text-align:center;">
                         <!-- <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/> -->
-                        <b style="font-size: 40px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
+                        <b style="font-size: 40px;margin-bottom: 2px;">ಜಿ.ಎಸ್.ಬಿ ಸಮಾಜ &nbsp;ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
                         <p style="font-size: 18px;margin-bottom: 2px;">ಕಲ್ಮಾಡಿ ಸೇತುವೆ ಬಳಿ, ಮಲ್ಪೆ ಮುಖ್ಯ ರಸ್ತೆ ಉಡುಪಿ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ, ಭಾರತ 576108</p>
                         <span style="font-size: 13px;margin-bottom: 2px;">
                         </span><br/>
