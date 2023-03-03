@@ -1092,6 +1092,67 @@ if ($warning) {
                 </div>
             </div>
 
+
+
+            <div class="col-lg-6 col-md-6 col-12 mb-2 column_padding_card ">
+                <div class="card-header border-bottom m-0 p-2 card_head_dashboard settings_card" data-toggle="collapse"
+                    data-target="#donationType">
+                    <a class="float-right mb-0 setting_pointer">Click here </a>
+                    <h6 class="m-0 text-dark">Donation Type Info</h6>
+                </div>
+
+                <div id="donationType" class="collapse">
+                    <div class="card card-small h-100">
+                        <div class="card-body d-flex flex-column p-1">
+                            <?php $this->load->helper("form"); ?>
+                            <form role="form" id="" action="<?php echo base_url() ?>addDonationType" method="post"
+                                role="form">
+                                <div class="row form-contents">
+                                    <div class="col-4 col-lg-8">
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control" id="" name="donation_name"
+                                                placeholder="Enter Type" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="col-4 mb-1 col-lg-4">
+                                        <input style="float:right;" type="submit" class="btn btn-block btn-primary"
+                                            value="Add" />
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="row mx-0">
+                                <div class="col-lg-12 col-12 p-0 mt-0 ">
+                                    <table class="table table-bordered text-dark mb-0">
+                                        <thead class="text-center">
+                                            <tr class="table_row_background">
+                                                <th>Donation Type</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            <?php if (!empty($donationTypeInfo)) {
+                                            foreach ($donationTypeInfo as $type) { ?>
+                                            <tr class="text-dark">
+                                                <td><?php echo $type->donation_type; ?></td>
+                                                <td>
+                                                    <a class="btn btn-xs btn-danger deleteDonationType" href="#"
+                                                        data-row_id="<?php echo $type->row_id; ?>" title="Delete"><i
+                                                            class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php }
+                                            } else { ?>
+                                            <td colspan="4" style="background-color: #83c8ea7d;">Donation Not Found</td>
+                                            <?php } ?>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

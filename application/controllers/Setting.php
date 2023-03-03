@@ -30,6 +30,7 @@ class Setting extends BaseController {
             $data['pakshaInfo'] = $this->settings->getAllPakshaInfo($this->company_id);
             $data['expenseNameInfo'] = $this->settings->getAllExpenseNameInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
+            $data['donationTypeInfo'] = $this->settings->getAllDonationTypeInfo($this->company_id);
 
             $this->global['pageTitle'] = $this->company_name.' : Settings';
             $this->loadViews("settings/settingsDashboard", $this->global, $data,null);  
@@ -591,6 +592,24 @@ class Setting extends BaseController {
             }
             redirect('settings');
          } 
+    }
+
+
+    public function addDonationType() {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }  else {
+            $donation_name =$this->security->xss_clean($this->input->post('donation_name'));
+            $donationInfo = array('donation_type'=>$donation_name,'company_id'=>$this->company_id);
+            $result = $this->settings->addDonationType($donationInfo);
+            if($result > 0){
+                $this->session->set_flashdata('success', 'New Donation Type Added Successfully');
+            } else{
+                $this->session->set_flashdata('error', 'Failed');
+            }
+            redirect('settings');
+        }
     }
 
 

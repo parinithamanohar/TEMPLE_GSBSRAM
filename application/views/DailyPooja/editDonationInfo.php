@@ -83,6 +83,25 @@ if ($error) {
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
+                                        <label for="purpose">Donation Type*</label>
+                                        <select class="form-control selectpicker" id=""
+                                            name="type_of_donation" data-live-search="true" required>
+                                            <?php if(!empty($donationInfo->type_of_donation)){ ?>
+                                            <option value="<?php echo $donationInfo->type_of_donation ?>" selected>
+                                                Selected: <?php echo $donationInfo->type_of_donation ?></option>
+                                            <?php } else { ?>
+                                            <option value=""> Select</option>
+                                            <?php } ?>
+                                            <?php if(!empty($donationTypeInfo)) {
+                                                             foreach($donationTypeInfo as $type){?>
+                                            <option value="<?php echo $type->donation_type;?>">
+                                                <?php echo $type->donation_type;?></option>
+                                            <?php }}?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-group">
                                         <label for="fname">Date</label>
 
                                         <input id="dob" type="text" name="in_date"

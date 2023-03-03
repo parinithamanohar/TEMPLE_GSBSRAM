@@ -277,6 +277,20 @@ if ($error) {
                                                         autocomplete="off" required>
                                                 </div>
 
+                                                <div class="col-lg-6 col-12 committee_name">
+                                                    <div class="form-group">
+                                                        <label for="purpose">Donation Type*</label>
+                                                        <select class="form-control selectpicker" id="" name="type_of_donation" required data-live-search="true">
+                                                            <option value=""> Select </option>
+                                                            <?php if(!empty($donationTypeInfo)) {
+                                                             foreach($donationTypeInfo as $role ){?>
+                                                            <option value="<?php echo $role->donation_type;?>">
+                                                                <?php echo $role->donation_type;?></option>
+                                                            <?php }}?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="form-group col-md-6">
                                                     <label for="fname">Date</label>

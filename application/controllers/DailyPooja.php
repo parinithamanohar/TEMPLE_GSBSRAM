@@ -382,7 +382,7 @@ class DailyPooja extends BaseController
                       
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Pooja Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
-            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A5']);
             $mpdf->autoScriptToLang = true;
             $mpdf->autoLangToFont = true;
                         $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
@@ -406,7 +406,7 @@ class DailyPooja extends BaseController
                       
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Pooja Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
-            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A5']);
             $mpdf->autoScriptToLang = true;
             $mpdf->autoLangToFont = true;
                         $mpdf->AddPage('P','','','','',7,7,7,7,8,8);
@@ -560,6 +560,7 @@ class DailyPooja extends BaseController
             $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
             $data['sevaInfo'] = $this->DailyPooja_model->getAllSevaInfo($this->company_id);
+            $data['donationTypeInfo'] = $this->settings->getAllDonationTypeInfo($this->company_id);
 
 
             $this->global['pageTitle'] = $this->company_name.' :Donation Details ';
@@ -590,6 +591,8 @@ class DailyPooja extends BaseController
                 $email = $this->security->xss_clean($this->input->post('email')); 
                 $donation_type = $this->security->xss_clean($this->input->post('donation_type'));
                 $donation_amount = $this->security->xss_clean($this->input->post('donation_amount'));
+                $type_of_donation = $this->security->xss_clean($this->input->post('type_of_donation'));
+
 
                 $serialized_array = serialize($seva_name); 
                 // $unserialized_array = unserialize($seva_name); 
@@ -640,6 +643,7 @@ class DailyPooja extends BaseController
                     'mobile_number' => $mobile_number,
                     'reference_number' => $reference_number,
                     'payment_type' =>$payment_type,
+                    'type_of_donation' =>$type_of_donation,
                     'created_by'=> $this->company_id, 
                     'company_id'=> $this->company_id, 
                     'created_date_time'=>date('Y-m-d H:i:s'));
@@ -714,7 +718,7 @@ class DailyPooja extends BaseController
                       
             $this->global['pageTitle'] = ''.TAB_TITLE.' : Donation Receipt';
             // $this->loadViews("fees/feeReceiptPrint", $this->global, $data, null); 
-            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A4-L']);
+            $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf','default_font' => 'timesnewroman','format' => 'A5']);
             // $mpdf->SetWatermarkImage(
             //     'assets/dist/img/bharathi_logo.png',
             //     0.2,
@@ -879,6 +883,7 @@ class DailyPooja extends BaseController
             $data['committeeInfo'] = $this->settings->getAllCommittetypeInfo($this->company_id);
             $data['purposeInfo'] = $this->settings->getAllPurposeInfo($this->company_id);
             $data['sevaInfo'] = $this->DailyPooja_model->getAllSevaInfo($this->company_id);
+            $data['donationTypeInfo'] = $this->settings->getAllDonationTypeInfo($this->company_id);
             $data['sevaIdArray'] = unserialize($data['donationInfo']->seva_id);
       
             $this->global['pageTitle'] = $this->company_name.' : Edit Donation Info ';
@@ -910,6 +915,8 @@ class DailyPooja extends BaseController
                 $email = $this->security->xss_clean($this->input->post('email')); 
                 $donation_type = $this->security->xss_clean($this->input->post('donation_type')); 
                 $donation_amount = $this->security->xss_clean($this->input->post('donation_amount')); 
+                $type_of_donation = $this->security->xss_clean($this->input->post('type_of_donation')); 
+
                 $serialized_array = serialize($seva_name); 
 
                 $row_id = $this->security->xss_clean($this->input->post('row_id')); 
@@ -951,6 +958,7 @@ class DailyPooja extends BaseController
                     'seva_name'    => $seva_name_all,
                     'seva_amount'    => $seva_amount_all,
                     'amount' =>  $total_amount,
+                    'type_of_donation' => $type_of_donation,
                     'donation_type' =>$donation_type,
                     'address' => $devotee_address,
                     'purpose' =>$purpose,
@@ -1008,6 +1016,16 @@ class DailyPooja extends BaseController
     }
 
 
+    public function deleteDonationType(){
+        if($this->isAdmin() == TRUE){
+            $this->loadThis();
+        } else {   
+            $row_id = $this->input->post('row_id');
+            $donationInfo = array('is_deleted' => 1);
+            $result = $this->DailyPooja_model->updateDonationTypeDetail($donationInfo, $row_id);
+            if ($result == true) {echo (json_encode(array('status' => true)));} else {echo (json_encode(array('status' => false)));}
+        } 
+    }
 
 }
 

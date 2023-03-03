@@ -53,15 +53,16 @@ table {
     <div class="row">
         <div class="">
 
-            <table class="table text_highlight" style="background-color:#FFD300">
+            <table class="table text_highlight" style="background-color:#FFA500">
                 <tr>
                     <!-- <td style="text-align:center;" width="80">
                         <!-- <img class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo"> 
                     </td> -->
                     <td width="700" style="text-align:center;">
-                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
-                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br />
-                        <b style="font-size: 13px;margin-bottom: 2px;">Near Kalmady Bridge, Malpe Main Road Udupi District,Karnataka, India 576108</b><br/>
+                        <!-- <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br /> -->
+                        <br/>
+                        <b style="font-size: 32px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br />
+                        <p style="font-size: 15px;margin-bottom: 2px;">ಕಲ್ಮಾಡಿ ಸೇತುವೆ ಬಳಿ, ಮಲ್ಪೆ ಮುಖ್ಯ ರಸ್ತೆ ಉಡುಪಿ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ, ಭಾರತ 576108</p>
                         <span style="font-size: 18px;margin-bottom: 2px;">Purpose: <b><?php echo $donationInfo->purpose_name; ?></b>
                         </span><br />
                         <br />
@@ -71,9 +72,9 @@ table {
             </table>
             <!-- <hr class="border_bottom hr_line"> -->
 
-            <h4 style="margin-left:300px"> Donation/ Seva Reciept </h4>
+            <h4 style="margin-left:160px"> Donation/ Seva Reciept </h4>
            
-                        <table class="table" style="font-size: 15px;">
+                        <table class="table" style="font-size: 16px;">
 
                             <tr>
                              
@@ -157,7 +158,7 @@ table {
                 </tr>
             </table>
             <?php } ?>
-            <table class="table" style="font-size: 15px;">
+            <table class="table" style="font-size: 16px;">
 
                             <tr>
                                 <td width="400"><b>Amount :</b> Rs.<?php echo $donationInfo->amount; ?>/- (<?php echo getIndianCurrency(floatval($donationInfo->amount)).' only'; ?>)</td>
@@ -174,7 +175,7 @@ table {
 
                         </table>
 
-                        <h4 style="margin-left:450px"> Collected By : <?php echo $donationInfo->type; ?> </h4>
+                        <h4 style="margin-left:280px"> Collected By : <?php echo $donationInfo->type; ?>ffff </h4>
                         <br/>
                           
                 

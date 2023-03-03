@@ -514,3 +514,6 @@ $route['updateRashi'] = "setting/updateRashi";
 $route['getSevaInfoByDonationId'] = 'DailyPooja/getSevaInfoByDonationId';
 
 
+$route['addDonationType'] = 'setting/addDonationType';
+
+$route['deleteDonationType'] = 'DailyPooja/deleteDonationType';

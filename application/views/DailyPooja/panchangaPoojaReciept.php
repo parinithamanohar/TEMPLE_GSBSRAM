@@ -53,9 +53,9 @@ table{
                         <img  class="mt-2" width="100" height="90" src="<?php echo $companyLogo; ?>" alt="logo">
                     </td>
                     <td width="700" style="text-align:center;">
-                        <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
-                        <b style="font-size: 25px;margin-bottom: 2px;">SHRI RAMA MANDIRA</b><br/>
-                        <b style="font-size: 13px;margin-bottom: 2px;">Near Kalmady Bridge, Malpe Main Road Udupi District,Karnataka, India 576108</b>
+                        <!-- <b style="font-size: 25px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/> -->
+                        <b style="font-size: 40px;margin-bottom: 2px;">ಶ್ರೀ ರಾಮ ಮಂದಿರ</b><br/>
+                        <p style="font-size: 18px;margin-bottom: 2px;">ಕಲ್ಮಾಡಿ ಸೇತುವೆ ಬಳಿ, ಮಲ್ಪೆ ಮುಖ್ಯ ರಸ್ತೆ ಉಡುಪಿ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ, ಭಾರತ 576108</p>
                         <span style="font-size: 13px;margin-bottom: 2px;">
                         </span><br/>
                         <br/>

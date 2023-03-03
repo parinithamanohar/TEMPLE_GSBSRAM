@@ -542,6 +542,23 @@
                         </div>
 
 
+                        <div class="col-lg-6 col-12 mt-2">
+                            <div class="form-group">
+                                <label for="purpose">Donation Type</label>
+                                <select class="form-control selectpicker" id="" name="type_of_donation"
+                                    data-live-search="true">
+                                    <option value=""> Select </option>
+                                    <option value=""> ALL</option>
+                                    <?php if(!empty($donationTypeInfo)) {
+                                                             foreach($donationTypeInfo as $data ){ ?>
+                                    <option value="<?php echo $data->donation_type;?>">
+                                        <?php echo $data->donation_type;?></option>
+                                    <?php }}?>
+                                </select>
+                            </div>
+                        </div>
+
+
 
                     </div>
             </div>

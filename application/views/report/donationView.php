@@ -50,7 +50,7 @@ u {
         <div class="row" >
             <table style="width: 100%;border-collapse: collapse;">
                 <tr>
-                    <th style="border: 1px solid black;text-align: center;width: 100px;" colspan="8">DONATION/SEVA REPORT</th>
+                    <th style="border: 1px solid black;text-align: center;width: 100px;" colspan="9">DONATION/SEVA REPORT</th>
                 </tr>
                 <tr>
                     <th style="border: 1px solid black;text-align: center;width: 100px;">SL. NO.</th>
@@ -60,6 +60,7 @@ u {
                     <th style="border: 1px solid black;text-align: center;width: 100px;">TYPE</th>
                     <th style="border: 1px solid black;text-align: center;width: 100px;">PURPOSE</th>
                     <th style="border: 1px solid black;text-align: center;width: 100px;">SEVA</th>
+                    <th style="border: 1px solid black;text-align: center;width: 100px;">DONATION TYPE</th>
                     <th style="border: 1px solid black;text-align: center;width: 100px;">AMOUNT</th>
 
                     <!-- <th style="text-align: center;width: 200px;"></th> -->
@@ -93,13 +94,14 @@ u {
                             <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $donation->donation_type; ?></th>
                             <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $donation->purpose_name; ?></th>
                             <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $donation->seva_name; ?></th>
-                            <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $donation->amount; ?></th>
+                            <th style="border: 1px solid black;text-align: left;width: 200px;"><?php echo $donation->type_of_donation; ?></th>
+                            <th style="border: 1px solid black;text-align: center;width: 200px;"><?php echo $donation->amount; ?></th>
 
                             <!-- <th style="text-align: center;width: 130px;"></th> -->
                             </tr>        
                             <?php        
                         } ?>
-                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="padding-top: 20px;font-size:20px;width: 200px;"><b>Total : <?php echo $total_amount ?></b></td></tr>
+                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="padding-top: 20px;font-size:20px;width: 200px;"><b>Total : <?php echo $total_amount ?></b></td></tr>
                     <?php }
                 
                 ?>

@@ -393,4 +393,22 @@ class Setting_model extends CI_Model
         return TRUE;
     }
 
+
+
+    public function addDonationType($donation) {
+        $this->db->trans_start();
+        $this->db->insert('tbl_donation_type', $donation);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+
+    public function getAllDonationTypeInfo($company_id) {
+        $this->db->from('tbl_donation_type as type');
+        $this->db->where('type.is_deleted', 0);
+        $this->db->where('type.company_id',$company_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
