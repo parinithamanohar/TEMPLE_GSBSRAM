@@ -126,7 +126,7 @@ table {
                 </tr>
                 <tr>
                     <th>Total Amount</th>
-                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></th>
+                    <th style="text-align: right;"><?php echo $donationInfo->amount; ?></th>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 13px;"><b><span style="text-transform: none;"></span></b></td>
@@ -141,7 +141,7 @@ table {
                 </tr> 
                 <tr>
                     <td style="text-align: left;">
-                                    <b><?php echo $donationInfo->purpose_name ?></b><br/>
+                                    <b><?php echo $donationInfo->type_of_donation ?></b><br/>
                                                                   
                                 </td>
                     <td style="text-align: right;">
@@ -151,7 +151,7 @@ table {
                 </tr>
                 <tr>
                     <th>Total Amount</th>
-                    <th style="text-align: right;"><?php echo sprintf('%0.2f', $donationInfo->amount); ?></th>
+                    <th style="text-align: right;"><?php echo $donationInfo->amount; ?></th>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 13px;"><b><span style="text-transform: none;"></span></b></td>
@@ -175,7 +175,7 @@ table {
 
                         </table>
 
-                        <h4 style="margin-left:280px"> Collected By : <?php echo $donationInfo->type; ?>ffff </h4>
+                        <h4 style="margin-left:280px"> Collected By : <?php echo $donationInfo->type; ?></h4>
                         <br/>
                           
                 
