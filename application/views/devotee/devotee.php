@@ -230,7 +230,7 @@ if ($error) {
                                             <label for="fname">Full Name*</label>
                                             <input type="text" class="form-control required"
                                                 value="<?php echo set_value('fname'); ?>" id="devotee_name"
-                                                onkeydown="return alphaOnly(event)" name="devotee_name" maxlength="128"
+                                                name="devotee_name" 
                                                 placeholder="Enter Full Name" autocomplete="off" required>
                                         </div>
                                     </div>
