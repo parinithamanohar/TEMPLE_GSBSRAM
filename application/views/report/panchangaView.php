@@ -63,6 +63,7 @@ u {
                     <th style="border: 1px solid black;text-align: center;">Gothra</th>
                     <th style="border: 1px solid black;text-align: center;">Occasion</th>
                     <th style="border: 1px solid black;text-align: center;">Paksha</th>
+                    <th style="border: 1px solid black;text-align: center;">Remarks</th>
                     <th style="border: 1px solid black;text-align: center;">Amount</th>
 
 
@@ -89,6 +90,7 @@ u {
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->gothra; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->occation; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->paksha; ?></th>
+                            <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->remarks; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->amount; ?></th>
 
                             </tr>        

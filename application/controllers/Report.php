@@ -629,8 +629,8 @@ public function downloadDevotee(){
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Rashi');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Gothra');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Ocassion');
-                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Amount');
-                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Remarks');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Remarks');
+                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Amount');
                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Created Date');
         
                             // $filter['report_type']= "Asset";
@@ -655,8 +655,8 @@ public function downloadDevotee(){
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $dp->rashi);
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $dp->gothra);
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, $dp->occation);
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, $dp->amount);
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, $dp->remarks);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, $dp->remarks);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, $dp->amount);
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, date('d-m-Y',strtotime($dp->created_date_time)));
                                     $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                     $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':J'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -768,8 +768,8 @@ public function downloadDevotee(){
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Gothra');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Ocassion');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Paksha');
-                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Amount');
-                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Remarks');
+                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Remarks');
+                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Amount');
                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, 'Created Date');
             
                                 // $filter['report_type']= "Asset";
@@ -791,8 +791,8 @@ public function downloadDevotee(){
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, $dp->gothra);
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, $dp->occation);
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, $dp->paksha);
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, $dp->amount);
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, $dp->remarks);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, $dp->remarks);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, $dp->amount);
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, date('d-m-Y',strtotime($dp->created_date_time)));
                                         $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                         $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':L'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
