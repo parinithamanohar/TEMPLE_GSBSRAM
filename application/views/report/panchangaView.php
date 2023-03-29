@@ -50,10 +50,11 @@ u {
         <div class="row" >
             <table style="width: 100%;border-collapse: collapse;">
                 <tr>
-                    <th style="border: 1px solid black;text-align: center;width: 100px;" colspan="13">PANCHANGA POOJA REPORT</th>
+                    <th style="border: 1px solid black;text-align: center;width: 100px;" colspan="14">PANCHANGA POOJA REPORT</th>
                 </tr>
                 <tr>
                     <th style="border: 1px solid black;text-align: center;">SL. NO.</th>
+                    <th style="border: 1px solid black;text-align: center;">Receipt No.</th>
                     <th style="border: 1px solid black;text-align: center;">Seva By</th>
                     <th style="border: 1px solid black;text-align: center;">Pooja Type</th>
                     <th style="border: 1px solid black;text-align: center;">Tithi</th>
@@ -61,11 +62,10 @@ u {
                     <th style="border: 1px solid black;text-align: center;">Masa</th>
                     <th style="border: 1px solid black;text-align: center;">Rashi</th>
                     <th style="border: 1px solid black;text-align: center;">Gothra</th>
-                    <th style="border: 1px solid black;text-align: center;">Occasion</th>
                     <th style="border: 1px solid black;text-align: center;">Paksha</th>
+                    <th style="border: 1px solid black;text-align: center;">Occasion</th>
                     <th style="border: 1px solid black;text-align: center;">Remarks</th>
                     <th style="border: 1px solid black;text-align: center;">Amount</th>
-
 
                 </tr>
                 <?php 
@@ -81,6 +81,7 @@ u {
                             ?>  
                             <tr>
                             <th style="border: 1px solid black;text-align: center"><?php echo $j++; ?></th>
+                            <th style="border: 1px solid black;text-align: center;"><?php echo $pooja->row_id; ?></th>
                             <th style="border: 1px solid black;text-align: center;"><?php echo $pooja->devotee_name; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->event_type; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->tithi; ?></th>
@@ -88,8 +89,8 @@ u {
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->masa; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->rashi; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->gothra; ?></th>
-                            <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->occation; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->paksha; ?></th>
+                            <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->occation; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->remarks; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->amount; ?></th>
 

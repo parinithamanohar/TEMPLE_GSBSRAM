@@ -54,6 +54,7 @@ u {
                 </tr>
                 <tr>
                     <th style="border: 1px solid black;text-align: center;">SL. NO.</th>
+                    <th style="border: 1px solid black;text-align: center;">Receipt No.</th>
                     <th style="border: 1px solid black;text-align: center;">Seva By</th>
                     <th style="border: 1px solid black;text-align: center;">Pooja Type</th>
                     <th style="border: 1px solid black;text-align: center;">Date</th>
@@ -84,6 +85,7 @@ u {
                             ?>  
                             <tr>
                             <th style="border: 1px solid black;text-align: center"><?php echo $j++; ?></th>
+                            <th style="border: 1px solid black;text-align: center;"><?php echo $pooja->row_id; ?></th>
                             <th style="border: 1px solid black;text-align: center;"><?php echo $pooja->devotee_name; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $pooja->event_type; ?></th>
                             <th style="border: 1px solid black;text-align: left;"><?php echo $event_date; ?></th>

@@ -175,6 +175,7 @@ class DailyPooja_model extends CI_Model
 
         $this->db->where('dailypooja.event_type', 'Panchanga');
         $this->db->where('dailypooja.is_deleted', 0);
+        $this->db->order_by('dailypooja.row_id', 'desc');
         $query = $this->db->get();      
         return $query->result();
     } 
@@ -290,6 +291,7 @@ function getDPDetailsMonthForReport($month,$filter)
     }
     $this->db->where('dailypooja.event_type', 'Date');
     $this->db->where('dailypooja.is_deleted', 0);
+    $this->db->order_by('dailypooja.row_id', 'desc');
     $query = $this->db->get();      
     return $query->result();
 } 
@@ -430,6 +432,8 @@ function addDonationInfoToDB($donationInfo)
 
 function donationInfoForReport($filter='',$company_id)
 {
+    $this->db->select('BaseTbl.row_id,BaseTbl.date,BaseTbl.amount,BaseTbl.devotee_name,BaseTbl.name,BaseTbl.donation_type,
+    BaseTbl.seva_name,BaseTbl.type_of_donation,purpose.purpose_name,BaseTbl.email,BaseTbl.note,BaseTbl.address');
     $this->db->from('tbl_donation_info as BaseTbl');
     $this->db->join('tbl_purpose as purpose','purpose.row_id = BaseTbl.purpose','left');
     // $this->db->join('tbl_seva as seva_base','seva_base.row_id=seva.seva_name_row_id','left');
