@@ -1019,12 +1019,13 @@ public function downloadDevotee(){
                                         $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
                                         
                                         $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(35);
-                                        $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-                                        $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
+                                        $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
+                                        $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
                                         $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(25);
-                                        $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(35);
-                                        $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
+                                        $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(25);
+                                        $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(35);
                                         $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
+                                        $this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
 
                                         $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
                                         $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -1034,12 +1035,13 @@ public function downloadDevotee(){
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Name');
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Email');
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Address');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Collected By');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Type');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Purpose');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Seva');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Donation Type');
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Amount');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Note');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Collected By');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row, 'Type');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row, 'Purpose');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row, 'Seva');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'Donation Type');
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, 'Amount');
                                       
                             
                                         $sl = 1;
@@ -1062,17 +1064,18 @@ public function downloadDevotee(){
                                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $donation->devotee_name);
                                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $donation->email);
                                                 $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $donation->address);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $donation->name);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row,$donation->donation_type);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row,$donation->purpose_name);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row,$donation->seva_name);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row,$donation->type_of_donation);
-                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row,$donation->amount);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $donation->note);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, $donation->name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('I'.$excel_row,$donation->donation_type);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('J'.$excel_row,$donation->purpose_name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('K'.$excel_row,$donation->seva_name);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row,$donation->type_of_donation);
+                                                $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row,$donation->amount);
                             
                                                 $this->excel->getActiveSheet()->getStyle('A'.$excel_row.':C'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                                $this->excel->getActiveSheet()->getStyle('H'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                                 $this->excel->getActiveSheet()->getStyle('I'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                                $this->excel->getActiveSheet()->getStyle('L'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                                $this->excel->getActiveSheet()->getStyle('J'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                                $this->excel->getActiveSheet()->getStyle('M'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                                 $excel_row++;
                                             }
                                             $excel_row++;
