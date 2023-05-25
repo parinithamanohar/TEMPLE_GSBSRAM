@@ -52,7 +52,7 @@ if ($error) {
                                 <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="account_type">Expense Name*</label>
-                                            <select class="form-control " id="expense_type" name="expense_type" required>
+                                            <select class="form-control selectpicker" id="expense_type" name="expense_type" data-live-search="true" required>
                                             <option value="<?php echo  $expenseInfo->expense_type; ?>">Selected:
                                                 <?php echo $expenseInfo->expense_type; ?></option>
                                                 <?php if(!empty($expenseNameInfo)) {
@@ -80,8 +80,8 @@ if ($error) {
 
                                     <div class="col-lg-6 col-12 committee_name">
                                         <div class="form-group">
-                                            <label for="purpose">Committee</label>
-                                            <select class="form-control " id="committee_name" name="committee_name">
+                                            <label for="purpose">Committee*</label>
+                                            <select class="form-control selectpicker" id="committee_name" name="committee_name" data-live-search="true">
                                             <option value="<?php echo  $expenseInfo->committee_id; ?>">Selected:
                                                 <?php echo $expenseInfo->committee_name; ?></option>
                                                 <?php if(!empty($committeeInfo)) {
@@ -95,8 +95,8 @@ if ($error) {
 
                                     <div class="col-lg-6 col-12 event_type">
                                         <div class="form-group">
-                                            <label for="purpose">Event Type</label>
-                                            <select class="form-control " id="event_type" name="event_type">
+                                            <label for="purpose">Event Type*</label>
+                                            <select class="form-control selectpicker" id="event_type" name="event_type" data-live-search="true">
                                             <option value="<?php echo  $expenseInfo->event_type; ?>">Selected:
                                                 <?php echo $expenseInfo->event_type; ?></option>
                                                 <?php if(!empty($eventInfo)) {
@@ -183,7 +183,7 @@ if ($error) {
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group required">
                                         <label for="party">Party</label>
-                                        <select class="form-control " id="party" name="party">
+                                        <select class="form-control selectpicker" id="party" name="party" data-live-search="true">
                                             <option value="<?php echo $expenseInfo->party_id; ?>">
                                                 Selected:<?php echo $expenseInfo->party_name; ?>
                                             </option>
@@ -195,7 +195,7 @@ if ($error) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-12">
+                                <!-- <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="account_type">Year*</label>
                                             <select class="form-control " id="year" name="year"
@@ -209,12 +209,20 @@ if ($error) {
                                                 <option value="2026">2026</option>
                                             </select>
                                         </div>
+                                    </div> -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact_number_two">Date*</label>
+                                            <input type="text" class="form-control datepicker" id="" value="<?php echo date('d-m-Y',strtotime($expenseInfo->expense_date)); ?>"
+                                                name="year" placeholder="Enter Date"
+                                                autocomplete="off" required>
+                                        </div>
                                     </div>
                                 <div class="col-lg-6 col-12">
                                     <div class="form-group">
-                                        <label for="comments">Comments</label>
+                                        <label for="comments">Notes</label>
                                         <textarea class="form-control " name="comments" id="comments" rows="2"
-                                            placeholder="Comments"
+                                            placeholder="Notes"
                                             autocomplete="off"> <?php echo $expenseInfo->comments; ?></textarea>
                                     </div>
                                 </div>
@@ -267,13 +275,13 @@ jQuery(document).ready(function() {
     type_of_expenses = $('#type_of_expense').val();
 
 if (type_of_expenses == 'Event') {
-        $('.committee_name').show();
-        $("#committee_name").prop('required', true);
+        $('.committee_name').hide();
+        $("#committee_name").prop('required', false);
         $('.event_type').show();
         $("#event_type").prop('required', true);
     } else {
-        $('.committee_name').hide();
-        $("#committee_name").prop('required', false);
+        $('.committee_name').show();
+        $("#committee_name").prop('required', true);
         $('.event_type').hide();
         $("#event_type").prop('required', false);
     }
@@ -323,13 +331,13 @@ $("#account_type").change(function() {
 $("#type_of_expense").change(function() {
     type_of_expense = $('#type_of_expense').val();
     if (type_of_expense == 'Event') {
-        $('.committee_name').show();
-        $("#committee_name").prop('required', true);
+        $('.committee_name').hide();
+        $("#committee_name").prop('required', false);
         $('.event_type').show();
         $("#event_type").prop('required', true);
     } else {
-        $('.committee_name').hide();
-        $("#committee_name").prop('required', false);
+        $('.committee_name').show();
+        $("#committee_name").prop('required', true);
         $('.event_type').hide();
         $("#event_type").prop('required', false);
     }

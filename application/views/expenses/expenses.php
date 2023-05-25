@@ -176,7 +176,7 @@ if ($error) {
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="account_type">Expense Name*</label>
-                                            <select class="form-control " id="expense_type" name="expense_type"
+                                            <select class="form-control selectpicker" data-live-search="true" id="expense_type" name="expense_type"
                                                 required>
                                                 <option value=""> Select Expense Name
                                                 </option>
@@ -204,8 +204,8 @@ if ($error) {
 
                                     <div class="col-lg-6 col-12 committee_name">
                                         <div class="form-group">
-                                            <label for="purpose">Committee</label>
-                                            <select class="form-control " id="committee_name" name="committee_name">
+                                            <label for="purpose">Committee*</label>
+                                            <select class="form-control selectpicker" id="committee_name" name="committee_name" data-live-search="true">
                                                 <option value=""> Select Committee </option>
                                                 <?php if(!empty($committeeInfo)) {
                                                              foreach($committeeInfo as $role ){?>
@@ -218,8 +218,8 @@ if ($error) {
 
                                     <div class="col-lg-6 col-12 event_type">
                                         <div class="form-group">
-                                            <label for="purpose">Event Type</label>
-                                            <select class="form-control " id="event_type" name="event_type">
+                                            <label for="purpose">Event Type*</label>
+                                            <select class="form-control selectpicker" id="event_type" name="event_type" data-live-search="true">
                                                 <option value=""> Select Event </option>
                                                 <?php if(!empty($eventInfo)) {
                                                              foreach($eventInfo as $role ){?>
@@ -294,7 +294,7 @@ if ($error) {
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group required">
                                             <label for="party">Party</label>
-                                            <select class="form-control " id="party" name="party">
+                                            <select class="form-control selectpicker" id="party" name="party" data-live-search="true">
                                                 <option value=""> Select Party
                                                 </option>
                                                 <?php if(!empty($partyInfo)) {
@@ -306,7 +306,7 @@ if ($error) {
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-12">
+                                    <!-- <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="account_type">Year*</label>
                                             <select class="form-control " id="year" name="year" required>
@@ -317,13 +317,22 @@ if ($error) {
                                                 <option value="2026">2026</option>
                                             </select>
                                         </div>
+                                    </div> -->
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact_number_two">Date*</label>
+                                            <input type="text" class="form-control datepicker" id="" value=""
+                                                name="year" placeholder="Enter Date"
+                                                autocomplete="off" required>
+                                        </div>
                                     </div>
 
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
-                                            <label for="comments">Comments</label>
+                                            <label for="comments">Notes</label>
                                             <textarea class="form-control " name="comments" id="comments" rows="2"
-                                                placeholder="Comments" autocomplete="off"></textarea>
+                                                placeholder="Notes" autocomplete="off"></textarea>
                                         </div>
                                     </div>
 
@@ -387,7 +396,7 @@ jQuery(document).ready(function() {
     });
     jQuery('.datepicker').datepicker({
         autoclose: true,
-        format: "yyyy-mm-dd"
+        format: "dd-mm-yyyy"
     });
 });
 
@@ -407,13 +416,13 @@ $("#tran_type").change(function() {
 $("#type_of_expense").change(function() {
     type_of_expense = $('#type_of_expense').val();
     if (type_of_expense == 'Event') {
-        $('.committee_name').show();
-        $("#committee_name").prop('required', true);
+        $('.committee_name').hide();
+        $("#committee_name").prop('required', false);
         $('.event_type').show();
         $("#event_type").prop('required', true);
     } else {
-        $('.committee_name').hide();
-        $("#committee_name").prop('required', false);
+        $('.committee_name').show();
+        $("#committee_name").prop('required', true);
         $('.event_type').hide();
         $("#event_type").prop('required', false);
     }

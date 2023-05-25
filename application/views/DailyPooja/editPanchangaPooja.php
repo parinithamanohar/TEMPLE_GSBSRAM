@@ -247,9 +247,9 @@ if ($error) {
 
                                 <div class="col-lg-12 col-12">
                                     <div class="form-group">
-                                        <label for="role">Remarks</label>
+                                        <label for="role">Notes</label>
                                         <textarea class="form-control required" value="<?php echo $dpInfo->remarks?>" name="remarks" id="remarks"
-                                            rows="4" placeholder="Remarks" autocomplete="off"><?php echo $dpInfo->remarks?></textarea>
+                                            rows="4" placeholder="Notes" autocomplete="off"><?php echo $dpInfo->remarks?></textarea>
                                     </div>
                                 </div>
 

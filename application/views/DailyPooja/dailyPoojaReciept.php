@@ -135,7 +135,7 @@ table {
                     <th style="text-align: right;"><?php echo sprintf('%0.2f', $dpInfo->amount); ?></th>
                 </tr>
                 <tr>
-                    <td colspan="2" style="font-size: 13px;"><br><b>: <span
+                    <td colspan="2" style="font-size: 13px;"><br><b>Amount: <span
                                 style="text-transform: none;"><?php echo getIndianCurrency(floatval($dpInfo->amount)).' only'; ?></span></b>
                     </td>
                 </tr>

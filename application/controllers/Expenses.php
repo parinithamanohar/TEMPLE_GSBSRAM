@@ -93,8 +93,8 @@ class Expenses extends BaseController
                 }
 
 
-                    $expensesInfo = array('account_type'=>$account_type,'year' =>$year,'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
-                    'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
+                    $expensesInfo = array('account_type'=>$account_type,'year' =>date('Y',strtotime($year)),'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+                    'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d',strtotime($year)));
                          
                 $result = $this->expenses_model->addExpenses($expensesInfo);
                 if($result > 0){
@@ -161,8 +161,8 @@ class Expenses extends BaseController
                     $com_name = '';
                 }
 
-                $expensesInfo = array('account_type'=>$account_type,'year'=>$year,'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
-                'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d H:i:s'));
+                $expensesInfo = array('account_type'=>$account_type,'year'=>date('Y',strtotime($year)),'event_type'=>$event_type,'committee_name'=>$com_name,'type_of_expense'=>$type_of_expense,'committee_id'=> $committee_name,'amount'=>$expense_amount,'invoice_no'=>$invoice_no,'comments'=>$comments,'party_id'=>$party_id,
+                'expense_type'=>$expense_type,'cash_row_id'=>$cash_row_id,'bank_row_id'=>$bank_row_id,'company_id'=>$this->company_id,'created_by'=>$this->employee_id, 'created_date_time'=>date('Y-m-d H:i:s'),'expense_date'=>date('Y-m-d',strtotime($year)));
                     
                 $result = $this->expenses_model->updateExpense($expensesInfo,$row_id);
                 if($result > 0){

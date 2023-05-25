@@ -276,9 +276,9 @@ if ($success) {
 
                                 <div class="col-lg-12 col-12">
                                     <div class="form-group">
-                                        <label for="role">Remarks</label>
+                                        <label for="role">Notes</label>
                                         <textarea class="form-control required" value="" name="remarks" id="remarks"
-                                            rows="4" placeholder="Remarks" autocomplete="off"></textarea>
+                                            rows="4" placeholder="Notes" autocomplete="off"></textarea>
                                     </div>
                                 </div>
 

@@ -432,7 +432,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-sm-12 mt-2">
+                        <!-- <div class="col-md-6 col-sm-12 mt-2">
                             <div class="form-group">
                                 <label for="post_status">Year</label>
                                 <select class="form-control required" id="" name="year">
@@ -443,7 +443,7 @@
                                     <option value="2026">2026</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
             </div>

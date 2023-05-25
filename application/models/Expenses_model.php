@@ -114,7 +114,7 @@ class Expenses_model extends CI_Model
      function getExpenseInfoById($row_id)
      {
      
-         $this->db->select('BaseTbl.row_id,BaseTbl.year,BaseTbl.type_of_expense,BaseTbl.committee_id,BaseTbl.committee_name,BaseTbl.event_type, BaseTbl.account_type, BaseTbl.amount, BaseTbl.invoice_no, BaseTbl.expense_type, BaseTbl.comments,BaseTbl.party_id,party.party_name,bank.row_id as bank_id,bank.bank_name,cash.row_id as cash_id,cash.cash_account_name');
+         $this->db->select('BaseTbl.row_id,BaseTbl.expense_date,BaseTbl.year,BaseTbl.type_of_expense,BaseTbl.committee_id,BaseTbl.committee_name,BaseTbl.event_type, BaseTbl.account_type, BaseTbl.amount, BaseTbl.invoice_no, BaseTbl.expense_type, BaseTbl.comments,BaseTbl.party_id,party.party_name,bank.row_id as bank_id,bank.bank_name,cash.row_id as cash_id,cash.cash_account_name');
          $this->db->join('tbl_party_info as party','party.row_id = BaseTbl.party_id','left');
          $this->db->join('tbl_bank_info as bank','bank.row_id = BaseTbl.bank_row_id','left');
          $this->db->join('tbl_cash_account as cash','cash.row_id = BaseTbl.cash_row_id','left');

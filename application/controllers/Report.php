@@ -846,7 +846,7 @@ public function downloadDevotee(){
                                     $this->excel->getActiveSheet()->setTitle($sheet);
                                     $this->excel->getActiveSheet()->getPageSetup()->setPrintArea('A1:N500');
                                     $this->excel->getActiveSheet()->setCellValue('A1', EXCEL_TITLE);
-                                    $this->excel->getActiveSheet()->setCellValue('A2',"Expense Report  - $year");
+                                    $this->excel->getActiveSheet()->setCellValue('A2',"Expense Report");
                                     $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
                                     $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
                                     $this->excel->getActiveSheet()->mergeCells('A1:G1');
@@ -863,7 +863,7 @@ public function downloadDevotee(){
                                     $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(28);
                                     $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(28);
                                     $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
-                                    $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+                                    $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
                                     
                                     $this->excel->getActiveSheet()->getStyle('A3:G3')->getFont()->setBold(true);
                                     $this->excel->getActiveSheet()->getStyle('A3:G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -873,7 +873,7 @@ public function downloadDevotee(){
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Event Type');
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Amount');
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Expense Date');
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Year');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Notes');
                                     $filter['report_type']= "Asset";
                                     // $filter['stream_name']= $stream[$sheet];
                                     if(!empty($expense_fromDate)) {
@@ -893,7 +893,7 @@ public function downloadDevotee(){
                                     }else{
                                         $filter['event_type']= $event_type;  
                                     }
-                                    $filter['year']= $year;
+                                    // $filter['year']= $year;
 
                     
                                     $sl = 1;
@@ -916,10 +916,10 @@ public function downloadDevotee(){
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$expense->event_type);
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $expense->amount);
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $expense_date);
-                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $expense->year);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $expense->comments);
 
                                             $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                            $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':G'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                            $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':F'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                             $excel_row++;
                                         }
                                         $excel_row++;
