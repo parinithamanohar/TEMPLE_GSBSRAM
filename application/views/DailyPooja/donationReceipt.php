@@ -82,7 +82,7 @@ table {
                                         style="color: red;"><?php echo $donationInfo->row_id; ?></span></td>
                             </tr>
                             <tr>
-                                <td><b>Receipt Date :</b> <?php echo date('d-m-Y'); ?></td>
+                                <td><b>Receipt Date :</b> <?php echo date('d-m-Y',strtotime($donationInfo->created_date_time)); ?></td>
                             </tr>
 
                             <tr>
