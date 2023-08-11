@@ -270,10 +270,10 @@ if ($error) {
 
                                                 <div class="form-group col-md-6 devotee_name">
                                                     <label for="fname">Devotee Name*</label>
-                                                    <input class="form-control is-valid mobile-width " type="text" onkeydown="return alphaOnly(event)"
+                                                    <input class="form-control is-valid mobile-width " type="text"
                                                         name="devotee_name" id="devotee_name" value=""
                                                         class="form-control input-sm pull-right "
-                                                        style="text-transform: uppercase" placeholder="Name"
+                                                        style="" placeholder="Name"
                                                         autocomplete="off" required>
                                                 </div>
 

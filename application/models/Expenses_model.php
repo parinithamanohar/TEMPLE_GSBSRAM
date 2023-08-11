@@ -216,6 +216,28 @@ class Expenses_model extends CI_Model
        $result = $query->result();        
        return $result;
    }
+
+
+   function addDocument($certificateInfo){
+    $this->db->trans_start();
+    $this->db->insert('tbl_attachment_document_details', $certificateInfo);
+    $insert_id = $this->db->insert_id(); 
+    $this->db->trans_complete();
+    return $insert_id; 
+}
+
+
+       function getAttachmentDocumentInfo($expense_id){
+         $this->db->from('tbl_attachment_document_details as doc'); 
+         $this->db->where('doc.expense_row_id',$expense_id);
+         $this->db->where('doc.is_deleted', 0);
+         $query = $this->db->get();
+         $result = $query->result();        
+         return $result;  
+     }
+
+
+
 }
 
   

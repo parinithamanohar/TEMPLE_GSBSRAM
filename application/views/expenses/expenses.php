@@ -125,6 +125,12 @@ if ($error) {
                                     <a class="btn btn-sm btn-danger deleteExpense" href="#"
                                         data-expense_id="<?php echo $expense->row_id; ?>" title="Delete"><i
                                             class="fas fa-trash"></i></a>
+                                     <?php $attachmentInfo = $expenses_model->getAttachmentDocumentInfo($expense->row_id); 
+                                            foreach($attachmentInfo as $doc){ ?>
+                                            <a href="<?php echo base_url(); ?><?php echo $doc->doc_path; ?>"
+                                            download target="_blank" class="btn btn_download p-2"><i
+                                            class="fa fa-download" style="font-size: 15px;"></i></a>
+                                            <?php } ?>        
 
                                 </td>
                             </tr>
@@ -168,7 +174,7 @@ if ($error) {
                     <div class="modal-body m-2">
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addExpenses" action="<?php echo base_url() ?>addExpenses" method="post"
-                            role="form">
+                            role="form" enctype="multipart/form-data">
                             <!-- Default Light Table -->
                             <div class="row form-contents">
                                 <div class="row">
@@ -176,8 +182,8 @@ if ($error) {
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="account_type">Expense Name*</label>
-                                            <select class="form-control selectpicker" data-live-search="true" id="expense_type" name="expense_type"
-                                                required>
+                                            <select class="form-control selectpicker" data-live-search="true"
+                                                id="expense_type" name="expense_type" required>
                                                 <option value=""> Select Expense Name
                                                 </option>
                                                 <?php if(!empty($expenseNameInfo)) {
@@ -205,7 +211,8 @@ if ($error) {
                                     <div class="col-lg-6 col-12 committee_name">
                                         <div class="form-group">
                                             <label for="purpose">Committee*</label>
-                                            <select class="form-control selectpicker" id="committee_name" name="committee_name" data-live-search="true">
+                                            <select class="form-control selectpicker" id="committee_name"
+                                                name="committee_name" data-live-search="true">
                                                 <option value=""> Select Committee </option>
                                                 <?php if(!empty($committeeInfo)) {
                                                              foreach($committeeInfo as $role ){?>
@@ -219,7 +226,8 @@ if ($error) {
                                     <div class="col-lg-6 col-12 event_type">
                                         <div class="form-group">
                                             <label for="purpose">Event Type*</label>
-                                            <select class="form-control selectpicker" id="event_type" name="event_type" data-live-search="true">
+                                            <select class="form-control selectpicker" id="event_type" name="event_type"
+                                                data-live-search="true">
                                                 <option value=""> Select Event </option>
                                                 <?php if(!empty($eventInfo)) {
                                                              foreach($eventInfo as $role ){?>
@@ -294,7 +302,8 @@ if ($error) {
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group required">
                                             <label for="party">Party</label>
-                                            <select class="form-control selectpicker" id="party" name="party" data-live-search="true">
+                                            <select class="form-control selectpicker" id="party" name="party"
+                                                data-live-search="true">
                                                 <option value=""> Select Party
                                                 </option>
                                                 <?php if(!empty($partyInfo)) {
@@ -323,8 +332,7 @@ if ($error) {
                                         <div class="form-group">
                                             <label for="contact_number_two">Date*</label>
                                             <input type="text" class="form-control datepicker" id="" value=""
-                                                name="year" placeholder="Enter Date"
-                                                autocomplete="off" required>
+                                                name="year" placeholder="Enter Date" autocomplete="off" required>
                                         </div>
                                     </div>
 
@@ -333,6 +341,31 @@ if ($error) {
                                             <label for="comments">Notes</label>
                                             <textarea class="form-control " name="comments" id="comments" rows="2"
                                                 placeholder="Notes" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact_number_two">Attachment 1</label>
+                                            <input type="hidden" value="attachment_1" name="documentName[]" id=""/>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg, application/pdf" class="form-control-sm" id="" name="userfile[]">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact_number_two">Attachment 2</label>
+                                            <input type="hidden" value="attachment_2" name="documentName[]" id=""/>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg, application/pdf" class="form-control-sm" id="" name="userfile[]">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact_number_two">Attachment 3</label>
+                                            <input type="hidden" value="attachment_3" name="documentName[]" id=""/>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg, application/pdf" class="form-control-sm" id="" name="userfile[]">
                                         </div>
                                     </div>
 
@@ -373,10 +406,10 @@ function alphaOnly(event) {
 
 jQuery(document).ready(function() {
 
-        $('.committee_name').hide();
-        $("#committee_name").prop('required', false);
-        $('.event_type').hide();
-        $("#event_type").prop('required', false);
+    $('.committee_name').hide();
+    $("#committee_name").prop('required', false);
+    $('.event_type').hide();
+    $("#event_type").prop('required', false);
 
     $("#bank_type_select").hide();
     $("#cash_type_select").hide();
