@@ -291,7 +291,7 @@ function getDPDetailsMonthForReport($month,$filter)
     }
     $this->db->where('dailypooja.event_type', 'Date');
     $this->db->where('dailypooja.is_deleted', 0);
-    $this->db->order_by('dailypooja.row_id', 'ASC');
+    $this->db->order_by('dailypooja.date', 'ASC');
     $query = $this->db->get();      
     return $query->result();
 } 
