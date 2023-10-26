@@ -431,6 +431,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6 col-sm-12 mt-2">
+                            <div class="form-group">
+                                <label for="post_status">Committe</label>
+                                <select class="form-control required" id="" name="committe_id">
+                                    <option value="">Select Committee</option>
+                                    <option value="">ALL</option>
+                                    <!-- <option value="other">OTHER</option> -->
+                                    <?php foreach($committeeInfo as $committee) { ?>
+                                    <option value="<?php echo $committee->type ?>"><?php echo $committee->type ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <!-- <div class="col-md-6 col-sm-12 mt-2">
                             <div class="form-group">

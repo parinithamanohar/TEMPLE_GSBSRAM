@@ -35,12 +35,15 @@ class Expenses extends BaseController
             // $devotee_id = $this->security->xss_clean($this->input->post('devotee_id'));  
             $account_type = $this->security->xss_clean($this->input->post('account_type'));
             $expense_type = $this->security->xss_clean($this->input->post('expense_type'));
+            $event_type = $this->security->xss_clean($this->input->post('event_type'));
             // $data['devotee_id'] = $devotee_id;
             $data['account_type'] = $account_type;
             $data['expense_type'] = $expense_type;
+            $data['event_type'] = $event_type;
             // $filter['devotee_id'] = $devotee_id;
             $filter['account_type'] = $account_type;
             $filter['expense_type'] = $expense_type;
+            $filter['event_type'] = $event_type;
            
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;

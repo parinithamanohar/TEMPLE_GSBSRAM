@@ -672,7 +672,7 @@ public function downloadDevotee(){
                             
                        
                         
-                        $filename ='Date_Pooja_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
+                        $filename ='Date_Pooja_Report_'.date('d-m-Y').'.xls'; //save our workbook as this file name
                         header('Content-Type: application/vnd.ms-excel'); //mime type
                         header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
                         header('Cache-Control: max-age=0'); //no cache
@@ -745,20 +745,20 @@ public function downloadDevotee(){
                                 
                                 $excel_row = 3;
                                 $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
-                                $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+                                $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
                                 $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(35);
-                                $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+                                $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
                                 $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
                                 
-                                $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(25);
-                                $this->excel->getActiveSheet()->getColumnDimension('N')->setWidth(25);
+                                $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+                                $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+                                $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+                                $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+                                $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
+                                $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(30);
+                                $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
+                                $this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(15);
+                                $this->excel->getActiveSheet()->getColumnDimension('N')->setWidth(15);
         
                                 $this->excel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
                                 $this->excel->getActiveSheet()->getStyle('A3:N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -784,7 +784,9 @@ public function downloadDevotee(){
                                 $sl = 1;
                                 $excel_row = 4;
                                 $dpInfo = $this->DailyPooja_model->getPanchangaDetailsForReport($filter);
+                                $total_amount=0;
                                 foreach($dpInfo as $dp){
+                                    $total_amount+= $dp->amount;
                                     
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, $sl++);
                                         $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $dp->row_id);
@@ -807,6 +809,12 @@ public function downloadDevotee(){
                                         // $this->excel->getActiveSheet()->getStyle('H'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                         $excel_row++;
                                     }
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('L'.$excel_row, 'TOTAL AMOUNT');
+                                    $this->excel->getActiveSheet()->getStyle('L'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('L'.$excel_row)->getFont()->setBold(true);
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('M'.$excel_row, $total_amount);
+                                    $this->excel->getActiveSheet()->getStyle('M'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('M'.$excel_row)->getFont()->setBold(true);
                                     $this->excel->createSheet(); 
                                 // }
                                 
@@ -838,6 +846,8 @@ public function downloadDevotee(){
                                 $expense_fromDate = $this->security->xss_clean($this->input->post('expense_fromDate'));
                                 $expense_toDate = $this->security->xss_clean($this->input->post('expense_toDate'));
                                 $event_type = $this->security->xss_clean($this->input->post('event_type'));
+                                $committe_id = $this->security->xss_clean($this->input->post('committe_id'));
+                              //  log_message('debug','test'.$committe_id);
                                 $year = $this->security->xss_clean($this->input->post('year'));
             
                                 $cellNameByStudentReport = array('G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
@@ -849,31 +859,33 @@ public function downloadDevotee(){
                                     $this->excel->getActiveSheet()->setCellValue('A2',"Expense Report");
                                     $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
                                     $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(14);
-                                    $this->excel->getActiveSheet()->mergeCells('A1:G1');
-                                    $this->excel->getActiveSheet()->mergeCells('A2:G2');
-                                    $this->excel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true);
-                                    $this->excel->getActiveSheet()->getStyle('A2:G2')->getFont()->setBold(true);
-                                    $this->excel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                    $this->excel->getActiveSheet()->getStyle('A1:G2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->mergeCells('A1:H1');
+                                    $this->excel->getActiveSheet()->mergeCells('A2:H2');
+                                    $this->excel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A2:H2')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A1:H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('A1:H2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                     
                                     $excel_row = 3;
                                     $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
                                     $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(35);
-                                    $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
-                                    $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(28);
-                                    $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(28);
+                                    $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+                                    $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+                                    $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
                                     $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
-                                    $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+                                    $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+                                    $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
                                     
-                                    $this->excel->getActiveSheet()->getStyle('A3:G3')->getFont()->setBold(true);
-                                    $this->excel->getActiveSheet()->getStyle('A3:G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                    $this->excel->getActiveSheet()->getStyle('A3:H3')->getFont()->setBold(true);
+                                    $this->excel->getActiveSheet()->getStyle('A3:H3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('A'.$excel_row, 'SL No.');
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, 'Expense Name');
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'Payment Type');
                                     $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, 'Event Type');
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Amount');
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Expense Date');
-                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Notes');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'Committee');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, 'Amount');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, 'Expense Date');
+                                    $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, 'Notes');
                                     $filter['report_type']= "Asset";
                                     // $filter['stream_name']= $stream[$sheet];
                                     if(!empty($expense_fromDate)) {
@@ -893,6 +905,7 @@ public function downloadDevotee(){
                                     }else{
                                         $filter['event_type']= $event_type;  
                                     }
+                                    $filter['committee_id']= $committe_id; 
                                     // $filter['year']= $year;
 
                     
@@ -914,27 +927,28 @@ public function downloadDevotee(){
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('B'.$excel_row, $expense->expense_type);
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row,$expense->account_type);
                                             $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row,$expense->event_type);
-                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, $expense->amount);
-                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $expense_date);
-                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $expense->comments);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row,$expense->committee_name);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $expense->amount);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('G'.$excel_row, $expense_date);
+                                            $this->excel->setActiveSheetIndex($sheet)->setCellValue('H'.$excel_row, $expense->comments);
 
                                             $this->excel->getActiveSheet()->getStyle('A'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                             $this->excel->getActiveSheet()->getStyle('C'.$excel_row.':F'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                                             $excel_row++;
                                         }
                                         $excel_row++;
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('C'.$excel_row, 'TOTAL AMOUNT');
-                                        $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                        $this->excel->getActiveSheet()->getStyle('C'.$excel_row)->getFont()->setBold(true);
-                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('D'.$excel_row, $total_amount);
-                                        $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                                        $this->excel->getActiveSheet()->getStyle('D'.$excel_row)->getFont()->setBold(true);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('E'.$excel_row, 'TOTAL AMOUNT');
+                                        $this->excel->getActiveSheet()->getStyle('E'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('E'.$excel_row)->getFont()->setBold(true);
+                                        $this->excel->setActiveSheetIndex($sheet)->setCellValue('F'.$excel_row, $total_amount);
+                                        $this->excel->getActiveSheet()->getStyle('F'.$excel_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                                        $this->excel->getActiveSheet()->getStyle('F'.$excel_row)->getFont()->setBold(true);
                                         $this->excel->createSheet(); 
                                     // }
                                     
                                 }
                                 
-                                $filename ='Expense_Report_-'.date('d-m-Y').'.xls'; //save our workbook as this file name
+                                $filename ='Expense_Report_'.date('d-m-Y').'.xls'; //save our workbook as this file name
                                 header('Content-Type: application/vnd.ms-excel'); //mime type
                                 header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
                                 header('Cache-Control: max-age=0'); //no cache

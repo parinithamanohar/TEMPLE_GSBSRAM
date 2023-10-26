@@ -94,6 +94,7 @@ if ($error) {
                                             <div class="valid-feedback feedback-icon"><i class="fa fa-money"></i></div>
                                         </div>
                                     </th>
+                                    
                                     <th width="150" style="padding: 0px;">
 
                                     </th>
@@ -102,9 +103,11 @@ if ($error) {
                                 </form>
                             </tr>
                             <tr class=" text-white bg-black ">
+                            <th width="10000">Date</th>
                                 <th width="10000">Expense Name</th>
                                 <th width="10000">Payment Type</th>
                                 <th width="10000">Event Type</th>
+                                <th width="10000">Committee</th>
                                 <th width="10000">Amount</th>
                                 <th class="text-center" width="10000">Actions</th>
                             </tr>
@@ -115,9 +118,11 @@ if ($error) {
                         {
                     ?>
                             <tr class="text-black">
+                            <td><?php echo $expense->expense_date ?></td>
                                 <td><?php echo $expense->expense_type ?></td>
                                 <td><?php echo $expense->account_type ?></td>
                                 <td><?php echo $expense->event_type ?></td>
+                                <td><?php echo $expense->committee_name ?></td>
                                 <td><?php echo $expense->amount ?></td>
                                 <td class="text-center">
 

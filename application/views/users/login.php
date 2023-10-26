@@ -79,7 +79,7 @@
           </div>
           <div class="card-footer">
             <div class="col-xs-12 text-center">
-            <span class="">&copy;<script>document.write(new Date().getFullYear())</script>-20 <a href="http://www.parrophins.com/" target="_blank"><span class="parro">Parro</span><span class="crm">phins</span></a>The Wings of Technology.</span>
+            <span class="">&copy;<script>document.write(new Date().getFullYear())</script>-<script>document.write(new Date().getFullYear()-1)</script> <a href="http://www.parrophins.com/" target="_blank"><span class="parro">Parro</span><span class="crm">phins</span></a>The Wings of Technology.</span>
             </div>
           </div>
         </div>
